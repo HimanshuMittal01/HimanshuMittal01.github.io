@@ -1,0 +1,4 @@
+baseURL = 'https://HimanshuMittal01.github.io/'
+languageCode = 'en-us'
+title = 'Himanshu Mittal Website'
+theme = 'ananke'
