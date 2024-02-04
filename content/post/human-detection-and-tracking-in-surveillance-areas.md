@@ -12,11 +12,16 @@ I worked closely with deep learning based object detection models to detect huma
 ## Sample predictions
 > *Please note that the below images are not part of the original dataset but are taken from publically available web images ([source](https://unsplash.com/s/photos/soldier)) and then our ML algorithm is run to detect humans/vehicles. Abiding by the terms of NDA, I cannot disclose any information about models, datasets or reports.*
 
-{{< figure src="/post/images/soldier prediction image 1.jpg" height="300" width="400">}}
-{{< figure src="/post/images/soldier prediction image 2.jpg" height="300" width="400">}}
-{{< figure src="/post/images/soldier prediction image 3.jpg" height="300" width="400">}}
-{{< figure src="/post/images/soldier prediction image 4.jpg" height="300" width="400">}}
-
+{{< gallery cols="2" imageratio="1">}}
+- /post/images/soldier prediction image 1.jpg
+  Soldier prediction 1
+- /post/images/soldier prediction image 2.jpg
+  Soldier prediction 2
+- /post/images/soldier prediction image 3.jpg
+  Soldier prediction 3
+- /post/images/soldier prediction image 4.jpg
+  Soldier prediction 4
+{{</ gallery >}}
 
 ## AfterMaths
 Our team completed this project just in time before the deadline. Here are some learnings from the project:
