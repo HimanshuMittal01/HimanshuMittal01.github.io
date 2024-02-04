@@ -3,6 +3,7 @@ title: "Human Detection and Tracking in Surveillance Areas"
 date: 2024-02-04T16:20:31+05:30
 draft: false
 tags: ["computer vision", "object detection", "tracking"]
+featured_image: /post/images/belodt featured.png
 ---
 
 This project "Human Detection in Surveillance Areas" was assigned to [Bennett University](https://www.bennett.edu.in/) by [Bharat Electronics Limited (BEL)](https://en.wikipedia.org/wiki/Bharat_Electronics) and I completed this project under the excellent guidance of [Dr. Vipul Kumar Mishra](https://in.linkedin.com/in/vipul-kumar-mishra-7bb43953) . The task was to detect any human or vehicle activity in restricted areas and surveillance zones at both daytime and night-time using RGB and IR cameras respectively.

@@ -3,6 +3,7 @@ title: "Custom Tensorrt Plugin"
 date: 2024-02-04T19:55:44+05:30
 draft: false
 tags: ["deep learning", "optimization"]
+featured_image: /post/images/tensorrt featured.jpg
 ---
 
 [NVIDIA TensorRT](https://developer.nvidia.com/tensorrt) is an SDK for high-performance deep learning inference. It includes a deep learning inference optimizer and runtime that delivers low latency and high throughput for deep learning inference applications. This work "Custom TensorRT Plugin" was completed as a project under TensorRT bootcamp organized by NVIDIA in our college. The task was to code a custom native TensorRT plugins, use them and document results.

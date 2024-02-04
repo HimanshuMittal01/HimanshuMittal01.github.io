@@ -3,6 +3,7 @@ title: "Face Recognition for Attendance Management"
 date: 2024-02-04T19:34:14+05:30
 draft: false
 tags: ["computer vision", "face recognition"]
+featured_image: /post/images/facerek featured.png
 ---
 
 Face recognition is quickly establishing itself as a standard for many companies to manage attendace, analyze behaviour and predict patterns. I have messed around with applied face recognition in three ways - web application in Flask, fixing API in Django, and full secured API in FastAPI. It sounds weird but at the same time funny that I worked on the same thing in three major python web frameworks and also three different face recognition libraries. Each time I upgraded my understanding of the overall process, and finally deployed API (in fastapi) for one of the clients. Below sections describe my experience with face recognition in more detail.
