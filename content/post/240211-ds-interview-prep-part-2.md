@@ -187,6 +187,8 @@ public:
     };
     ```
 
+    Now, try solving this problem by yourself: [LCA of deepest levels](https://leetcode.com/problems/lowest-common-ancestor-of-deepest-leaves/)
+
 ### Practice problems
 - [Sum Root to Leaf Numbers](https://leetcode.com/problems/sum-root-to-leaf-numbers)
 - [Insufficient Nodes in Root to Leaf Paths](https://leetcode.com/problems/insufficient-nodes-in-root-to-leaf-paths)
