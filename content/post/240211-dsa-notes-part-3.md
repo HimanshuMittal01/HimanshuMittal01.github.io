@@ -1,5 +1,5 @@
 ---
-title: "DSA Interview Prep: Part 2 - Binary Tree"
+title: "DSA Interview Notes: Binary Tree [Part 3]"
 date: 2024-02-11T20:01:57+05:30
 draft: false
 tags: ["dsa", "interviews"]
