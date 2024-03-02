@@ -2,9 +2,6 @@
 title: "About"
 description: "Coding for past 10 years. I have gradually started seeing patterns in life and I love to decode them using science and enginnering. Improving daily..."
 featured_image: '/images/Victor_Hugo-Hunchback.jpg'
-menu:
-  main:
-    weight: 1
 ---
 
 I am a data scientist with 4 years of experience in various domains like manufacturing, healthcare, automotive, marketing, agriculture and defence.

@@ -2,3 +2,34 @@ baseURL = "http://HimanshuMittal01.github.io/"
 languageCode = "en-us"
 title = "Himanshu Mittal"
 theme = "ananke"
+
+[params]
+  favicon = "/images/favicon.png"
+  site_logo = "/images/logo-light.png"
+
+[[params.ananke_socials]]
+name = "github"
+url = "https://github.com/HimanshuMittal01"
+
+[[params.ananke_socials]]
+name = "linkedin"
+url = "https://www.linkedin.com/in/himanshumittal13/"
+
+[menu]
+  [[menu.main]]
+    name = "Posts"
+    identifier = "post"
+    pageRef= "/post"
+    weight = 1
+
+  [[menu.main]]
+    name = "Projects"
+    identifier = "projects"
+    pageRef= "/projects"
+    weight = 2
+
+  [[menu.main]]
+    name = "About"
+    identifier = "about"
+    pageRef= "/about"
+    weight = 3
