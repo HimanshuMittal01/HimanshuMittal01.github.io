@@ -85,6 +85,7 @@ A subarray is a subset of an array where all elements in the subarray needs to b
     - [Maximum Ascending Subarray Sum](https://leetcode.com/problems/maximum-ascending-subarray-sum)
     - [Longest Nice Subarray](https://leetcode.com/problems/longest-nice-subarray)
     - [Sliding Window Maximum](https://leetcode.com/problems/sliding-window-maximum)
+    - [Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters)
 
 3. Kadane's Algorithm
 
