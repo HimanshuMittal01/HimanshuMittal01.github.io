@@ -26,7 +26,7 @@ Some common scenarios where you can apply two-pointer approach is:
 | 3  | [ Move Zeroes ]( https://leetcode.com/problems/move-zeroes )                                                  | Move all zeroes to the end                   | Keep one pointer to track the index of non-negative integer and other one to iterate all values.                                                           |
 
 TODO: Add 'merge sorted arrays' and 'pivot' approach here
-TODO: Add 'prefix and suffix' and 'trapping rainwater' technique
+TODO: Add 'prefix and suffix' and 'trapping rainwater' technique / [Bag of Tokens](https://leetcode.com/problems/bag-of-tokens)
 
 ## Subarray problems
 
