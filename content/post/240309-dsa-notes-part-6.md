@@ -1,7 +1,9 @@
 ---
 title: "DSA Interview Notes: Stack [Part 6]"
 date: 2024-03-09T09:19:14+05:30
-draft: true
+draft: false
+tags: ["dsa", "interviews"]
+featured_image: /post/images/dsa-part6-bg.png
 ---
 
 It is a data structure which follows the property of LIFO (last in First Out)

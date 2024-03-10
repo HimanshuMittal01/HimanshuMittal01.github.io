@@ -56,3 +56,4 @@ Practice problems:
 - [Minimum Number of Swaps to Make the String Balanced](https://leetcode.com/problems/minimum-number-of-swaps-to-make-the-string-balanced)
 - [Minimum Deletions to Make String Balanced](https://leetcode.com/problems/minimum-deletions-to-make-string-balanced)
 - [Remove duplicate letters](https://leetcode.com/problems/remove-duplicate-letters)
+- [Evaluate Reverse Polish Notation](https://leetcode.com/problems/evaluate-reverse-polish-notation)
