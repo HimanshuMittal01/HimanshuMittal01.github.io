@@ -4,6 +4,7 @@ date: 2024-02-24T20:05:50+05:30
 draft: false
 tags: ["dsa", "interviews"]
 featured_image: /post/images/dsa-part4-bg.png
+summary: "Matrix: Navigate grids extending concepts of traversal"
 ---
 
 Matrix is a two-dimensional array. Any problems related to matrix can be solved either via:

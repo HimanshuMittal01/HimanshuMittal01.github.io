@@ -4,6 +4,7 @@ date: 2024-02-19T21:53:23+05:30
 draft: false
 tags: ["dsa", "interviews"]
 featured_image: /post/images/dsa-part2-bg.png
+summary: "Linked List: It's all about pointer manipulation"
 ---
 
 Linked List is a linear data structure in which elements are stored in nodes and each of the node contains the data and address or link or reference to the next node in the sequence.

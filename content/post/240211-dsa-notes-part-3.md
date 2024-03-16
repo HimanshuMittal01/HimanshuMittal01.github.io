@@ -4,6 +4,7 @@ date: 2024-02-11T20:01:57+05:30
 draft: false
 tags: ["dsa", "interviews"]
 featured_image: /post/images/dsa-part3-bg.png
+summary: "Binary Tree: Master BFS and DFS"
 ---
 
 Binary tree is a data structure in which each node has at most two children i.e. left and right child.

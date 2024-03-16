@@ -4,6 +4,7 @@ date: 2024-02-18T00:17:15+05:30
 draft: true
 tags: ["dsa", "interviews"]
 featured_image: /post/images/dsa-part1-bg.png
+summary: "Array: Sounds simple, yet involve variety of tricks"
 ---
 
 Array is a fundamental data structure which is used to store elements of same data type. In an array, elements are stored in contiguous memory location.

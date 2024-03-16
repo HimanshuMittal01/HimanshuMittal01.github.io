@@ -4,9 +4,10 @@ date: 2024-03-03T09:07:05+05:30
 draft: false
 tags: ["dsa", "interviews"]
 featured_image: /post/images/dsa-part5-bg.png
+summary: "String: practice subsequences and parentheses question"
 ---
 
-String is a sequence of characters, so essentially it is an array. It is important to cover following techniques:
+String is a sequence of characters, so essentially it is an array. Questions can be tricky so practice as much as possible. Following techniques cover intervier's favorite questions:
 
 ## Palindrome
 
@@ -57,3 +58,4 @@ Practice problems:
 - [Minimum Deletions to Make String Balanced](https://leetcode.com/problems/minimum-deletions-to-make-string-balanced)
 - [Remove duplicate letters](https://leetcode.com/problems/remove-duplicate-letters)
 - [Evaluate Reverse Polish Notation](https://leetcode.com/problems/evaluate-reverse-polish-notation)
+- [Decode String](https://leetcode.com/problems/decode-string/)
