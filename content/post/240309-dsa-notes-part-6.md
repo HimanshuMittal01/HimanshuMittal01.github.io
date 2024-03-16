@@ -107,3 +107,4 @@ public:
 Practice problems:
 - [Reveal Cards In Increasing Order](https://leetcode.com/problems/reveal-cards-in-increasing-order/)
 - [Design Front Middle Back Queue](https://leetcode.com/problems/design-front-middle-back-queue)
+- [Reveal Cards In Increasing Order](https://leetcode.com/problems/reveal-cards-in-increasing-order/)
