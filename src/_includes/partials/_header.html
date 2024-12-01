@@ -1,0 +1,27 @@
+<header>
+    <div class="header-container">
+        <!-- Logo -->
+        <a href="/" class="logo">
+            <img src="/assets/images/logo-dark.png" alt="Logo for Light Mode" class="logo-image light-mode-logo">
+            <img src="/assets/images/logo-light.png" alt="Logo for Dark Mode" class="logo-image dark-mode-logo">
+        </a>
+
+        <!-- Navigation Menu -->
+        <nav class="site-nav">
+            <ul class="nav-list">
+                {% for entry in collections.page | eleventyNavigation %}
+                <li class="nav-item">
+                    <a href="{{ entry.url }}" class="{% if entry.url == page.url %}active{% endif %}">
+                        {{ entry.data.menuname }}
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </nav>
+
+        <!-- Color Mode Toggle -->
+        <button class="color-mode-toggle" aria-label="Toggle Color Mode">
+            <span class="toggle-icon">🌞</span>
+        </button>
+    </div>
+</header>

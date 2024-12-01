@@ -1,0 +1,87 @@
+/* Container for the post list */
+.post-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem; /* Spacing between posts */
+    padding: 2rem;
+}
+
+/* Post Card */
+.post-card {
+    display: flex;
+    flex-direction: row;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px var(--box-shadow-light); /* Default shadow */
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+/* Hover Effect for Post Card */
+.post-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px var(--box-shadow-dark); /* Hover shadow */
+}
+
+/* Thumbnail styling */
+.post-thumbnail {
+    width: 40%;
+    overflow: hidden;
+    position: relative;
+}
+
+.thumbnail-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image covers the area without distortion */
+}
+
+/* Post Details (Title and Description) */
+.post-details {
+    flex: 1;
+    padding: 1rem;
+}
+
+.post-card h2 {
+    font-size: 1.35rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+}
+
+.post-card h2 a {
+    text-decoration: none;
+    color: var(--text-color);
+    transition: color 0.3s ease;
+}
+
+.post-card h2 a:hover {
+    color: var(--text-color-link-active); /* Hover effect for title */
+}
+
+/* Description styling */
+.post-card p {
+    font-size: 1rem;
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/* Responsive Design for Smaller Screens */
+@media (max-width: 768px) {
+    .post-card {
+        flex-direction: column; /* Stack the thumbnail and text for smaller screens */
+    }
+
+    .post-thumbnail {
+        width: 100%; /* Make the image take up full width on smaller screens */
+        height: 200px; /* Set a height for the image on smaller screens */
+    }
+
+    .post-card h2 {
+        font-size: 1.25rem;
+    }
+
+    .post-card p {
+        font-size: 0.9rem;
+    }
+}

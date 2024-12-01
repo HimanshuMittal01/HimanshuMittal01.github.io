@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+	<link rel="icon" type="image/png" href="{{ '/assets/images/favicon.png' url }}"/>
+	<link href="https://npm.elemecdn.com/prism-themes/themes/prism-vsc-dark-plus.css" rel="stylesheet" />
+	<link href="{{ '/assets/css/index.css' url }}" rel="stylesheet" />
+	<link href="{{ '/assets/css/header.css' url }}" rel="stylesheet" />
+	<link href="{{ '/assets/css/footer.css' url }}" rel="stylesheet" />
+
+	<!-- Conditionally load the CSS files -->
+	{% if css %}
+	{% if css is array %}
+	{% for css_ in css %}
+	<link rel="stylesheet" href="{{ css_ }}">
+	{% endfor %}
+	{% else %}
+	<link rel="stylesheet" href="{{ css url }}">
+	{% endif %}
+	{% endif %}
+
+	<!-- Meta -->
+	<title>{{ title | default: "Himanshu Mittal" }}</title>
+	<meta name="description" content="
+		  {% if description %}
+			{{description}}
+		  {% else %}
+			{{site.description}}
+		  {% endif %}
+		" />
+</head>
+
+<body>
+	<div class="page-container">
+		{% include "partials/_header.html" %}
+
+		<main class="main-content">
+			{{ content }}
+		</main>
+
+		{% include "partials/_footer.html" %}
+	</div>
+
+	<script type="text/javascript">
+
+		{% include "_includes/js/theme-switch.js" %}
+
+	</script>
+</body>
+
+</html>

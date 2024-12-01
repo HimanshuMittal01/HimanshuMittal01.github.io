@@ -1,0 +1,9 @@
+---
+layout: base.html
+---
+
+<h1>{{ title | default: "My Blog" }}</h1>
+{{ content }}
+<br />
+{% include "partials/_paginate.html" %}
+<br />
