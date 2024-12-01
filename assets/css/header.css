@@ -1,0 +1,90 @@
+/* General Header Styling */
+.header-container {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Logo */
+.logo-image {
+    max-width: 100px;
+    width: 60px;
+    display: none;
+}
+
+.light-mode-logo {
+    display: block;
+}
+
+.dark-mode .light-mode-logo {
+    display: none;
+}
+
+.dark-mode .dark-mode-logo {
+    display: block;
+}
+
+/* @media (prefers-color-scheme: dark) {
+    .light-mode-logo {
+        display: none;
+    }
+
+    .dark-mode-logo {
+        display: block;
+    }
+} */
+
+/* Navigation Menu */
+.site-nav {
+    display: flex;
+    align-items: center;
+}
+
+.nav-list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 1.5rem;
+}
+
+.nav-item a {
+    text-decoration: none;
+    font-size: 1rem;
+    color: var(--text-color);
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-item a:hover,
+.nav-item a.active {
+    color: var(--text-color-link-active);
+    text-decoration: underline;
+}
+
+/* Color Mode Toggle */
+.color-mode-toggle {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-color);
+    transition: color 0.3s ease;
+}
+
+.color-mode-toggle:hover {
+    color: var(--text-color-link-active);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .nav-list {
+        gap: 1rem;
+    }
+
+    .logo-image {
+        height: 32px;
+    }
+}

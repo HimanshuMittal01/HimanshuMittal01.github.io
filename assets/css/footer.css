@@ -1,0 +1,60 @@
+/* Footer Styles */
+.footer {
+    width: 100%;
+    padding: 1.5rem 0;
+    background-color: var(--footer-background, var(--color-gray-50));
+    color: var(--footer-text, var(--text-color));
+    border-top: 1px solid var(--footer-border, var(--color-gray-20));
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.footer-content {
+    max-width: 45em;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.footer-content p {
+    font-size: 0.875rem;
+    margin: 0 0 1rem;
+}
+
+.footer-social-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.footer-social-links a {
+    color: var(--footer-link, var(--text-color-link));
+    text-decoration: none;
+    font-size: 1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.3s;
+}
+
+.footer-social-links a:hover {
+    color: var(--footer-link-hover, var(--text-color-link-active));
+}
+
+.footer-social-links i {
+    font-size: 1.25rem;
+}
+
+/* Dark Mode Styles */
+:root.dark-mode .footer {
+    background-color: var(--footer-background-dark, #333);
+    color: var(--footer-text-dark, #e0e0e0);
+    border-top: 1px solid var(--footer-border-dark, #444);
+}
+
+:root.dark-mode .footer-social-links a {
+    color: var(--footer-link-dark, #1493fb);
+}
+
+:root.dark-mode .footer-social-links a:hover {
+    color: var(--footer-link-hover-dark, #6969f7);
+}

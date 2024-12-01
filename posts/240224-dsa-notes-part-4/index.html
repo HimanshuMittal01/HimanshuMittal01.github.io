@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+	<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+	<link rel="icon" type="image/png" href="/assets/images/favicon.png">
+	<link href="https://npm.elemecdn.com/prism-themes/themes/prism-vsc-dark-plus.css" rel="stylesheet">
+	<link href="/assets/css/index.css" rel="stylesheet">
+	<link href="/assets/css/header.css" rel="stylesheet">
+	<link href="/assets/css/footer.css" rel="stylesheet">
+
+	<!-- Conditionally load the CSS files -->
+	
+
+	<!-- Meta -->
+	<title>DSA Interview Notes: Matrix [Part 4]</title>
+	<meta name="description" content="
+		  
+			A site to showcase Himanshu Mittal's writing on AI, technology, philosophy and productivity.
+		  
+		">
+</head>
+
+<body>
+	<div class="page-container">
+		<header>
+    <div class="header-container">
+        <!-- Logo -->
+        <a href="/" class="logo">
+            <picture><source type="image/avif" srcset="/img/YcBxjvMwsE-79.avif 79w"><source type="image/webp" srcset="/img/YcBxjvMwsE-79.webp 79w"><img loading="lazy" decoding="async" src="/img/YcBxjvMwsE-79.png" alt="Logo for Light Mode" class="logo-image light-mode-logo" width="79" height="48"></picture>
+            <picture><source type="image/avif" srcset="/img/WWFT1o-94Z-80.avif 80w"><source type="image/webp" srcset="/img/WWFT1o-94Z-80.webp 80w"><img loading="lazy" decoding="async" src="/img/WWFT1o-94Z-80.png" alt="Logo for Dark Mode" class="logo-image dark-mode-logo" width="80" height="48"></picture>
+        </a>
+
+        <!-- Navigation Menu -->
+        <nav class="site-nav">
+            <ul class="nav-list">
+                
+                <li class="nav-item">
+                    <a href="/about/" class="">
+                        About
+                    </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="/" class="">
+                        Posts
+                    </a>
+                </li>
+                
+            </ul>
+        </nav>
+
+        <!-- Color Mode Toggle -->
+        <button class="color-mode-toggle" aria-label="Toggle Color Mode">
+            <span class="toggle-icon">🌞</span>
+        </button>
+    </div>
+</header>
+
+
+		<main class="main-content">
+			
+<h1>DSA Interview Notes: Matrix [Part 4]</h1>
+<!-- date: 2024-02-24T20:05:50+05:30
+tags: ["dsa", "interviews"]-->
+<p>Matrix is a two-dimensional array. Any problems related to matrix can be solved either via:</p>
+<ol>
+<li>Auxiliary array or index manipulation, or</li>
+<li>BFS / DFS</li>
+</ol>
+<h2>Auxiliary array method</h2>
+<p>Standard loop. T.C. = <code>O(m*n)</code></p>
+<pre class="language-cpp"><code class="language-cpp"><span class="token comment">// arr[m][n]</span>
+<span class="token comment">// m -> rows</span>
+<span class="token comment">// n -> cols</span>
+<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span>m<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> j<span class="token operator">&lt;</span>n<span class="token punctuation">;</span> <span class="token operator">++</span>j<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// do some operation here</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p><a href="https://leetcode.com/problems/spiral-matrix/">Spiral Matrix</a> problem is quite popular, still many fail to solve it properly because of the edge cases. Here's an intuitive solution:</p>
+<pre class="language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token function">spiralOrder</span><span class="token punctuation">(</span>vector<span class="token operator">&lt;</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">>></span><span class="token operator">&amp;</span> matrix<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">int</span> m<span class="token operator">=</span>matrix<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> n<span class="token operator">=</span>matrix<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">int</span> top<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span> bottom<span class="token operator">=</span>m<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> left<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span> right<span class="token operator">=</span>n<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+        vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> ans<span class="token punctuation">;</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span>left<span class="token operator">&lt;=</span>right <span class="token operator">&amp;&amp;</span> top<span class="token operator">&lt;=</span>bottom<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j<span class="token operator">=</span>left<span class="token punctuation">;</span> j<span class="token operator">&lt;=</span>right<span class="token punctuation">;</span> <span class="token operator">++</span>j<span class="token punctuation">)</span> ans<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>matrix<span class="token punctuation">[</span>top<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token operator">++</span>top<span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>top <span class="token operator">></span> bottom<span class="token punctuation">)</span> <span class="token keyword">break</span><span class="token punctuation">;</span>
+
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token operator">=</span>top<span class="token punctuation">;</span> i<span class="token operator">&lt;=</span>bottom<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> ans<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>matrix<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>right<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token operator">--</span>right<span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>left <span class="token operator">></span> right<span class="token punctuation">)</span> <span class="token keyword">break</span><span class="token punctuation">;</span>
+
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j<span class="token operator">=</span>right<span class="token punctuation">;</span> j<span class="token operator">>=</span>left<span class="token punctuation">;</span> <span class="token operator">--</span>j<span class="token punctuation">)</span> ans<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>matrix<span class="token punctuation">[</span>bottom<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token operator">--</span>bottom<span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>top <span class="token operator">></span> bottom<span class="token punctuation">)</span> <span class="token keyword">break</span><span class="token punctuation">;</span>
+
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token operator">=</span>bottom<span class="token punctuation">;</span> i<span class="token operator">>=</span>top<span class="token punctuation">;</span> <span class="token operator">--</span>i<span class="token punctuation">)</span> ans<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>matrix<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>left<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token operator">++</span>left<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> ans<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+<p><a href="https://leetcode.com/problems/set-matrix-zeroes">Set Matrix Zeroes</a> has a nice technique which leads to in-place solution. The idea is to use the first row and column as a placeholder. See below solution:</p>
+<pre class="language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">void</span> <span class="token function">setZeroes</span><span class="token punctuation">(</span>vector<span class="token operator">&lt;</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">>></span><span class="token operator">&amp;</span> matrix<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// keep two variables to handle first row and col</span>
+        <span class="token keyword">int</span> m<span class="token operator">=</span>matrix<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> n<span class="token operator">=</span>matrix<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> setFirstRowZero <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> setFirstColZero <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span>m<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>matrix<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token operator">==</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>setFirstColZero <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span> <span class="token keyword">break</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> j<span class="token operator">&lt;</span>n<span class="token punctuation">;</span> <span class="token operator">++</span>j<span class="token punctuation">)</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>matrix<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token operator">==</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>setFirstRowZero <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span> <span class="token keyword">break</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+
+        <span class="token comment">// set first row 0 to denote column will be 0</span>
+        <span class="token comment">// set first column 0 to denote row will be 0</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span>m<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span> j<span class="token operator">&lt;</span>n<span class="token punctuation">;</span> <span class="token operator">++</span>j<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>matrix<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token operator">==</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    matrix<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+                    matrix<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token comment">// set full row and column 0 based on first row/col</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span>m<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span> j<span class="token operator">&lt;</span>n<span class="token punctuation">;</span> <span class="token operator">++</span>j<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>matrix<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token operator">==</span><span class="token number">0</span> <span class="token operator">||</span> matrix<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token operator">==</span><span class="token number">0</span><span class="token punctuation">)</span> matrix<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token comment">// now check first row and col</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>setFirstRowZero<span class="token punctuation">)</span> <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> j<span class="token operator">&lt;</span>n<span class="token punctuation">;</span> <span class="token operator">++</span>j<span class="token punctuation">)</span> matrix<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>setFirstColZero<span class="token punctuation">)</span> <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span>m<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> matrix<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+<p><a href="https://leetcode.com/problems/maximal-square">Maximal Square</a> is a beuatiful DP problem to apply this technique. You will also learn how to utilise property of a square in a matrix. The idea is that in order to find side of the square at point (i,j), we can do following because sequare needs to be equal both sides.</p>
+<p>$$ S[i,j] = min(S[i-1,j], S[i,j-1], S[i-1,j-1]) + 1 $$</p>
+<pre class="language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">int</span> <span class="token function">maximalSquare</span><span class="token punctuation">(</span>vector<span class="token operator">&lt;</span>vector<span class="token operator">&lt;</span><span class="token keyword">char</span><span class="token operator">>></span><span class="token operator">&amp;</span> matrix<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">int</span> m<span class="token operator">=</span>matrix<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> n<span class="token operator">=</span>matrix<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// initialise auxiliary side matrix</span>
+        vector<span class="token operator">&lt;</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">>></span> <span class="token function">sides</span><span class="token punctuation">(</span>m<span class="token punctuation">,</span> <span class="token generic-function"><span class="token function">vector</span><span class="token generic class-name"><span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span></span></span><span class="token punctuation">(</span>n<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> ans <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span>m<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>matrix<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token operator">==</span><span class="token char">'1'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>sides<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span> ans<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> j<span class="token operator">&lt;</span>n<span class="token punctuation">;</span> <span class="token operator">++</span>j<span class="token punctuation">)</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>matrix<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token operator">==</span><span class="token char">'1'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>sides<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span> ans<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+
+        <span class="token comment">// do side calculation</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span>m<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span> j<span class="token operator">&lt;</span>n<span class="token punctuation">;</span> <span class="token operator">++</span>j<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>matrix<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token operator">==</span><span class="token char">'1'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    sides<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">min</span><span class="token punctuation">(</span><span class="token punctuation">{</span>sides<span class="token punctuation">[</span>i<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">,</span> sides<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> sides<span class="token punctuation">[</span>i<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+                    ans <span class="token operator">=</span> <span class="token function">max</span><span class="token punctuation">(</span>ans<span class="token punctuation">,</span> sides<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> ans<span class="token operator">*</span>ans<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+<p><strong>Practice problems:</strong></p>
+<ul>
+<li><a href="https://leetcode.com/problems/transpose-matrix">Transpose Matrix</a></li>
+<li><a href="https://leetcode.com/problems/search-a-2d-matrix">Search a 2D Matrix</a></li>
+<li><a href="https://leetcode.com/problems/search-a-2d-matrix-ii">Search a 2D Matrix II</a></li>
+<li><a href="https://leetcode.com/problems/spiral-matrix-ii">Spiral Matrix II</a></li>
+<li><a href="https://leetcode.com/problems/spiral-matrix-iii">Spiral Matrix III</a></li>
+<li><a href="https://leetcode.com/problems/spiral-matrix-iv">Spiral Matrix IV</a></li>
+<li><a href="https://leetcode.com/problems/maximal-rectangle">Maximal Rectangle</a></li>
+</ul>
+<p><strong>Tip:</strong>
+<em>It's crucial to consider that prioritizing reduced time complexity (T.C.) by employing additional space complexity (S.C.) is often a superior approach. Opting for lower T.C. at the expense of higher S.C. is generally favored over maintaining higher T.C. with constant S.C. When faced with challenges in minimizing T.C. during an interview, it's advisable to reconsider whether introducing extra space complexity can contribute to a more efficient solution.</em></p>
+<h2>BFS / DFS method</h2>
+<p>Matrix can be treated as an unweighted graph. Unweighted graph is a graph where the distance from one node to another node always remains the same.</p>
+<p>Whenever in an interview, you are asked to find out the shortest path from source to the destination in a matrix, generally BFS will be used to solve the problem.</p>
+<p>The <strong>general implementation</strong> of traveral in matrix is as follows:</p>
+<pre class="language-cpp"><code class="language-cpp"><span class="token comment">// Create dx and dy helper arrays</span>
+<span class="token comment">// to traverse possible nodes from a cell</span>
+<span class="token comment">// if only top, left, right and bottom required</span>
+<span class="token comment">// reduce its length to 4 accordingly</span>
+<span class="token keyword">int</span> dx<span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> dy<span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Initialize queue and visited array</span>
+<span class="token comment">// Initially distance of source node to itself is zero</span>
+<span class="token keyword">int</span> m<span class="token operator">=</span>grid<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> n<span class="token operator">=</span>grid<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+vector<span class="token operator">&lt;</span>vector<span class="token operator">&lt;</span><span class="token keyword">bool</span><span class="token operator">>></span> <span class="token function">visited</span><span class="token punctuation">(</span>m<span class="token punctuation">,</span> <span class="token generic-function"><span class="token function">vector</span><span class="token generic class-name"><span class="token operator">&lt;</span><span class="token keyword">bool</span><span class="token operator">></span></span></span><span class="token punctuation">(</span>n<span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+queue<span class="token operator">&lt;</span>pair<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span><span class="token keyword">int</span><span class="token operator">>></span> q<span class="token punctuation">;</span>
+q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+visited<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> dist <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+<span class="token comment">// BFS</span>
+<span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token operator">!</span>q<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// Increase size as we traverse its children</span>
+    <span class="token keyword">int</span> sz <span class="token operator">=</span> q<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    dist<span class="token operator">++</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>sz<span class="token operator">--</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// current cell</span>
+        pair<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span><span class="token keyword">int</span><span class="token operator">></span> curr <span class="token operator">=</span> q<span class="token punctuation">.</span><span class="token function">front</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> q<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> x<span class="token operator">=</span>curr<span class="token punctuation">.</span>first<span class="token punctuation">,</span> y<span class="token operator">=</span>curr<span class="token punctuation">.</span>second<span class="token punctuation">;</span>
+
+        <span class="token comment">// target condition meet</span>
+        <span class="token comment">// here now checking whether it reaches bottom right</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>x<span class="token operator">==</span>m<span class="token operator">-</span><span class="token number">1</span> <span class="token operator">&amp;&amp;</span> y<span class="token operator">==</span>n<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token keyword">return</span> dist<span class="token punctuation">;</span>
+
+        <span class="token comment">// traverse neighbors</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> k<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> k<span class="token operator">&lt;</span><span class="token number">8</span><span class="token punctuation">;</span> <span class="token operator">++</span>k<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">int</span> nx <span class="token operator">=</span> x<span class="token operator">+</span>dx<span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token keyword">int</span> ny <span class="token operator">=</span> y<span class="token operator">+</span>dy<span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+            <span class="token comment">// check allowable condition</span>
+            <span class="token comment">// here another check applied is cell value must be 0</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>nx<span class="token operator">>=</span><span class="token number">0</span> <span class="token operator">&amp;&amp;</span> nx<span class="token operator">&lt;</span>m <span class="token operator">&amp;&amp;</span> ny<span class="token operator">>=</span><span class="token number">0</span> <span class="token operator">&amp;&amp;</span> ny<span class="token operator">&lt;</span>n <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>visited<span class="token punctuation">[</span>nx<span class="token punctuation">]</span><span class="token punctuation">[</span>ny<span class="token punctuation">]</span> <span class="token operator">&amp;&amp;</span> grid<span class="token punctuation">[</span>nx<span class="token punctuation">]</span><span class="token punctuation">[</span>ny<span class="token punctuation">]</span><span class="token operator">==</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                visited<span class="token punctuation">[</span>nx<span class="token punctuation">]</span><span class="token punctuation">[</span>ny<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+                q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token punctuation">{</span>nx<span class="token punctuation">,</span>ny<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span></code></pre>
+<p>Practice problems:</p>
+<ul>
+<li><a href="https://leetcode.com/problems/shortest-path-in-binary-matrix">Shortest Path in Binary Matrix</a></li>
+<li><a href="https://leetcode.com/problems/longest-increasing-path-in-a-matrix">Longest Increasing Path in a Matrix</a></li>
+<li><a href="https://leetcode.com/problems/max-area-of-island">Max Area of Island</a></li>
+</ul>
+
+<br>
+
+
+
+
+<ul class="links-nextprev">
+    
+    <li class="links-nextprev-prev">← Previous<br> 
+        <a href="/posts/240219-dsa-notes-part-2/">DSA Interview Notes: Linked List [Part 2]</a>
+    </li>
+    
+    
+    <li class="links-nextprev-next">Next →<br> 
+        <a href="/posts/240303-dsa-notes-part-5/">DSA Interview Notes: String [Part 5]</a>
+    </li>
+    
+</ul>
+
+
+<br>
+
+		</main>
+
+		<footer class="footer">
+    <div class="footer-content">
+        <p>&copy; Himanshu Mittal 2024. All rights reserved.</p>
+        <div class="footer-social-links">
+            <a href="mailto:himanshu.mittal.dev@gmail.com" title="Email" target="_blank" rel="noopener">
+                <i class="fas fa-envelope"></i>
+            </a>
+            <a href="https://linkedin.com/in/himanshumittal13" title="LinkedIn" target="_blank" rel="noopener">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://github.com/HimanshuMittal01" title="GitHub" target="_blank" rel="noopener">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="https://twitter.com/thesevenbow" title="Twitter" target="_blank" rel="noopener">
+                <i class="fab fa-twitter"></i>
+            </a>
+        </div>
+    </div>
+</footer>
+	</div>
+
+	<script type="text/javascript">
+
+		const toggleButton = document.querySelector(".color-mode-toggle");
+console.log(toggleButton);
+const toggleIcon = document.querySelector(".toggle-icon");
+
+// Function to toggle color mode
+function toggleColorMode() {
+    const isDark = document.documentElement.classList.toggle("dark-mode");
+    console.log(isDark)
+
+    // Update the toggle icon
+    toggleIcon.textContent = isDark ? "🌙" : "🌞";
+
+    // Save the user's preference in localStorage
+    localStorage.setItem("color-mode", isDark ? "dark" : "light");
+}
+
+// Attach the event listener
+toggleButton.addEventListener("click", toggleColorMode);
+
+// Determine initial color mode
+const savedMode = localStorage.getItem("color-mode");
+if (savedMode) {
+    // Apply saved preference
+    if (savedMode === "dark") {
+        document.documentElement.classList.add("dark-mode");
+        toggleIcon.textContent = "🌙";
+    } else {
+        toggleIcon.textContent = "🌞";
+    }
+} else {
+    // Default to system preference
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        document.documentElement.classList.add("dark-mode");
+        toggleIcon.textContent = "🌙";
+    } else {
+        toggleIcon.textContent = "🌞";
+    }
+}
+
+
+	</script>
+</body>
+
+</html>

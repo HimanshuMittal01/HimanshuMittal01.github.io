@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+	<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+	<link rel="icon" type="image/png" href="/assets/images/favicon.png">
+	<link href="https://npm.elemecdn.com/prism-themes/themes/prism-vsc-dark-plus.css" rel="stylesheet">
+	<link href="/assets/css/index.css" rel="stylesheet">
+	<link href="/assets/css/header.css" rel="stylesheet">
+	<link href="/assets/css/footer.css" rel="stylesheet">
+
+	<!-- Conditionally load the CSS files -->
+	
+
+	<!-- Meta -->
+	<title>Face Recognition for Attendance Management</title>
+	<meta name="description" content="
+		  
+			A site to showcase Himanshu Mittal's writing on AI, technology, philosophy and productivity.
+		  
+		">
+</head>
+
+<body>
+	<div class="page-container">
+		<header>
+    <div class="header-container">
+        <!-- Logo -->
+        <a href="/" class="logo">
+            <picture><source type="image/avif" srcset="/img/YcBxjvMwsE-79.avif 79w"><source type="image/webp" srcset="/img/YcBxjvMwsE-79.webp 79w"><img loading="lazy" decoding="async" src="/img/YcBxjvMwsE-79.png" alt="Logo for Light Mode" class="logo-image light-mode-logo" width="79" height="48"></picture>
+            <picture><source type="image/avif" srcset="/img/WWFT1o-94Z-80.avif 80w"><source type="image/webp" srcset="/img/WWFT1o-94Z-80.webp 80w"><img loading="lazy" decoding="async" src="/img/WWFT1o-94Z-80.png" alt="Logo for Dark Mode" class="logo-image dark-mode-logo" width="80" height="48"></picture>
+        </a>
+
+        <!-- Navigation Menu -->
+        <nav class="site-nav">
+            <ul class="nav-list">
+                
+                <li class="nav-item">
+                    <a href="/about/" class="">
+                        About
+                    </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="/" class="">
+                        Posts
+                    </a>
+                </li>
+                
+            </ul>
+        </nav>
+
+        <!-- Color Mode Toggle -->
+        <button class="color-mode-toggle" aria-label="Toggle Color Mode">
+            <span class="toggle-icon">🌞</span>
+        </button>
+    </div>
+</header>
+
+
+		<main class="main-content">
+			
+<h1>Face Recognition for Attendance Management</h1>
+<!-- date: 2024-02-04T19:34:14+05:30
+tags: ["computer vision", "face recognition"] -->
+<p>Face recognition is quickly establishing itself as a standard for many companies to manage attendace, analyze behaviour and predict patterns. I have messed around with applied face recognition in three ways - web application in Flask, fixing API in Django, and full secured API in FastAPI. It sounds weird but at the same time funny that I worked on the same thing in three major python web frameworks and also three different face recognition libraries. Each time I upgraded my understanding of the overall process, and finally deployed API (in fastapi) for one of the clients. Below sections describe my experience with face recognition in more detail.</p>
+<h2>FaceRek: Web application in Flask</h2>
+<p>Here is the <a href="https://github.com/HimanshuMittal01/Week5-Project">github link</a> of the project. This was the first capstone project under the course <a href="https://www.machinelearningcourse.io/courses/make-money">MMML</a> by Siraj Raval where I teamed up randomly with Sanjeev Gupta. Eventually, Siraj had some plagiarism issues due to which this course was not properly delivered, but that's a story for another day.
+Anyways, tt was quite a fun and challenging project because I had very little experience with Flask before, no practical experience in databases and Sanjeev was senior to me and had non-tech background which made this work even more interesting. Even after all these challenges, we managed to submit the project which includes login-signup, user database, face verification, and payment gateway integration using stripe. We used <a href="https://docs.opencv.org/3.4/da/d60/tutorial_face_main.html">OpenCV</a> for encoding and verifying the faces. Here are some snapshots of the final web app:</p>
+<div style="text-align: center;">
+    <figure>
+        <picture><source type="image/avif" srcset="/posts/240202-face-recognition-for-attendance-management/R6eQ7HUl_x-600.avif 600w"><source type="image/webp" srcset="/posts/240202-face-recognition-for-attendance-management/R6eQ7HUl_x-600.webp 600w"><img loading="lazy" decoding="async" src="/posts/240202-face-recognition-for-attendance-management/R6eQ7HUl_x-600.png" alt="facerek screenshot 1" width="600" height="309"></picture>
+        <figcaption>Fig.1 - Process flow.</figcaption>
+    </figure>
+    <figure>
+        <picture><source type="image/avif" srcset="/posts/240202-face-recognition-for-attendance-management/eMArYBW5kr-600.avif 600w"><source type="image/webp" srcset="/posts/240202-face-recognition-for-attendance-management/eMArYBW5kr-600.webp 600w"><img loading="lazy" decoding="async" src="/posts/240202-face-recognition-for-attendance-management/eMArYBW5kr-600.png" alt="facerek screenshot 2" width="600" height="692"></picture>
+        <figcaption>Fig.2 - Homepage.</figcaption>
+    </figure>
+    <figure>
+        <picture><source type="image/avif" srcset="/posts/240202-face-recognition-for-attendance-management/gf7CHstVe1-600.avif 600w"><source type="image/webp" srcset="/posts/240202-face-recognition-for-attendance-management/gf7CHstVe1-600.webp 600w"><img loading="lazy" decoding="async" src="/posts/240202-face-recognition-for-attendance-management/gf7CHstVe1-600.png" alt="facerek screenshot 3" width="600" height="531"></picture>
+        <figcaption>Fig.3 - Demo screen.</figcaption>
+    </figure>
+</div>
+<p>This was the period where I gradually started learning about software engineering aspects of machine learning project as well, and this project was the start of my full stack data scientist journey.</p>
+<h2>Face Recognition API in Django</h2>
+<p>2 years later, I got opportunity to fix some bugs in Face Recognition Django API for 30Days Technologies Pvt. Ltd. It was using awesome <a href="https://github.com/ageitgey/face_recognition">face_recognition</a> library by Adam Gietgey. The problem was that the image orientation and face alignment was not correct, thus giving inconsistent results and additionally the server was getting filled up on each request. First I learnt about Django models for MySql and rest_framework, as it was completely new to me and then I solved all issues with the API. But then the database requirements changed, so I offered to create new secure API from scratch with custom in-app database. And then comes the FastAPI..</p>
+<h2>Finally, FastAPI Face Recognition !!</h2>
+<p>I wanted to code this project in FastAPI because one I love this framework, second easy to handle concurrent operations and third the automatic swagger docs. I successfully built this project using one of my favourite libraries i.e <a href="https://github.com/serengil/deepface">deepface</a> by Serengil for face recognition, and now this piece of work is being used in their products like <a href="https://www.ezhrm.in/">EZHRM</a>. Key features:</p>
+<ul>
+<li>JWT Token Authentication</li>
+<li>Option to change models</li>
+<li>Stored representations for low latency time while comparing</li>
+<li>No overhead of adding relational ot noSQL database as it is managed in-app itself</li>
+</ul>
+<h2>Conclusion</h2>
+<p>These face recognition projects came to me from nowhere and helped me practically learn about APIs and databases which are used by other backend engines like PHP and NodeJS. Also, got hands-on experience with libraries like openCV, face-recognition and deepface. I would love to get more knowledge about handling scale issues in low budget, contact me.</p>
+
+<br>
+
+
+
+
+<ul class="links-nextprev">
+    
+    <li class="links-nextprev-prev">← Previous<br> 
+        <a href="/posts/240202-custom-tensorrt-plugin/">Custom Tensorrt Plugin</a>
+    </li>
+    
+    
+    <li class="links-nextprev-next">Next →<br> 
+        <a href="/posts/240202-human-detection-and-tracking-in-surveillance-areas/">Human Detection and Tracking in Surveillance Areas</a>
+    </li>
+    
+</ul>
+
+
+<br>
+
+		</main>
+
+		<footer class="footer">
+    <div class="footer-content">
+        <p>&copy; Himanshu Mittal 2024. All rights reserved.</p>
+        <div class="footer-social-links">
+            <a href="mailto:himanshu.mittal.dev@gmail.com" title="Email" target="_blank" rel="noopener">
+                <i class="fas fa-envelope"></i>
+            </a>
+            <a href="https://linkedin.com/in/himanshumittal13" title="LinkedIn" target="_blank" rel="noopener">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://github.com/HimanshuMittal01" title="GitHub" target="_blank" rel="noopener">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="https://twitter.com/thesevenbow" title="Twitter" target="_blank" rel="noopener">
+                <i class="fab fa-twitter"></i>
+            </a>
+        </div>
+    </div>
+</footer>
+	</div>
+
+	<script type="text/javascript">
+
+		const toggleButton = document.querySelector(".color-mode-toggle");
+console.log(toggleButton);
+const toggleIcon = document.querySelector(".toggle-icon");
+
+// Function to toggle color mode
+function toggleColorMode() {
+    const isDark = document.documentElement.classList.toggle("dark-mode");
+    console.log(isDark)
+
+    // Update the toggle icon
+    toggleIcon.textContent = isDark ? "🌙" : "🌞";
+
+    // Save the user's preference in localStorage
+    localStorage.setItem("color-mode", isDark ? "dark" : "light");
+}
+
+// Attach the event listener
+toggleButton.addEventListener("click", toggleColorMode);
+
+// Determine initial color mode
+const savedMode = localStorage.getItem("color-mode");
+if (savedMode) {
+    // Apply saved preference
+    if (savedMode === "dark") {
+        document.documentElement.classList.add("dark-mode");
+        toggleIcon.textContent = "🌙";
+    } else {
+        toggleIcon.textContent = "🌞";
+    }
+} else {
+    // Default to system preference
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        document.documentElement.classList.add("dark-mode");
+        toggleIcon.textContent = "🌙";
+    } else {
+        toggleIcon.textContent = "🌞";
+    }
+}
+
+
+	</script>
+</body>
+
+</html>

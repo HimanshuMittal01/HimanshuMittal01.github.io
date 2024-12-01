@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+	<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+	<link rel="icon" type="image/png" href="/assets/images/favicon.png">
+	<link href="https://npm.elemecdn.com/prism-themes/themes/prism-vsc-dark-plus.css" rel="stylesheet">
+	<link href="/assets/css/index.css" rel="stylesheet">
+	<link href="/assets/css/header.css" rel="stylesheet">
+	<link href="/assets/css/footer.css" rel="stylesheet">
+
+	<!-- Conditionally load the CSS files -->
+	
+
+	<!-- Meta -->
+	<title>DSA Interview Notes: Stack & Queue [Part 6]</title>
+	<meta name="description" content="
+		  
+			A site to showcase Himanshu Mittal's writing on AI, technology, philosophy and productivity.
+		  
+		">
+</head>
+
+<body>
+	<div class="page-container">
+		<header>
+    <div class="header-container">
+        <!-- Logo -->
+        <a href="/" class="logo">
+            <picture><source type="image/avif" srcset="/img/YcBxjvMwsE-79.avif 79w"><source type="image/webp" srcset="/img/YcBxjvMwsE-79.webp 79w"><img loading="lazy" decoding="async" src="/img/YcBxjvMwsE-79.png" alt="Logo for Light Mode" class="logo-image light-mode-logo" width="79" height="48"></picture>
+            <picture><source type="image/avif" srcset="/img/WWFT1o-94Z-80.avif 80w"><source type="image/webp" srcset="/img/WWFT1o-94Z-80.webp 80w"><img loading="lazy" decoding="async" src="/img/WWFT1o-94Z-80.png" alt="Logo for Dark Mode" class="logo-image dark-mode-logo" width="80" height="48"></picture>
+        </a>
+
+        <!-- Navigation Menu -->
+        <nav class="site-nav">
+            <ul class="nav-list">
+                
+                <li class="nav-item">
+                    <a href="/about/" class="">
+                        About
+                    </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="/" class="">
+                        Posts
+                    </a>
+                </li>
+                
+            </ul>
+        </nav>
+
+        <!-- Color Mode Toggle -->
+        <button class="color-mode-toggle" aria-label="Toggle Color Mode">
+            <span class="toggle-icon">🌞</span>
+        </button>
+    </div>
+</header>
+
+
+		<main class="main-content">
+			
+<h1>DSA Interview Notes: Stack & Queue [Part 6]</h1>
+<!-- date: 2024-03-09T09:19:14+05:30
+tags: ["dsa", "interviews"]-->
+<p>It is a data structure which follows the property of LIFO (last in First Out)</p>
+<ul>
+<li><code>top()</code> or <code>peek()</code> --&gt; It returns you the top element from the stack in O(1) time complexity</li>
+<li><code>pop()</code> --&gt; It deletes the top element from the stack in O(1) time complexity</li>
+<li><code>push()</code> --&gt; It adds an element to the top of the stack in O(1) time complexity</li>
+<li><code>size()</code> --&gt; It returns you the number of elements present in the stack</li>
+<li><code>empty()</code> --&gt; It returns true if the stack is empty, otherwise false</li>
+</ul>
+<p>Consider below intuitive points for solving problems:</p>
+<ul>
+<li>During an interview Whenever you feel that you need to traverse backward as compared to current index location, in that case rather than nested loop (to go backward), think of the stack as a possible solution.</li>
+<li>Whenever you add an element in the stack, that element could be index, element, or in case of string it could be character.</li>
+<li>Stack may be used to reverse the string</li>
+</ul>
+<p>Let's solve <a href="https://leetcode.com/problems/next-greater-element-ii/">Next Greater Element II</a> to understand how we can make a monotonic increasing stack and use it in various situations.</p>
+<pre class="language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token function">nextGreaterElements</span><span class="token punctuation">(</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token operator">&amp;</span> nums<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">int</span> n <span class="token operator">=</span> nums<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token function">visited</span><span class="token punctuation">(</span>n<span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token function">ans</span><span class="token punctuation">(</span>n<span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        stack<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> st<span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span><span class="token number">2</span><span class="token operator">*</span>n<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token operator">!</span>st<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> nums<span class="token punctuation">[</span>st<span class="token punctuation">.</span><span class="token function">top</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token operator">&lt;</span> nums<span class="token punctuation">[</span>i<span class="token operator">%</span>n<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">int</span> prev <span class="token operator">=</span> st<span class="token punctuation">.</span><span class="token function">top</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> st<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                visited<span class="token punctuation">[</span>prev<span class="token punctuation">]</span><span class="token operator">=</span><span class="token boolean">true</span><span class="token punctuation">;</span>
+                ans<span class="token punctuation">[</span>prev<span class="token punctuation">]</span> <span class="token operator">=</span> nums<span class="token punctuation">[</span>i<span class="token operator">%</span>n<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            st<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>i<span class="token operator">%</span>n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> ans<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+<p>You may encounter situations where you need to find next lexicographically greater permutation of the sequence, and you might use stack there. But it can be solved in O(1) and the idea is quite logical:</p>
+<ol>
+<li>Traverse from right to left and find the element which does not follow ascending order.</li>
+<li>Switch the position of that element with greater element on the right side.</li>
+<li>Reverse the right portion of the sequence. As its already sorted in decreasing order, after reversing it will be ascending sorted.</li>
+</ol>
+<p><em>Note: Sequence sorted in descending order does not have any next greater permuation.</em></p>
+<p><strong>Practice problems:</strong></p>
+<ul>
+<li><a href="https://leetcode.com/problems/next-greater-element-i/">Next Greater Element I</a></li>
+<li><a href="https://leetcode.com/problems/next-greater-element-iv">Next Greater Element IV</a></li>
+<li><a href="https://leetcode.com/problems/steps-to-make-array-non-decreasing/">Steps to Make Array Non-decreasing</a></li>
+<li><a href="https://leetcode.com/problems/sum-of-total-strength-of-wizards">Sum of Total Strength of Wizards</a></li>
+<li><a href="https://leetcode.com/problems/car-fleet-ii">Car Fleet II</a></li>
+</ul>
+<h2>Queue</h2>
+<p>It is a data structure which follows the logic of FIFO (First In First Out) that implies the element which has been inserted first into the queue will be the first element to get deleted from queue. It is generally implemented either using array or linkedlist.</p>
+<p>Let's see one of the most boring and popular question: <a href="https://leetcode.com/problems/implement-queue-using-stacks">Implement queue using stack</a>. The below idea uses auxiliary stack:</p>
+<ol>
+<li>Keep one stack S1 for push operations and another stack S2 for pop operations.</li>
+<li>Whenever there is a push operation, first transfer all elements from S2 to S1 if any and then push element on top of S1</li>
+<li>Whenever there is a pop operation, first transfer all elements from S1 to S2 if any and then pop the top element from S2.</li>
+</ol>
+<p><strong>Deque (Doubly ended queue)</strong>: Deque is simply a doubly linked list that have pointers at both sides to implement following operations:</p>
+<ul>
+<li><code>push_front()</code>and <code>push_back()</code> --&gt; These functions are used to push elements into a deque from the front and back respectively in O(1) time complexity</li>
+<li><code>pop_front()</code> and <code>pop_back()</code> --&gt; These functions are used to delete elements from the front and back respectively in O(1) time complexity</li>
+<li><code>front()</code> and <code>back()</code> --&gt; Refer to the first and last element respectively of the deque container.</li>
+</ul>
+<p>It is very hepful in finding <a href="https://leetcode.com/problems/sliding-window-maximum">Sliding Window Maximum</a> which is important concept for many problems. Let's look at its implementation:</p>
+<pre class="language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token function">maxSlidingWindow</span><span class="token punctuation">(</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token operator">&amp;</span> nums<span class="token punctuation">,</span> <span class="token keyword">int</span> k<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">int</span> n <span class="token operator">=</span> nums<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// monotonic decreasing deque</span>
+        deque<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> q<span class="token punctuation">;</span>
+        vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> ans<span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span>n<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token comment">// remove out of range elements from the front</span>
+            <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token operator">!</span>q<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> i<span class="token operator">-</span>q<span class="token punctuation">.</span><span class="token function">front</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">+</span><span class="token number">1</span><span class="token operator">></span>k<span class="token punctuation">)</span> q<span class="token punctuation">.</span><span class="token function">pop_front</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token comment">// remove smaller elements from the back</span>
+            <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token operator">!</span>q<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> nums<span class="token punctuation">[</span>q<span class="token punctuation">.</span><span class="token function">back</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token operator">&lt;</span> nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span> q<span class="token punctuation">.</span><span class="token function">pop_back</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token comment">// add element to the queue</span>
+            q<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token comment">// update ans</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>i<span class="token operator">>=</span>k<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> ans<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>nums<span class="token punctuation">[</span>q<span class="token punctuation">.</span><span class="token function">front</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> ans<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+<p>Practice problems:</p>
+<ul>
+<li><a href="https://leetcode.com/problems/reveal-cards-in-increasing-order/">Reveal Cards In Increasing Order</a></li>
+<li><a href="https://leetcode.com/problems/design-front-middle-back-queue">Design Front Middle Back Queue</a></li>
+<li><a href="https://leetcode.com/problems/reveal-cards-in-increasing-order/">Reveal Cards In Increasing Order</a></li>
+</ul>
+
+<br>
+
+
+
+
+<ul class="links-nextprev">
+    
+    <li class="links-nextprev-prev">← Previous<br> 
+        <a href="/posts/240303-dsa-notes-part-5/">DSA Interview Notes: String [Part 5]</a>
+    </li>
+    
+    
+</ul>
+
+
+<br>
+
+		</main>
+
+		<footer class="footer">
+    <div class="footer-content">
+        <p>&copy; Himanshu Mittal 2024. All rights reserved.</p>
+        <div class="footer-social-links">
+            <a href="mailto:himanshu.mittal.dev@gmail.com" title="Email" target="_blank" rel="noopener">
+                <i class="fas fa-envelope"></i>
+            </a>
+            <a href="https://linkedin.com/in/himanshumittal13" title="LinkedIn" target="_blank" rel="noopener">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://github.com/HimanshuMittal01" title="GitHub" target="_blank" rel="noopener">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="https://twitter.com/thesevenbow" title="Twitter" target="_blank" rel="noopener">
+                <i class="fab fa-twitter"></i>
+            </a>
+        </div>
+    </div>
+</footer>
+	</div>
+
+	<script type="text/javascript">
+
+		const toggleButton = document.querySelector(".color-mode-toggle");
+console.log(toggleButton);
+const toggleIcon = document.querySelector(".toggle-icon");
+
+// Function to toggle color mode
+function toggleColorMode() {
+    const isDark = document.documentElement.classList.toggle("dark-mode");
+    console.log(isDark)
+
+    // Update the toggle icon
+    toggleIcon.textContent = isDark ? "🌙" : "🌞";
+
+    // Save the user's preference in localStorage
+    localStorage.setItem("color-mode", isDark ? "dark" : "light");
+}
+
+// Attach the event listener
+toggleButton.addEventListener("click", toggleColorMode);
+
+// Determine initial color mode
+const savedMode = localStorage.getItem("color-mode");
+if (savedMode) {
+    // Apply saved preference
+    if (savedMode === "dark") {
+        document.documentElement.classList.add("dark-mode");
+        toggleIcon.textContent = "🌙";
+    } else {
+        toggleIcon.textContent = "🌞";
+    }
+} else {
+    // Default to system preference
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        document.documentElement.classList.add("dark-mode");
+        toggleIcon.textContent = "🌙";
+    } else {
+        toggleIcon.textContent = "🌞";
+    }
+}
+
+
+	</script>
+</body>
+
+</html>

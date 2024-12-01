@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+	<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+	<link rel="icon" type="image/png" href="/assets/images/favicon.png">
+	<link href="https://npm.elemecdn.com/prism-themes/themes/prism-vsc-dark-plus.css" rel="stylesheet">
+	<link href="/assets/css/index.css" rel="stylesheet">
+	<link href="/assets/css/header.css" rel="stylesheet">
+	<link href="/assets/css/footer.css" rel="stylesheet">
+
+	<!-- Conditionally load the CSS files -->
+	
+	
+	
+	<link rel="stylesheet" href="/assets/css/profilecard.css">
+	
+	
+	
+
+	<!-- Meta -->
+	<title>Himanshu Mittal</title>
+	<meta name="description" content="
+		  
+			A site to showcase Himanshu Mittal's writing on AI, technology, philosophy and productivity.
+		  
+		">
+</head>
+
+<body>
+	<div class="page-container">
+		<header>
+    <div class="header-container">
+        <!-- Logo -->
+        <a href="/" class="logo">
+            <picture><source type="image/avif" srcset="/img/YcBxjvMwsE-79.avif 79w"><source type="image/webp" srcset="/img/YcBxjvMwsE-79.webp 79w"><img loading="lazy" decoding="async" src="/img/YcBxjvMwsE-79.png" alt="Logo for Light Mode" class="logo-image light-mode-logo" width="79" height="48"></picture>
+            <picture><source type="image/avif" srcset="/img/WWFT1o-94Z-80.avif 80w"><source type="image/webp" srcset="/img/WWFT1o-94Z-80.webp 80w"><img loading="lazy" decoding="async" src="/img/WWFT1o-94Z-80.png" alt="Logo for Dark Mode" class="logo-image dark-mode-logo" width="80" height="48"></picture>
+        </a>
+
+        <!-- Navigation Menu -->
+        <nav class="site-nav">
+            <ul class="nav-list">
+                
+                <li class="nav-item">
+                    <a href="/about/" class="active">
+                        About
+                    </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="/" class="">
+                        Posts
+                    </a>
+                </li>
+                
+            </ul>
+        </nav>
+
+        <!-- Color Mode Toggle -->
+        <button class="color-mode-toggle" aria-label="Toggle Color Mode">
+            <span class="toggle-icon">🌞</span>
+        </button>
+    </div>
+</header>
+
+
+		<main class="main-content">
+			
+<!-- Profile Card -->
+<div class="intro-card">
+    <picture><source type="image/avif" srcset="/img/Uuv4JR3vjG-624.avif 624w"><source type="image/webp" srcset="/img/Uuv4JR3vjG-624.webp 624w"><img loading="lazy" decoding="async" src="/img/Uuv4JR3vjG-624.jpeg" alt="Profile Photo" class="profile-photo" width="624" height="624"></picture>
+
+    <div class="intro-card-content">
+        <p class="name">Himanshu Mittal</p>
+        <p class="description">
+            Full-stack data scientist passionate about building impactful AI systems to unlock human potential and solve
+            complex challenges.
+        </p>
+
+        <div class="social-links">
+            <a href="https://www.linkedin.com/in/himanshumittal13/" class="linkedin" title="LinkedIn" target="_blank" aria-label="LinkedIn">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://github.com/HimanshuMittal01" class="github" title="GitHub" target="_blank" aria-label="GitHub">
+                <i class="fab fa-github"></i>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="bio-section">
+    <p>
+        Coding for the past 10 years, decoding patterns of life through science and engineering. With over 4 years of
+        hands-on experience, I specialize in leveraging advanced analytics and deep learning techniques to extract
+        actionable insights across diverse industries like manufacturing, automotive, healthcare, and defense.
+    </p>
+    <p>
+        I thrive on collaborating with highly creative teams to develop innovative solutions, solve challenging
+        problems, and build enterprise-grade products that make a difference.
+    </p>
+</div>
+		</main>
+
+		<footer class="footer">
+    <div class="footer-content">
+        <p>&copy; Himanshu Mittal 2024. All rights reserved.</p>
+        <div class="footer-social-links">
+            <a href="mailto:himanshu.mittal.dev@gmail.com" title="Email" target="_blank" rel="noopener">
+                <i class="fas fa-envelope"></i>
+            </a>
+            <a href="https://linkedin.com/in/himanshumittal13" title="LinkedIn" target="_blank" rel="noopener">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://github.com/HimanshuMittal01" title="GitHub" target="_blank" rel="noopener">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="https://twitter.com/thesevenbow" title="Twitter" target="_blank" rel="noopener">
+                <i class="fab fa-twitter"></i>
+            </a>
+        </div>
+    </div>
+</footer>
+	</div>
+
+	<script type="text/javascript">
+
+		const toggleButton = document.querySelector(".color-mode-toggle");
+console.log(toggleButton);
+const toggleIcon = document.querySelector(".toggle-icon");
+
+// Function to toggle color mode
+function toggleColorMode() {
+    const isDark = document.documentElement.classList.toggle("dark-mode");
+    console.log(isDark)
+
+    // Update the toggle icon
+    toggleIcon.textContent = isDark ? "🌙" : "🌞";
+
+    // Save the user's preference in localStorage
+    localStorage.setItem("color-mode", isDark ? "dark" : "light");
+}
+
+// Attach the event listener
+toggleButton.addEventListener("click", toggleColorMode);
+
+// Determine initial color mode
+const savedMode = localStorage.getItem("color-mode");
+if (savedMode) {
+    // Apply saved preference
+    if (savedMode === "dark") {
+        document.documentElement.classList.add("dark-mode");
+        toggleIcon.textContent = "🌙";
+    } else {
+        toggleIcon.textContent = "🌞";
+    }
+} else {
+    // Default to system preference
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        document.documentElement.classList.add("dark-mode");
+        toggleIcon.textContent = "🌙";
+    } else {
+        toggleIcon.textContent = "🌞";
+    }
+}
+
+
+	</script>
+</body>
+
+</html>

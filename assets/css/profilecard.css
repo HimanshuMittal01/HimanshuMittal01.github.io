@@ -1,0 +1,64 @@
+/* Intro Card Styling */
+.intro-card {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    padding: 1.5rem;
+    background-color: var(--background-color);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px var(--box-shadow-light);
+}
+
+.profile-photo {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.intro-card-content {
+    flex: 1;
+}
+
+.name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0;
+    color: var(--text-color);
+}
+
+.description {
+    font-size: 1rem;
+    margin: 0.5rem 0 1rem;
+    color: var(--color-gray-90);
+    line-height: 1.5;
+}
+
+/* Social Links */
+.social-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.social-links a {
+    color: var(--text-color-link);
+    font-size: 1.25rem;
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+}
+
+.social-links a:hover {
+    color: var(--text-color-link-active);
+}
+
+/* Bio Section */
+.bio-section {
+    margin-top: 2rem;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-color);
+}
+
+.bio-section p {
+    margin: 0 0 1rem;
+}

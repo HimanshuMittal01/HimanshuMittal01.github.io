@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+	<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+	<link rel="icon" type="image/png" href="/assets/images/favicon.png">
+	<link href="https://npm.elemecdn.com/prism-themes/themes/prism-vsc-dark-plus.css" rel="stylesheet">
+	<link href="/assets/css/index.css" rel="stylesheet">
+	<link href="/assets/css/header.css" rel="stylesheet">
+	<link href="/assets/css/footer.css" rel="stylesheet">
+
+	<!-- Conditionally load the CSS files -->
+	
+
+	<!-- Meta -->
+	<title>DSA Interview Notes: Array [Part 1]</title>
+	<meta name="description" content="
+		  
+			A site to showcase Himanshu Mittal's writing on AI, technology, philosophy and productivity.
+		  
+		">
+</head>
+
+<body>
+	<div class="page-container">
+		<header>
+    <div class="header-container">
+        <!-- Logo -->
+        <a href="/" class="logo">
+            <picture><source type="image/avif" srcset="/img/YcBxjvMwsE-79.avif 79w"><source type="image/webp" srcset="/img/YcBxjvMwsE-79.webp 79w"><img loading="lazy" decoding="async" src="/img/YcBxjvMwsE-79.png" alt="Logo for Light Mode" class="logo-image light-mode-logo" width="79" height="48"></picture>
+            <picture><source type="image/avif" srcset="/img/WWFT1o-94Z-80.avif 80w"><source type="image/webp" srcset="/img/WWFT1o-94Z-80.webp 80w"><img loading="lazy" decoding="async" src="/img/WWFT1o-94Z-80.png" alt="Logo for Dark Mode" class="logo-image dark-mode-logo" width="80" height="48"></picture>
+        </a>
+
+        <!-- Navigation Menu -->
+        <nav class="site-nav">
+            <ul class="nav-list">
+                
+                <li class="nav-item">
+                    <a href="/about/" class="">
+                        About
+                    </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="/" class="">
+                        Posts
+                    </a>
+                </li>
+                
+            </ul>
+        </nav>
+
+        <!-- Color Mode Toggle -->
+        <button class="color-mode-toggle" aria-label="Toggle Color Mode">
+            <span class="toggle-icon">🌞</span>
+        </button>
+    </div>
+</header>
+
+
+		<main class="main-content">
+			
+<h1>DSA Interview Notes: Array [Part 1]</h1>
+<!-- date: 2024-02-18
+tags: ["dsa", "interviews"]
+ -->
+<p>Array is a fundamental data structure which is used to store elements of same data type. In an array, elements are stored in contiguous memory location.</p>
+<p>Time complexity of best algorithm to sort the array is <code>O(nlogn)</code></p>
+<p>Index plays a very important role in problems related to array. Depending on the problem, you need to use additional variables which will act as an index in your input array.</p>
+<h2>Two pointer approach</h2>
+<p>It is a technique used for efficiently solving problems related to arrays and linked lists. The basic idea is to use two pointers that traverses the array or list in a way that will help identify a solution, subarray or some property of data efficiently.</p>
+<p><strong>When can you apply it?</strong><br>
+There needs to be a certain relation in the input and the output which is required.</p>
+<p>Some common scenarios where you can apply two-pointer approach is:</p>
+<table>
+<thead>
+<tr>
+<th>No</th>
+<th>Problem</th>
+<th>Description</th>
+<th>Approach</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><a href="https://leetcode.com/problems/two-sum"> Two sum </a></td>
+<td>Finding a pair in sorted array</td>
+<td>Create left and right pointers initialized to 0 and n-1. Move left+1 if target is higher and right-1 otherwise. Terminate the loop if the answer is found.</td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="https://leetcode.com/problems/remove-duplicates-from-sorted-array/"> Remove duplicates from sorted array </a></td>
+<td>Remove duplicates in-place and return length</td>
+<td>Keep one pointer to track the index that denotes length of unique elements and other one to iterate all values.</td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="https://leetcode.com/problems/move-zeroes"> Move Zeroes </a></td>
+<td>Move all zeroes to the end</td>
+<td>Keep one pointer to track the index of non-negative integer and other one to iterate all values.</td>
+</tr>
+</tbody>
+</table>
+<p>TODO: Add 'merge sorted arrays' and 'pivot' approach here
+TODO: Add 'prefix and suffix' and 'trapping rainwater' technique / <a href="https://leetcode.com/problems/bag-of-tokens">Bag of Tokens</a></p>
+<h2>Subarray problems</h2>
+<p>A subarray is a subset of an array where all elements in the subarray needs to be contiguous. We can broadly categorize the techniques into three categories:</p>
+<ol>
+<li>
+<p><strong>Hashmap</strong></p>
+<p>The idea is to use hashmap to store a property of the subarray like index, sum, product, etc. depending on the problem and then perform compuation based on that property to identify the required subarray.</p>
+<p>General pattern of code:</p>
+<pre class="language-cpp"><code class="language-cpp"><span class="token comment">// Question is to find number of subarrays which have sum equal to target</span>
+<span class="token comment">// https://www.geeksforgeeks.org/number-subarrays-sum-exactly-equal-k/</span>
+
+<span class="token keyword">int</span> <span class="token function">findSubarraySum</span><span class="token punctuation">(</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token operator">&amp;</span>arr<span class="token punctuation">,</span> <span class="token keyword">int</span> target<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// store sum as key and freq of sum as value</span>
+    unordered_map<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span><span class="token keyword">int</span><span class="token operator">></span> mp<span class="token punctuation">;</span>
+
+    <span class="token keyword">int</span> ans <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> curr <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span>arr<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// add element to track curr sum so far</span>
+        curr <span class="token operator">+=</span> arr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// found the target; subarray from index [0,i]</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>curr<span class="token operator">==</span>target<span class="token punctuation">)</span> ans<span class="token operator">++</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// find (curr-target) in hashmap</span>
+        <span class="token comment">// If found that means subarray with sum target exists</span>
+        <span class="token comment">// where end element is 'i' and no of possible starts are</span>
+        <span class="token comment">// recorded in hashmap</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>mp<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span>curr<span class="token operator">-</span>target<span class="token punctuation">)</span> <span class="token operator">!=</span> mp<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            ans <span class="token operator">+=</span> mp<span class="token punctuation">[</span>curr<span class="token operator">-</span>target<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token comment">// update freq</span>
+        mp<span class="token punctuation">[</span>curr<span class="token punctuation">]</span><span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> ans<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>Practice problems:</p>
+<ul>
+<li><a href="https://www.geeksforgeeks.org/longest-sub-array-sum-k/">Longest Subarray Sum K</a></li>
+<li><a href="https://leetcode.com/problems/subarray-sum-equals-k">Subarray Sum Equals K</a></li>
+<li><a href="https://leetcode.com/problems/continuous-subarray-sum">Continuous Subarray Sum</a></li>
+<li><a href="https://www.geeksforgeeks.org/largest-subarray-with-equal-number-of-0s-and-1s/">Largest Subarray with Equal Number of 0s and 1s</a></li>
+<li><a href="https://www.geeksforgeeks.org/length-of-longest-subarray-with-equal-number-of-odd-and-even-elements/">Longest Subarray with Equal Number of Odds and Evens</a></li>
+</ul>
+</li>
+<li>
+<p>Sliding Window</p>
+<p>The idea is similar to two-pointers approach i.e. to track start and end of the subarray however it is so common in the subarray problems that it deserves its own category.</p>
+<p>Usually you have to keep track of the start of the subarray. Other than that there are no general templates for it. More you practice, better it is. Try these different variety of problems:</p>
+<ul>
+<li><a href="https://leetcode.com/problems/maximum-ascending-subarray-sum">Maximum Ascending Subarray Sum</a></li>
+<li><a href="https://leetcode.com/problems/longest-nice-subarray">Longest Nice Subarray</a></li>
+<li><a href="https://leetcode.com/problems/sliding-window-maximum">Sliding Window Maximum</a></li>
+<li><a href="https://leetcode.com/problems/longest-substring-without-repeating-characters">Longest Substring Without Repeating Characters</a></li>
+</ul>
+</li>
+<li>
+<p>Kadane's Algorithm</p>
+<p><a href="https://leetcode.com/problems/maximum-product-subarray">Maximum Product Subarray</a> and <a href="https://leetcode.com/problems/maximum-subarray">Maximum Sum Subarray</a> are two very important problems to understand for solving greedy/DP problems.</p>
+</li>
+</ol>
+<h2>Binary search</h2>
+<h2>Classic problems</h2>
+<p><strong>Stock</strong> related problems is a popular category for interview questions. The idea simply is to maximize profit given some rules defined in the question. Just attempt the first two problems of the following series on the leetcode (attempt others if you know about DP approach):</p>
+<ol>
+<li><a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock">Best Time to Buy and Sell Stock</a></li>
+<li><a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii">Best Time to Buy and Sell Stock II</a></li>
+<li><a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii">Best Time to Buy and Sell Stock III</a></li>
+<li><a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv">Best Time to Buy and Sell Stock IV</a></li>
+<li><a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown">Best Time to Buy and Sell Stock with Cooldown</a></li>
+<li><a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee">Best Time to Buy and Sell Stock with Transaction Fee</a></li>
+</ol>
+<p><strong>Meeting room</strong> related problems is often asked in interview questions. The idea here is to sort the periods based on start time and then start clubbing periods by comparing end of previous group and start of current period.</p>
+
+<br>
+
+
+
+
+<ul class="links-nextprev">
+    
+    <li class="links-nextprev-prev">← Previous<br> 
+        <a href="/posts/240211-dsa-notes-part-3/">DSA Interview Notes: Binary Tree [Part 3]</a>
+    </li>
+    
+    
+    <li class="links-nextprev-next">Next →<br> 
+        <a href="/posts/240219-dsa-notes-part-2/">DSA Interview Notes: Linked List [Part 2]</a>
+    </li>
+    
+</ul>
+
+
+<br>
+
+		</main>
+
+		<footer class="footer">
+    <div class="footer-content">
+        <p>&copy; Himanshu Mittal 2024. All rights reserved.</p>
+        <div class="footer-social-links">
+            <a href="mailto:himanshu.mittal.dev@gmail.com" title="Email" target="_blank" rel="noopener">
+                <i class="fas fa-envelope"></i>
+            </a>
+            <a href="https://linkedin.com/in/himanshumittal13" title="LinkedIn" target="_blank" rel="noopener">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://github.com/HimanshuMittal01" title="GitHub" target="_blank" rel="noopener">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="https://twitter.com/thesevenbow" title="Twitter" target="_blank" rel="noopener">
+                <i class="fab fa-twitter"></i>
+            </a>
+        </div>
+    </div>
+</footer>
+	</div>
+
+	<script type="text/javascript">
+
+		const toggleButton = document.querySelector(".color-mode-toggle");
+console.log(toggleButton);
+const toggleIcon = document.querySelector(".toggle-icon");
+
+// Function to toggle color mode
+function toggleColorMode() {
+    const isDark = document.documentElement.classList.toggle("dark-mode");
+    console.log(isDark)
+
+    // Update the toggle icon
+    toggleIcon.textContent = isDark ? "🌙" : "🌞";
+
+    // Save the user's preference in localStorage
+    localStorage.setItem("color-mode", isDark ? "dark" : "light");
+}
+
+// Attach the event listener
+toggleButton.addEventListener("click", toggleColorMode);
+
+// Determine initial color mode
+const savedMode = localStorage.getItem("color-mode");
+if (savedMode) {
+    // Apply saved preference
+    if (savedMode === "dark") {
+        document.documentElement.classList.add("dark-mode");
+        toggleIcon.textContent = "🌙";
+    } else {
+        toggleIcon.textContent = "🌞";
+    }
+} else {
+    // Default to system preference
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        document.documentElement.classList.add("dark-mode");
+        toggleIcon.textContent = "🌙";
+    } else {
+        toggleIcon.textContent = "🌞";
+    }
+}
+
+
+	</script>
+</body>
+
+</html>

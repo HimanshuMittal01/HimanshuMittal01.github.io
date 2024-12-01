@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+	<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+	<link rel="icon" type="image/png" href="/assets/images/favicon.png">
+	<link href="https://npm.elemecdn.com/prism-themes/themes/prism-vsc-dark-plus.css" rel="stylesheet">
+	<link href="/assets/css/index.css" rel="stylesheet">
+	<link href="/assets/css/header.css" rel="stylesheet">
+	<link href="/assets/css/footer.css" rel="stylesheet">
+
+	<!-- Conditionally load the CSS files -->
+	
+
+	<!-- Meta -->
+	<title>DSA Interview Notes: Linked List [Part 2]</title>
+	<meta name="description" content="
+		  
+			A site to showcase Himanshu Mittal's writing on AI, technology, philosophy and productivity.
+		  
+		">
+</head>
+
+<body>
+	<div class="page-container">
+		<header>
+    <div class="header-container">
+        <!-- Logo -->
+        <a href="/" class="logo">
+            <picture><source type="image/avif" srcset="/img/YcBxjvMwsE-79.avif 79w"><source type="image/webp" srcset="/img/YcBxjvMwsE-79.webp 79w"><img loading="lazy" decoding="async" src="/img/YcBxjvMwsE-79.png" alt="Logo for Light Mode" class="logo-image light-mode-logo" width="79" height="48"></picture>
+            <picture><source type="image/avif" srcset="/img/WWFT1o-94Z-80.avif 80w"><source type="image/webp" srcset="/img/WWFT1o-94Z-80.webp 80w"><img loading="lazy" decoding="async" src="/img/WWFT1o-94Z-80.png" alt="Logo for Dark Mode" class="logo-image dark-mode-logo" width="80" height="48"></picture>
+        </a>
+
+        <!-- Navigation Menu -->
+        <nav class="site-nav">
+            <ul class="nav-list">
+                
+                <li class="nav-item">
+                    <a href="/about/" class="">
+                        About
+                    </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="/" class="">
+                        Posts
+                    </a>
+                </li>
+                
+            </ul>
+        </nav>
+
+        <!-- Color Mode Toggle -->
+        <button class="color-mode-toggle" aria-label="Toggle Color Mode">
+            <span class="toggle-icon">🌞</span>
+        </button>
+    </div>
+</header>
+
+
+		<main class="main-content">
+			
+<h1>DSA Interview Notes: Linked List [Part 2]</h1>
+<!-- date: 2024-02-19T21:53:23+05:30
+tags: ["dsa", "interviews"] -->
+<p>Linked List is a linear data structure in which elements are stored in nodes and each of the node contains the data and address or link or reference to the next node in the sequence.</p>
+<p>In linked list related problems, most of the questions will revolve around manipulation of pointers.</p>
+<ol>
+<li>
+<p><strong>Reversing a linked list</strong> is sometimes required to solve the task. Here's how you can do it:</p>
+<pre class="language-cpp"><code class="language-cpp">ListNode<span class="token operator">*</span> <span class="token function">reverseList</span><span class="token punctuation">(</span>ListNode<span class="token operator">*</span> head<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>head <span class="token operator">||</span> <span class="token operator">!</span>head<span class="token operator">-></span>next<span class="token punctuation">)</span> <span class="token keyword">return</span> head<span class="token punctuation">;</span>
+
+    ListNode<span class="token operator">*</span> curr <span class="token operator">=</span> head<span class="token punctuation">;</span>
+    ListNode<span class="token operator">*</span> prev <span class="token operator">=</span> <span class="token keyword">nullptr</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>curr<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        ListNode<span class="token operator">*</span> next <span class="token operator">=</span> curr<span class="token operator">-></span>next<span class="token punctuation">;</span>
+
+        <span class="token comment">// note this pattern</span>
+        curr<span class="token operator">-></span>next <span class="token operator">=</span> prev<span class="token punctuation">;</span>
+        prev <span class="token operator">=</span> curr<span class="token punctuation">;</span>
+        curr <span class="token operator">=</span> next<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> prev<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>Practice problems:</p>
+<ul>
+<li><a href="https://leetcode.com/problems/reverse-linked-list-ii">Reverse Linked List II</a></li>
+<li><a href="https://leetcode.com/problems/reverse-nodes-in-k-group/">Reverse Nodes in K group</a></li>
+<li><a href="https://leetcode.com/problems/add-two-numbers-ii">Add Two Numbers II</a></li>
+</ul>
+</li>
+<li>
+<p><strong>Fast and slow pointer</strong> approach is another idea which can be seen in the interview questions. Illustrating how to <a href="https://leetcode.com/problems/middle-of-the-linked-list">find middle point</a> using it  :</p>
+<pre class="language-cpp"><code class="language-cpp">ListNode<span class="token operator">*</span> <span class="token function">middleNode</span><span class="token punctuation">(</span>ListNode<span class="token operator">*</span> head<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    ListNode<span class="token operator">*</span> slow <span class="token operator">=</span> head<span class="token punctuation">;</span>
+    ListNode<span class="token operator">*</span> fast <span class="token operator">=</span> head<span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>fast <span class="token operator">&amp;&amp;</span> fast<span class="token operator">-></span>next<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        slow <span class="token operator">=</span> slow<span class="token operator">-></span>next<span class="token punctuation">;</span>
+        fast <span class="token operator">=</span> fast<span class="token operator">-></span>next<span class="token operator">-></span>next<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> slow<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>This concept can be applied to solve <a href="https://leetcode.com/problems/linked-list-cycle-ii">Detect and Find Cycle</a> in a linked list. Additionally, you need to know an important trick i.e. <strong>when cycle exists, slow and fast pointer merge</strong> after some iterations.</p>
+ <picture><source type="image/avif" srcset="/posts/240219-dsa-notes-part-2/ZEQGH5JE8R-1191.avif 1191w"><source type="image/webp" srcset="/posts/240219-dsa-notes-part-2/ZEQGH5JE8R-1191.webp 1191w"><img loading="lazy" decoding="async" src="/posts/240219-dsa-notes-part-2/ZEQGH5JE8R-1191.png" alt="Linked list cycle detection process" width="1191" height="761"></picture>
+<p>And to find the node from which the cycle starts, use the following technique. Let's say distance from head of linked list to start of the cycle is <code>x</code>, distance from start of the cycle to merge point is <code>y</code>, and distance travelled from merge point to start of the cycle is <code>z</code>.</p>
+<p>$$ 2 (x+y) = x+y+y+z $$
+$$ x = z $$</p>
+<p>It means that <strong>travelling equal distance from head and merge point, it meets at the start of the cycle.</strong> So, simply put one pointer at head and other at merge point, and iterate next pointers till both meets at desired point.</p>
+</li>
+</ol>
+<p><em>Tip: Creating a new sentinel nodes and pointing it to head is a useful trick to avoid edge cases.</em></p>
+<p><a href="https://leetcode.com/problems/copy-list-with-random-pointer">Copy List with Random Pointer</a> is a tricky but an important problem to understand. Essentially, we have to deepcopy a linked list where each nodes is having next and random pointer. The intuitive approach is to first create new nodes by iterating through the next pointers and store the old to new node mapping in a hashmap, and then replicate random pointers using that hashmap. But there exists a beautiful O(1) space complexity solution. Let's see the implementation:</p>
+<pre class="language-cpp"><code class="language-cpp">Node<span class="token operator">*</span> <span class="token function">copyRandomList</span><span class="token punctuation">(</span>Node<span class="token operator">*</span> head<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// This can be broken down into three parts</span>
+        <span class="token comment">// 1. Create new nodes such that the new node follows its corresponding old node</span>
+        <span class="token comment">// 2. Add random pointer based on old nodes</span>
+        <span class="token comment">// 3. Restore original linked list and return copied head</span>
+
+        <span class="token comment">// Step 1</span>
+        <span class="token comment">// Before: 1 -> 2 -> 3 -> NULL</span>
+        <span class="token comment">// After: 1 -> 1' -> 2 -> 2' -> 3 -> 3' -> NULL</span>
+        Node<span class="token operator">*</span> curr <span class="token operator">=</span> head<span class="token punctuation">;</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span>curr<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            Node<span class="token operator">*</span> dup <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">Node</span><span class="token punctuation">(</span>curr<span class="token operator">-></span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            Node<span class="token operator">*</span> nxt <span class="token operator">=</span> curr<span class="token operator">-></span>next<span class="token punctuation">;</span>
+            curr<span class="token operator">-></span>next <span class="token operator">=</span> dup<span class="token punctuation">;</span>
+            dup<span class="token operator">-></span>next <span class="token operator">=</span> nxt<span class="token punctuation">;</span>
+            curr <span class="token operator">=</span> nxt<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token comment">// Step 2</span>
+        <span class="token comment">// newNode->random = (oldNode->random)->next</span>
+        <span class="token comment">// (oldNode->next)->random = (oldNode->random)->next</span>
+        curr <span class="token operator">=</span> head<span class="token punctuation">;</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span>curr<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>curr<span class="token operator">-></span>random<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                curr<span class="token operator">-></span>next<span class="token operator">-></span>random <span class="token operator">=</span> curr<span class="token operator">-></span>random<span class="token operator">-></span>next<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            curr <span class="token operator">=</span> curr<span class="token operator">-></span>next<span class="token operator">-></span>next<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token comment">// Step 3 - Restore</span>
+        Node<span class="token operator">*</span> sentinel <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">Node</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        sentinel<span class="token operator">-></span>next <span class="token operator">=</span> head<span class="token punctuation">;</span>
+
+        Node<span class="token operator">*</span> newNode <span class="token operator">=</span> sentinel<span class="token punctuation">;</span>
+        Node<span class="token operator">*</span> oldNode <span class="token operator">=</span> head<span class="token punctuation">;</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span>oldNode<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            Node<span class="token operator">*</span> nextNewNode <span class="token operator">=</span> oldNode<span class="token operator">-></span>next<span class="token punctuation">;</span>
+            Node<span class="token operator">*</span> nextOldNode <span class="token operator">=</span> oldNode<span class="token operator">-></span>next<span class="token operator">-></span>next<span class="token punctuation">;</span>
+            
+            newNode<span class="token operator">-></span>next <span class="token operator">=</span> nextNewNode<span class="token punctuation">;</span>
+            oldNode<span class="token operator">-></span>next <span class="token operator">=</span> nextOldNode<span class="token punctuation">;</span>
+
+            newNode <span class="token operator">=</span> nextNewNode<span class="token punctuation">;</span>
+            oldNode <span class="token operator">=</span> nextOldNode<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> sentinel<span class="token operator">-></span>next<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span></code></pre>
+<p>Practice problems:</p>
+<ul>
+<li><a href="https://leetcode.com/problems/remove-duplicates-from-sorted-list">Remove Duplicates from Sorted List</a></li>
+<li><a href="https://leetcode.com/problems/remove-duplicates-from-sorted-list-ii">Remove Duplicates from Sorted List II</a></li>
+<li><a href="https://leetcode.com/problems/split-linked-list-in-parts">Split Linked List in Parts</a></li>
+<li><a href="https://leetcode.com/problems/palindrome-linked-list">Palindrome Linked List</a></li>
+<li><a href="https://leetcode.com/problems/delete-the-middle-node-of-a-linked-list">Delete the Middle Node of a Linked List</a></li>
+<li><a href="https://leetcode.com/problems/rotate-list">Rotate List</a></li>
+</ul>
+
+<br>
+
+
+
+
+<ul class="links-nextprev">
+    
+    <li class="links-nextprev-prev">← Previous<br> 
+        <a href="/posts/240218-dsa-notes-part-1/">DSA Interview Notes: Array [Part 1]</a>
+    </li>
+    
+    
+    <li class="links-nextprev-next">Next →<br> 
+        <a href="/posts/240224-dsa-notes-part-4/">DSA Interview Notes: Matrix [Part 4]</a>
+    </li>
+    
+</ul>
+
+
+<br>
+
+		</main>
+
+		<footer class="footer">
+    <div class="footer-content">
+        <p>&copy; Himanshu Mittal 2024. All rights reserved.</p>
+        <div class="footer-social-links">
+            <a href="mailto:himanshu.mittal.dev@gmail.com" title="Email" target="_blank" rel="noopener">
+                <i class="fas fa-envelope"></i>
+            </a>
+            <a href="https://linkedin.com/in/himanshumittal13" title="LinkedIn" target="_blank" rel="noopener">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://github.com/HimanshuMittal01" title="GitHub" target="_blank" rel="noopener">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="https://twitter.com/thesevenbow" title="Twitter" target="_blank" rel="noopener">
+                <i class="fab fa-twitter"></i>
+            </a>
+        </div>
+    </div>
+</footer>
+	</div>
+
+	<script type="text/javascript">
+
+		const toggleButton = document.querySelector(".color-mode-toggle");
+console.log(toggleButton);
+const toggleIcon = document.querySelector(".toggle-icon");
+
+// Function to toggle color mode
+function toggleColorMode() {
+    const isDark = document.documentElement.classList.toggle("dark-mode");
+    console.log(isDark)
+
+    // Update the toggle icon
+    toggleIcon.textContent = isDark ? "🌙" : "🌞";
+
+    // Save the user's preference in localStorage
+    localStorage.setItem("color-mode", isDark ? "dark" : "light");
+}
+
+// Attach the event listener
+toggleButton.addEventListener("click", toggleColorMode);
+
+// Determine initial color mode
+const savedMode = localStorage.getItem("color-mode");
+if (savedMode) {
+    // Apply saved preference
+    if (savedMode === "dark") {
+        document.documentElement.classList.add("dark-mode");
+        toggleIcon.textContent = "🌙";
+    } else {
+        toggleIcon.textContent = "🌞";
+    }
+} else {
+    // Default to system preference
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        document.documentElement.classList.add("dark-mode");
+        toggleIcon.textContent = "🌙";
+    } else {
+        toggleIcon.textContent = "🌞";
+    }
+}
+
+
+	</script>
+</body>
+
+</html>

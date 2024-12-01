@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+	<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+	<link rel="icon" type="image/png" href="/assets/images/favicon.png">
+	<link href="https://npm.elemecdn.com/prism-themes/themes/prism-vsc-dark-plus.css" rel="stylesheet">
+	<link href="/assets/css/index.css" rel="stylesheet">
+	<link href="/assets/css/header.css" rel="stylesheet">
+	<link href="/assets/css/footer.css" rel="stylesheet">
+
+	<!-- Conditionally load the CSS files -->
+	
+
+	<!-- Meta -->
+	<title>DSA Interview Notes: String [Part 5]</title>
+	<meta name="description" content="
+		  
+			A site to showcase Himanshu Mittal's writing on AI, technology, philosophy and productivity.
+		  
+		">
+</head>
+
+<body>
+	<div class="page-container">
+		<header>
+    <div class="header-container">
+        <!-- Logo -->
+        <a href="/" class="logo">
+            <picture><source type="image/avif" srcset="/img/YcBxjvMwsE-79.avif 79w"><source type="image/webp" srcset="/img/YcBxjvMwsE-79.webp 79w"><img loading="lazy" decoding="async" src="/img/YcBxjvMwsE-79.png" alt="Logo for Light Mode" class="logo-image light-mode-logo" width="79" height="48"></picture>
+            <picture><source type="image/avif" srcset="/img/WWFT1o-94Z-80.avif 80w"><source type="image/webp" srcset="/img/WWFT1o-94Z-80.webp 80w"><img loading="lazy" decoding="async" src="/img/WWFT1o-94Z-80.png" alt="Logo for Dark Mode" class="logo-image dark-mode-logo" width="80" height="48"></picture>
+        </a>
+
+        <!-- Navigation Menu -->
+        <nav class="site-nav">
+            <ul class="nav-list">
+                
+                <li class="nav-item">
+                    <a href="/about/" class="">
+                        About
+                    </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="/" class="">
+                        Posts
+                    </a>
+                </li>
+                
+            </ul>
+        </nav>
+
+        <!-- Color Mode Toggle -->
+        <button class="color-mode-toggle" aria-label="Toggle Color Mode">
+            <span class="toggle-icon">🌞</span>
+        </button>
+    </div>
+</header>
+
+
+		<main class="main-content">
+			
+<h1>DSA Interview Notes: String [Part 5]</h1>
+<!-- date: 2024-03-03T09:07:05+05:30
+tags: ["dsa", "interviews"]-->
+<p>String is a sequence of characters, so essentially it is an array. Questions can be tricky so practice as much as possible. Following techniques cover intervier's favorite questions:</p>
+<h2>Palindrome</h2>
+<p>A string is called palindrome when original word is equal to reversed word. Palindrome either could be odd or even length. The idea to apply is that expand equally from the middle of the string to check a palindrome. Here's a general template:</p>
+<pre class="language-cpp"><code class="language-cpp"><span class="token keyword">bool</span> <span class="token function">checkPalindrome</span><span class="token punctuation">(</span>strign s<span class="token punctuation">,</span> <span class="token keyword">int</span> n<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">int</span> l <span class="token operator">=</span> <span class="token punctuation">(</span>n<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">/</span><span class="token number">2</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> r <span class="token operator">=</span> n<span class="token operator">/</span><span class="token number">2</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>l<span class="token operator">>=</span><span class="token number">0</span> <span class="token operator">&amp;&amp;</span> r<span class="token operator">&lt;</span>n<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>s<span class="token punctuation">[</span>l<span class="token operator">--</span><span class="token punctuation">]</span><span class="token operator">!=</span>s<span class="token punctuation">[</span>r<span class="token operator">++</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>Practice Problems:</p>
+<ul>
+<li><a href="https://leetcode.com/problems/palindromic-substrings/">Palindromic Substrings</a></li>
+</ul>
+<h2>Longest Common Subsequence</h2>
+<p>Subsequence is a collection of characters and those characters should be in the increasing order of indices. Many problems come down to this property.</p>
+<p>Another really important concept is longest common subsequence (LCS). It have to be computed as a subproblem for some problems. Here's the implementation where <code>dp</code> is memoization matrix initialized as global variable:</p>
+<pre class="language-cpp"><code class="language-cpp"><span class="token keyword">int</span> <span class="token function">lcs</span><span class="token punctuation">(</span>string <span class="token operator">&amp;</span>s1<span class="token punctuation">,</span> string <span class="token operator">&amp;</span>s2<span class="token punctuation">,</span> <span class="token keyword">int</span> m<span class="token punctuation">,</span> <span class="token keyword">int</span> n<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>m<span class="token operator">==</span><span class="token number">0</span> <span class="token operator">||</span> n<span class="token operator">==</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>dp<span class="token punctuation">[</span>m<span class="token punctuation">]</span><span class="token punctuation">[</span>n<span class="token punctuation">]</span><span class="token operator">!=</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token keyword">return</span> dp<span class="token punctuation">[</span>m<span class="token punctuation">]</span><span class="token punctuation">[</span>n<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>s1<span class="token punctuation">[</span>m<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token operator">==</span>s2<span class="token punctuation">[</span>n<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token keyword">return</span> dp<span class="token punctuation">[</span>m<span class="token punctuation">]</span><span class="token punctuation">[</span>n<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">+</span> <span class="token function">lcs</span><span class="token punctuation">(</span>s1<span class="token punctuation">,</span> s2<span class="token punctuation">,</span> m<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> n<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">else</span> <span class="token keyword">return</span> dp<span class="token punctuation">[</span>m<span class="token punctuation">]</span><span class="token punctuation">[</span>n<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">max</span><span class="token punctuation">(</span><span class="token function">lcs</span><span class="token punctuation">(</span>s1<span class="token punctuation">,</span> s2<span class="token punctuation">,</span> m<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">lcs</span><span class="token punctuation">(</span>s1<span class="token punctuation">,</span> s2<span class="token punctuation">,</span> m<span class="token punctuation">,</span> n<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>Practice problems:</p>
+<ul>
+<li><a href="https://leetcode.com/problems/longest-common-subsequence">Longest Common Subsequence</a></li>
+<li><a href="https://leetcode.com/problems/longest-palindromic-subsequence">Longest Palindromic Subsequence</a></li>
+<li><a href="https://leetcode.com/problems/edit-distance">Edit Distance</a></li>
+</ul>
+<h2>Parentheses and Expressions</h2>
+<p>Questions asking about balancing parentheses or evaluating expressions is pretty common. The idea is to <strong>think of the stack data structure</strong> in such cases because usually it is required to use the last seen information. For example - in balanced parentheses if '(' is seen before then ')' can correspond to it and we can remove that pair.</p>
+<p>For expression problems, trick is to create one stack for operands and another one for operators. Then, parse them such that lower priority cannot be evaluated before the higher priority i.e. '+' and '-', cannot come on top of '*' or '/' in the stack. See <a href="https://leetcode.com/problems/basic-calculator-ii/">Basic Calculator II</a> for more clarity.</p>
+<p>Practice problems:</p>
+<ul>
+<li><a href="https://leetcode.com/problems/minimum-number-of-swaps-to-make-the-string-balanced">Minimum Number of Swaps to Make the String Balanced</a></li>
+<li><a href="https://leetcode.com/problems/minimum-deletions-to-make-string-balanced">Minimum Deletions to Make String Balanced</a></li>
+<li><a href="https://leetcode.com/problems/remove-duplicate-letters">Remove duplicate letters</a></li>
+<li><a href="https://leetcode.com/problems/evaluate-reverse-polish-notation">Evaluate Reverse Polish Notation</a></li>
+<li><a href="https://leetcode.com/problems/decode-string/">Decode String</a></li>
+</ul>
+
+<br>
+
+
+
+
+<ul class="links-nextprev">
+    
+    <li class="links-nextprev-prev">← Previous<br> 
+        <a href="/posts/240224-dsa-notes-part-4/">DSA Interview Notes: Matrix [Part 4]</a>
+    </li>
+    
+    
+    <li class="links-nextprev-next">Next →<br> 
+        <a href="/posts/240309-dsa-notes-part-6/">DSA Interview Notes: Stack & Queue [Part 6]</a>
+    </li>
+    
+</ul>
+
+
+<br>
+
+		</main>
+
+		<footer class="footer">
+    <div class="footer-content">
+        <p>&copy; Himanshu Mittal 2024. All rights reserved.</p>
+        <div class="footer-social-links">
+            <a href="mailto:himanshu.mittal.dev@gmail.com" title="Email" target="_blank" rel="noopener">
+                <i class="fas fa-envelope"></i>
+            </a>
+            <a href="https://linkedin.com/in/himanshumittal13" title="LinkedIn" target="_blank" rel="noopener">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://github.com/HimanshuMittal01" title="GitHub" target="_blank" rel="noopener">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="https://twitter.com/thesevenbow" title="Twitter" target="_blank" rel="noopener">
+                <i class="fab fa-twitter"></i>
+            </a>
+        </div>
+    </div>
+</footer>
+	</div>
+
+	<script type="text/javascript">
+
+		const toggleButton = document.querySelector(".color-mode-toggle");
+console.log(toggleButton);
+const toggleIcon = document.querySelector(".toggle-icon");
+
+// Function to toggle color mode
+function toggleColorMode() {
+    const isDark = document.documentElement.classList.toggle("dark-mode");
+    console.log(isDark)
+
+    // Update the toggle icon
+    toggleIcon.textContent = isDark ? "🌙" : "🌞";
+
+    // Save the user's preference in localStorage
+    localStorage.setItem("color-mode", isDark ? "dark" : "light");
+}
+
+// Attach the event listener
+toggleButton.addEventListener("click", toggleColorMode);
+
+// Determine initial color mode
+const savedMode = localStorage.getItem("color-mode");
+if (savedMode) {
+    // Apply saved preference
+    if (savedMode === "dark") {
+        document.documentElement.classList.add("dark-mode");
+        toggleIcon.textContent = "🌙";
+    } else {
+        toggleIcon.textContent = "🌞";
+    }
+} else {
+    // Default to system preference
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        document.documentElement.classList.add("dark-mode");
+        toggleIcon.textContent = "🌙";
+    } else {
+        toggleIcon.textContent = "🌞";
+    }
+}
+
+
+	</script>
+</body>
+
+</html>

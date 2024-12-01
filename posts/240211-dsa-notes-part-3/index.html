@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+	<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+	<link rel="icon" type="image/png" href="/assets/images/favicon.png">
+	<link href="https://npm.elemecdn.com/prism-themes/themes/prism-vsc-dark-plus.css" rel="stylesheet">
+	<link href="/assets/css/index.css" rel="stylesheet">
+	<link href="/assets/css/header.css" rel="stylesheet">
+	<link href="/assets/css/footer.css" rel="stylesheet">
+
+	<!-- Conditionally load the CSS files -->
+	
+
+	<!-- Meta -->
+	<title>DSA Interview Notes: Binary Tree [Part 3]</title>
+	<meta name="description" content="
+		  
+			A site to showcase Himanshu Mittal's writing on AI, technology, philosophy and productivity.
+		  
+		">
+</head>
+
+<body>
+	<div class="page-container">
+		<header>
+    <div class="header-container">
+        <!-- Logo -->
+        <a href="/" class="logo">
+            <picture><source type="image/avif" srcset="/img/YcBxjvMwsE-79.avif 79w"><source type="image/webp" srcset="/img/YcBxjvMwsE-79.webp 79w"><img loading="lazy" decoding="async" src="/img/YcBxjvMwsE-79.png" alt="Logo for Light Mode" class="logo-image light-mode-logo" width="79" height="48"></picture>
+            <picture><source type="image/avif" srcset="/img/WWFT1o-94Z-80.avif 80w"><source type="image/webp" srcset="/img/WWFT1o-94Z-80.webp 80w"><img loading="lazy" decoding="async" src="/img/WWFT1o-94Z-80.png" alt="Logo for Dark Mode" class="logo-image dark-mode-logo" width="80" height="48"></picture>
+        </a>
+
+        <!-- Navigation Menu -->
+        <nav class="site-nav">
+            <ul class="nav-list">
+                
+                <li class="nav-item">
+                    <a href="/about/" class="">
+                        About
+                    </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="/" class="">
+                        Posts
+                    </a>
+                </li>
+                
+            </ul>
+        </nav>
+
+        <!-- Color Mode Toggle -->
+        <button class="color-mode-toggle" aria-label="Toggle Color Mode">
+            <span class="toggle-icon">🌞</span>
+        </button>
+    </div>
+</header>
+
+
+		<main class="main-content">
+			
+<h1>DSA Interview Notes: Binary Tree [Part 3]</h1>
+<!-- date: 2024-02-11T20:01:57+05:30
+tags: ["dsa", "interviews"]-->
+<p>Binary tree is a data structure in which each node has at most two children i.e. left and right child.</p>
+<p>All the questions related to the binary tree can be solved using the two techniques below:</p>
+<ol>
+<li>BFS (Breadth-first search)</li>
+<li>DFS (Depth-first search)</li>
+</ol>
+<h2>Breadth-first search</h2>
+<p>Breadth first search is same as level-order traversal for the binary tree. Read more <a href="https://cp-algorithms.com/graph/breadth-first-search.html">here</a>.</p>
+<p>General template:</p>
+<pre class="language-cpp"><code class="language-cpp">queue<span class="token operator">&lt;</span>TreeNode<span class="token operator">*</span><span class="token operator">></span> q<span class="token punctuation">;</span>
+q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// add root of the binary tree to the queue</span>
+
+<span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token operator">!</span>q<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// denotes number of nodes in current level</span>
+    <span class="token keyword">int</span> sz <span class="token operator">=</span> q<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// loop through the complete level</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span>sz<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// extract the first element from the queue</span>
+        TreeNode<span class="token operator">*</span> peek <span class="token operator">=</span> q<span class="token punctuation">.</span><span class="token function">front</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> q<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>peek<span class="token operator">-></span>left<span class="token punctuation">)</span> q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>peek<span class="token operator">-></span>left<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>peek<span class="token operator">-></span>right<span class="token punctuation">)</span> q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>peek<span class="token operator">-></span>right<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<h3>Example</h3>
+<p>Problem link - <a href="https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal">ZigZag Order</a>. Given the root of a binary tree, return the zigzag level order traversal of its nodes' values. (i.e., from left to right, then right to left for the next level and alternate between).</p>
+<pre class="language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    vector<span class="token operator">&lt;</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">>></span> <span class="token function">zigzagLevelOrder</span><span class="token punctuation">(</span>TreeNode<span class="token operator">*</span> root<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        vector<span class="token operator">&lt;</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">>></span> ans<span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>root<span class="token punctuation">)</span> <span class="token keyword">return</span> ans<span class="token punctuation">;</span>
+
+        queue<span class="token operator">&lt;</span>TreeNode<span class="token operator">*</span><span class="token operator">></span> q<span class="token punctuation">;</span>
+        q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">int</span> level <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>        
+        <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token operator">!</span>q<span class="token punctuation">.</span><span class="token function">empty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">int</span> sz <span class="token operator">=</span> q<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span> curr<span class="token punctuation">;</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span>sz<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                TreeNode<span class="token operator">*</span> peek <span class="token operator">=</span> q<span class="token punctuation">.</span><span class="token function">front</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> q<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                curr<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>peek<span class="token operator">-></span>val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>peek<span class="token operator">-></span>left<span class="token punctuation">)</span> q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>peek<span class="token operator">-></span>left<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>peek<span class="token operator">-></span>right<span class="token punctuation">)</span> q<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>peek<span class="token operator">-></span>right<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>level<span class="token operator">%</span><span class="token number">2</span><span class="token operator">==</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token function">reverse</span><span class="token punctuation">(</span>curr<span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> curr<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            ans<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>curr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            level<span class="token operator">++</span><span class="token punctuation">;</span> 
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> ans<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+<h3>Practice problems</h3>
+<ul>
+<li><a href="https://leetcode.com/problems/binary-tree-right-side-view">Right view</a></li>
+<li><a href="https://leetcode.com/problems/find-bottom-left-tree-value">Find bottom left tree value</a></li>
+</ul>
+<h2>Depth-first search</h2>
+<p>Depth-first search problems is generally easier to think and implement in a recursive manner. Read more about it <a href="https://cp-algorithms.com/graph/depth-first-search.html">here</a>. Keep following points in mind for recursion:</p>
+<ol>
+<li>Identify the parameters which will help you in solving the problem.</li>
+<li>Think of the base condition</li>
+<li>Think of how you will make a recursive call to the function by calling the smaller instances of it so that it could reach the base condition.</li>
+<li>Think of the value you need to return back to its parent function call which would help you to solve the problem.</li>
+</ol>
+<p>General template:</p>
+<pre class="language-cpp"><code class="language-cpp"><span class="token keyword">void</span> <span class="token function">preOrderTraversal</span><span class="token punctuation">(</span>TreeNode<span class="token operator">*</span> root<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// Base condition</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>root<span class="token punctuation">)</span> <span class="token keyword">return</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// Compute and recurse according to the problem</span>
+    cout <span class="token operator">&lt;&lt;</span> root<span class="token operator">-></span>val <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span><span class="token punctuation">;</span>
+    <span class="token function">traverse</span><span class="token punctuation">(</span>root<span class="token operator">-></span>left<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">traverse</span><span class="token punctuation">(</span>root<span class="token operator">-></span>right<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">solve</span><span class="token punctuation">(</span>TreeNode<span class="token operator">*</span> root<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">preOrderTraversal</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span></code></pre>
+<h3>Example</h3>
+<p>Problem link - <a href="https://leetcode.com/problems/symmetric-tree">Mirror Tree</a>. Given the root of a binary tree, check whether it is a mirror of itself (i.e., symmetric around its center).</p>
+<pre class="language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">bool</span> <span class="token function">helper</span><span class="token punctuation">(</span>TreeNode<span class="token operator">*</span> root1<span class="token punctuation">,</span> TreeNode<span class="token operator">*</span> root2<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>root1 <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>root2<span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>root1 <span class="token operator">||</span> <span class="token operator">!</span>root2<span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">return</span> <span class="token punctuation">(</span>root1<span class="token operator">-></span>val<span class="token operator">==</span>root2<span class="token operator">-></span>val <span class="token operator">&amp;&amp;</span> <span class="token function">helper</span><span class="token punctuation">(</span>root1<span class="token operator">-></span>left<span class="token punctuation">,</span> root2<span class="token operator">-></span>right<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token function">helper</span><span class="token punctuation">(</span>root1<span class="token operator">-></span>right<span class="token punctuation">,</span> root2<span class="token operator">-></span>left<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">bool</span> <span class="token function">isSymmetric</span><span class="token punctuation">(</span>TreeNode<span class="token operator">*</span> root<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token function">helper</span><span class="token punctuation">(</span>root<span class="token operator">-></span>left<span class="token punctuation">,</span> root<span class="token operator">-></span>right<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+<h3>Tips and Tricks</h3>
+<ol>
+<li>
+<p><strong>Traversal Order</strong></p>
+<p>There are three types of traversal order defined (V=Value, L=Left, R=Right) which tells when to process the root value. Following are:</p>
+<ul>
+<li>PreOrder: V L R</li>
+<li>InOrder: L V R</li>
+<li>PostOrder: L R V</li>
+</ul>
+<p>Popular question: <a href="https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal">Construct a binary tree from preorder and inorder traversal</a></p>
+<pre class="language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">int</span> preindex <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    TreeNode<span class="token operator">*</span> <span class="token function">traverse</span><span class="token punctuation">(</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token operator">&amp;</span> preorder<span class="token punctuation">,</span> <span class="token keyword">int</span> s<span class="token punctuation">,</span> <span class="token keyword">int</span> e<span class="token punctuation">,</span> unordered_map<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span><span class="token keyword">int</span><span class="token operator">></span> <span class="token operator">&amp;</span>mp<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>s <span class="token operator">></span> e<span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+        
+        TreeNode<span class="token operator">*</span> root <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">TreeNode</span><span class="token punctuation">(</span>preorder<span class="token punctuation">[</span>preindex<span class="token operator">++</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">int</span> inOrderIndex <span class="token operator">=</span> mp<span class="token punctuation">[</span>root<span class="token operator">-></span>val<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        root<span class="token operator">-></span>left <span class="token operator">=</span> <span class="token function">traverse</span><span class="token punctuation">(</span>preorder<span class="token punctuation">,</span> s<span class="token punctuation">,</span> inOrderIndex<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> mp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        root<span class="token operator">-></span>right <span class="token operator">=</span> <span class="token function">traverse</span><span class="token punctuation">(</span>preorder<span class="token punctuation">,</span> inOrderIndex<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span> e<span class="token punctuation">,</span> mp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">return</span> root<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    TreeNode<span class="token operator">*</span> <span class="token function">buildTree</span><span class="token punctuation">(</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token operator">&amp;</span> preorder<span class="token punctuation">,</span> vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token operator">&amp;</span> inorder<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">int</span> n <span class="token operator">=</span> preorder<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        unordered_map<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token punctuation">,</span><span class="token keyword">int</span><span class="token operator">></span> mp<span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span>n<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> mp<span class="token punctuation">[</span>inorder<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">=</span> i<span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token function">traverse</span><span class="token punctuation">(</span>preorder<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> n<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> mp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+<p>Now, try solving this problem by yourself: <a href="https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal">Construct a binary tree from postorder and inorder traversal</a></p>
+</li>
+<li>
+<p><strong>Lowest Common Ancestor (LCA)</strong></p>
+<p>According to the definition of LCA on Wikipedia: “The lowest common ancestor is defined between two nodes p and q as the lowest node in T that has both p and q as descendants (where we allow a node to be a descendant of itself).”</p>
+<p>It is important to understand the concept of LCA as it may be used as a subproblem for other problems. Here is its implementation (test on leetcode <a href="https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree">here</a>):</p>
+<p><em>Note that the below implementation assumes both the given nodes exist</em></p>
+<pre class="language-cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    TreeNode<span class="token operator">*</span> <span class="token function">getLCA</span><span class="token punctuation">(</span>TreeNode<span class="token operator">*</span> root<span class="token punctuation">,</span> TreeNode<span class="token operator">*</span> p<span class="token punctuation">,</span> TreeNode<span class="token operator">*</span> q<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// not found base condition</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>root<span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// return root itself to indicate presence of the value</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>root<span class="token operator">-></span>val <span class="token operator">==</span> p<span class="token operator">-></span>val <span class="token operator">||</span> root<span class="token operator">-></span>val <span class="token operator">==</span> q<span class="token operator">-></span>val<span class="token punctuation">)</span> <span class="token keyword">return</span> root<span class="token punctuation">;</span>
+
+        <span class="token comment">// traverse left and right if not found yet</span>
+        TreeNode<span class="token operator">*</span> left <span class="token operator">=</span> <span class="token function">getLCA</span><span class="token punctuation">(</span>root<span class="token operator">-></span>left<span class="token punctuation">,</span> p<span class="token punctuation">,</span> q<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        TreeNode<span class="token operator">*</span> right <span class="token operator">=</span> <span class="token function">getLCA</span><span class="token punctuation">(</span>root<span class="token operator">-></span>right<span class="token punctuation">,</span> p<span class="token punctuation">,</span> q<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// current node is lowest common ancestor</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>left <span class="token operator">&amp;&amp;</span> right<span class="token punctuation">)</span> <span class="token keyword">return</span> root<span class="token punctuation">;</span>
+
+        <span class="token comment">// otherwise return the path where some value is found</span>
+        <span class="token keyword">return</span> <span class="token punctuation">(</span>left <span class="token operator">?</span> left <span class="token operator">:</span> right<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    TreeNode<span class="token operator">*</span> <span class="token function">lowestCommonAncestor</span><span class="token punctuation">(</span>TreeNode<span class="token operator">*</span> root<span class="token punctuation">,</span> TreeNode<span class="token operator">*</span> p<span class="token punctuation">,</span> TreeNode<span class="token operator">*</span> q<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token function">getLCA</span><span class="token punctuation">(</span>root<span class="token punctuation">,</span> p<span class="token punctuation">,</span> q<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+<p>Now, try solving this problem by yourself: <a href="https://leetcode.com/problems/lowest-common-ancestor-of-deepest-leaves/">LCA of deepest levels</a></p>
+</li>
+</ol>
+<h3>Practice problems</h3>
+<ul>
+<li><a href="https://leetcode.com/problems/sum-root-to-leaf-numbers">Sum Root to Leaf Numbers</a></li>
+<li><a href="https://leetcode.com/problems/insufficient-nodes-in-root-to-leaf-paths">Insufficient Nodes in Root to Leaf Paths</a></li>
+<li><a href="https://leetcode.com/problems/path-sum/">Path Sum</a></li>
+<li><a href="https://leetcode.com/problems/path-sum-ii">Path Sum II</a></li>
+<li><a href="https://leetcode.com/problems/binary-tree-maximum-path-sum">Binary Tree Maximum Path Sum</a></li>
+</ul>
+
+<br>
+
+
+
+
+<ul class="links-nextprev">
+    
+    <li class="links-nextprev-prev">← Previous<br> 
+        <a href="/posts/240202-human-detection-and-tracking-in-surveillance-areas/">Human Detection and Tracking in Surveillance Areas</a>
+    </li>
+    
+    
+    <li class="links-nextprev-next">Next →<br> 
+        <a href="/posts/240218-dsa-notes-part-1/">DSA Interview Notes: Array [Part 1]</a>
+    </li>
+    
+</ul>
+
+
+<br>
+
+		</main>
+
+		<footer class="footer">
+    <div class="footer-content">
+        <p>&copy; Himanshu Mittal 2024. All rights reserved.</p>
+        <div class="footer-social-links">
+            <a href="mailto:himanshu.mittal.dev@gmail.com" title="Email" target="_blank" rel="noopener">
+                <i class="fas fa-envelope"></i>
+            </a>
+            <a href="https://linkedin.com/in/himanshumittal13" title="LinkedIn" target="_blank" rel="noopener">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://github.com/HimanshuMittal01" title="GitHub" target="_blank" rel="noopener">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="https://twitter.com/thesevenbow" title="Twitter" target="_blank" rel="noopener">
+                <i class="fab fa-twitter"></i>
+            </a>
+        </div>
+    </div>
+</footer>
+	</div>
+
+	<script type="text/javascript">
+
+		const toggleButton = document.querySelector(".color-mode-toggle");
+console.log(toggleButton);
+const toggleIcon = document.querySelector(".toggle-icon");
+
+// Function to toggle color mode
+function toggleColorMode() {
+    const isDark = document.documentElement.classList.toggle("dark-mode");
+    console.log(isDark)
+
+    // Update the toggle icon
+    toggleIcon.textContent = isDark ? "🌙" : "🌞";
+
+    // Save the user's preference in localStorage
+    localStorage.setItem("color-mode", isDark ? "dark" : "light");
+}
+
+// Attach the event listener
+toggleButton.addEventListener("click", toggleColorMode);
+
+// Determine initial color mode
+const savedMode = localStorage.getItem("color-mode");
+if (savedMode) {
+    // Apply saved preference
+    if (savedMode === "dark") {
+        document.documentElement.classList.add("dark-mode");
+        toggleIcon.textContent = "🌙";
+    } else {
+        toggleIcon.textContent = "🌞";
+    }
+} else {
+    // Default to system preference
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        document.documentElement.classList.add("dark-mode");
+        toggleIcon.textContent = "🌙";
+    } else {
+        toggleIcon.textContent = "🌞";
+    }
+}
+
+
+	</script>
+</body>
+
+</html>
