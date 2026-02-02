@@ -1,27 +1,43 @@
 <header>
     <div class="header-container">
-        <!-- Logo -->
-        <a href="/" class="logo">
-            <img src="/assets/images/logo-dark.png" alt="Logo for Light Mode" class="logo-image light-mode-logo">
-            <img src="/assets/images/logo-light.png" alt="Logo for Dark Mode" class="logo-image dark-mode-logo">
-        </a>
-
-        <!-- Navigation Menu -->
-        <nav class="site-nav">
-            <ul class="nav-list">
-                {% for entry in collections.page | eleventyNavigation %}
-                <li class="nav-item">
-                    <a href="{{ entry.url }}" class="{% if entry.url == page.url %}active{% endif %}">
-                        {{ entry.data.menuname }}
-                    </a>
-                </li>
-                {% endfor %}
-            </ul>
-        </nav>
-
-        <!-- Color Mode Toggle -->
-        <button class="color-mode-toggle" aria-label="Toggle Color Mode">
-            <span class="toggle-icon">🌞</span>
+        <div class="header-left">
+            <!-- Logo and Tagline Grouped -->
+            <a href="/" class="logo">
+                <img src="/assets/images/logo-dark.png" alt="Logo for Light Mode" class="logo-image light-mode-logo">
+                <img src="/assets/images/logo-light.png" alt="Logo for Dark Mode" class="logo-image dark-mode-logo">
+            </a>
+            <div class="site-tagline">
+                Notes, ideas, and things I build out of curiosity.
+            </div>
+        </div>
+        <div class="header-right">
+            <!-- Navigation Menu and Color Mode Toggle Grouped -->
+            <nav class="site-nav">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="/" class="{% if page.url == '/' %}active{% endif %}">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/learnings/" class="{% if page.url == '/learnings/' %}active{% endif %}">Learnings</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/quotes/" class="{% if page.url == '/quotes/' %}active{% endif %}">Quotes</a>
+                    </li>
+                    {% for entry in collections.page | eleventyNavigation %}
+                        {% if entry.data.menuname != 'About' and entry.data.menuname != 'Learnings' and entry.data.menuname != 'Quotes' %}
+                        <li class="nav-item">
+                            <a href="{{ entry.url }}" class="{% if entry.url == page.url %}active{% endif %}">
+                                {{ entry.data.menuname }}
+                            </a>
+                        </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </nav>
+            <button class="color-mode-toggle" aria-label="Toggle Color Mode">
+                <span class="toggle-icon">🌞</span>
+            </button>
+        </div>
         </button>
     </div>
 </header>

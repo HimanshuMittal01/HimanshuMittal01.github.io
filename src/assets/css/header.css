@@ -5,6 +5,26 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 0 1.5rem;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.site-tagline {
+    font-size: 1.05rem;
+    color: var(--text-color-secondary, #666);
+    margin-left: 0.5rem;
+    white-space: nowrap;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
 }
 
 /* Logo */
