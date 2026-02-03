@@ -11,7 +11,7 @@ Face recognition is quickly establishing itself as a standard for many companies
 
 ## FaceRek: Web application in Flask
 Here is the [github link](https://github.com/HimanshuMittal01/Week5-Project) of the project. This was the first capstone project under the course [MMML](https://www.machinelearningcourse.io/courses/make-money) by Siraj Raval where I teamed up randomly with Sanjeev Gupta. Eventually, Siraj had some plagiarism issues due to which this course was not properly delivered, but that's a story for another day.
-Anyways, tt was quite a fun and challenging project because I had very little experience with Flask before, no practical experience in databases and Sanjeev was senior to me and had non-tech background which made this work even more interesting. Even after all these challenges, we managed to submit the project which includes login-signup, user database, face verification, and payment gateway integration using stripe. We used [OpenCV](https://docs.opencv.org/3.4/da/d60/tutorial_face_main.html) for encoding and verifying the faces. Here are some snapshots of the final web app:
+Anyways, it was quite a fun and challenging project because I had very little experience with Flask before, no practical experience in databases and Sanjeev was senior to me and had non-tech background which made this work even more interesting. Even after all these challenges, we managed to submit the project which includes login-signup, user database, face verification, and payment gateway integration using stripe. We used [OpenCV](https://docs.opencv.org/3.4/da/d60/tutorial_face_main.html) for encoding and verifying the faces. Here are some snapshots of the final web app:
 
 <div style="text-align: center;">
     <figure>
