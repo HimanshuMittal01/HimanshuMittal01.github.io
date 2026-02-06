@@ -2,6 +2,7 @@
 title: "Brain Rot"
 summary: "How the Attention Economy Is Rewiring Our Minds"
 thumbnail: "/assets/thumbnails/brain-rot.png"
+date: 2026-01-17
 ---
 
 ## Age of Overload

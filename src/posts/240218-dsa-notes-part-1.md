@@ -2,6 +2,7 @@
 title: "DSA Interview Notes: Array [Part 1]"
 summary: "Array: Sounds simple, yet involve variety of tricks"
 thumbnail: "/assets/thumbnails/dsa-part1-bg.png"
+archived: true
 ---
 
 <!-- date: 2024-02-18

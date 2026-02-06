@@ -2,6 +2,7 @@
 title: "Job Hunting and Recruitment - A Balanced Perspective"
 summary: "Transparent communication between candidates and recruiters ensures better alignment and successful outcomes."
 thumbnail: /assets/thumbnails/job-hunting-and-recruitment-post-bg.webp
+date: 2024-07-28
 ---
 
 I have been on both sides of the table—giving interviews to secure a good job and conducting interviews to recruit talented individuals. Both roles come with their own set of challenges.

@@ -2,6 +2,7 @@
 title: "Custom Tensorrt Plugin"
 summary: "Built a custom TensorRT plugin, boosting LeNet-5 performance 3x."
 thumbnail: "/assets/thumbnails/tensorrt-post-bg.jpg"
+archived: true
 ---
 
 <!-- date: 2024-02-04T19:55:44+05:30 tags: ["deep learning", "optimization"]-->

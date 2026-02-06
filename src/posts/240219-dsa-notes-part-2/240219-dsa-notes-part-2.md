@@ -2,6 +2,7 @@
 title: "DSA Interview Notes: Linked List [Part 2]"
 summary: "Linked List: It's all about pointer manipulation"
 thumbnail: "/assets/thumbnails/dsa-part2-bg.png"
+archived: true
 ---
 
 <!-- date: 2024-02-19T21:53:23+05:30
