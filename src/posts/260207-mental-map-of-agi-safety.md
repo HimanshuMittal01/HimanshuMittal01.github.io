@@ -1,8 +1,8 @@
 ---
-title: "My Takeaways from Google DeepMind's AGI Safety Course"
-summary: "Understanding the alignment problem and how we're working to solve it"
+title: "A Mental Map of AI Safety"
+summary: "Key concepts from Google DeepMind's 1.5-hour course on AGI Safety"
 thumbnail: "/assets/thumbnails/AI-brain-with-shield-and-connections.png"
-date: 2026-02-07
+date: 2026-02-08
 ---
 
 I completed this course delivered as [Youtube Playlist](https://www.youtube.com/playlist?list=PLw9kjlF6lD5UqaZvMTbhJB8sV-yuXu5eW)  (~1.5 hours watch time), and I wanted to share some of the key insights I've gained. What I really loved about this course was its clear bifurcation of concerns and research work being done in AI safety. It was incredibly helpful for building a mental map of the different problems we're facing.
@@ -20,11 +20,17 @@ The course presented this beautifully through a framework of three specification
 
 When the ideal specification and design specification diverge, we get specification failures. The most common form is **specification gaming**: an AI system finds loopholes in how we've defined its goals. Imagine optimizing an AI to maximize user engagement on a platform. It might learn to show increasingly divisive content because controversy keeps people scrolling, even though that's clearly not what we wanted.
 
+Addressing specification gaming requires overcoming several challenges: (1) faithfully capturing human intent, (2) avoiding mistaken implicit assumptions about the environment, and (3) preventing systems from tampering with their reward signals.
+
 ## Generalization Failures
 
 When the design specification and revealed specification don't match, we encounter generalization failures:
 
-**Goal misgeneralization** happens when a system trained in one environment applies its learned goals inappropriately in new situations.
+**Goal misgeneralization** typically appears under distribution shift: the system learns a proxy goal that works during training but fails when the environment changes. The system may be highly capable yet pursue the wrong objective.
+
+It's worth noting the distinction between **misspecification** and **underspecification**. Even if there's no reward misspecification (i.e., the reward function correctly captures what we want), underspecification can still enable goal misgeneralization. When the training environment doesn't provide enough information to uniquely identify the intended goal, the system may learn any of several goals that happen to perform well during training.
+
+A fascinating example comes from the [CoinRun environment](https://arxiv.org/abs/2105.14111), where researchers analyzed how the actor and critic components of the PPO algorithm both fail to generalize out-of-distribution (OOD) and fail in different ways. The critic learned a proxy like "move toward the wall", while the actor learned an even weaker proxy: "move right", instead of the intended behavior "move toward the coin". This shows how agents can pursue a non-robust proxy of a non-robust proxy while still performing well in training.
 
 **Capability misgeneralization** refers to when a model's abilities don't transfer as expected across different contexts, potentially leading to unpredictable failures in novel situations. This isn't a central focus in AI alignment research because there are already thousands of engineers working on improving AI capabilities and these failures would be less of an issue.
 
@@ -51,7 +57,7 @@ The course emphasized a hierarchical approach to monitoring:
 - Use cheap heuristics to monitor inputs, outputs, and actions most of the time
 - Deploy more powerful (and expensive) evaluations only when consequences are unclear and stakes are high
 
-On the training side, the key insight is to be strategic about what data we use. Rather than just filtering the existing data, we should actively synthesize inputs that are likely to be informative and might expose dangerous failure modes before they occur in the real world.
+On the training side, the key insight is to be strategic about what data we use. Rather than just filtering existing data, we should actively synthesize inputs that are likely to be informative and might expose dangerous failure modes, thereby increasing the diversity of the training data.
 
 ## Security and Control: The Second Layer of Defense
 
@@ -98,6 +104,9 @@ The course outlined specific bottleneck capabilities for catastrophic threats:
 
 ---
 
-## Final Thoughts
+## Resources
 
-The good news is that we're not starting from zero. We have frameworks, techniques, and a growing community of researchers and practitioners working on these challenges. The key is maintaining this focus on safety as the field continues to advance at breakneck speed.
+From the course materials:
+
+- [Examples of Specification Gaming](https://tinyurl.com/specification-gaming)
+- [Examples of Goal Misgeneralization](https://tinyurl.com/goal-misgeneralisation)
