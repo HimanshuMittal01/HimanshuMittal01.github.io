@@ -1,7 +1,6 @@
 ---
 title: "DSA Interview Notes: Array [Part 1]"
 summary: "Array: Sounds simple, yet involve variety of tricks"
-archived: true
 ---
 
 <!-- date: 2024-02-18

@@ -1,7 +1,6 @@
 ---
 title: "DSA Interview Notes: Binary Tree [Part 3]"
 summary: "Binary Tree: Master BFS and DFS"
-archived: true
 ---
 
 <!-- date: 2024-02-11T20:01:57+05:30

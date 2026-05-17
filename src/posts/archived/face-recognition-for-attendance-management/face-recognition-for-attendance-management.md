@@ -1,7 +1,6 @@
 ---
 title: "Face Recognition for Attendance Management"
 summary: "Built face recognition systems with python backend, ending in a production-ready API."
-archived: true
 ---
 
 <img src="./facerek-post-bg.png" alt="Face Recognition for Attendance Management" />

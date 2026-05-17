@@ -2,7 +2,6 @@
 title: "Job Hunting and Recruitment - A Balanced Perspective"
 summary: "Transparent communication between candidates and recruiters ensures better alignment and successful outcomes."
 date: 2024-07-28
-archived: true
 ---
 
 <img src="./job-hunting-and-recruitment-post-bg.webp" alt="Job Hunting and Recruitment - A Balanced Perspective" />

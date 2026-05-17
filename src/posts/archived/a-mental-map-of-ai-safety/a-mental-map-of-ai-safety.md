@@ -2,7 +2,6 @@
 title: "A Mental Map of AI Safety"
 summary: "Key concepts from Google DeepMind's 1.5-hour course on AGI Safety"
 date: 2026-02-08
-archived: true
 ---
 
 <img src="./AI-brain-with-shield-and-connections.png" alt="A Mental Map of AI Safety" />

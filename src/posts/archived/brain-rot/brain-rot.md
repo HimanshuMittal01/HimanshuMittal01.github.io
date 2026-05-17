@@ -2,7 +2,6 @@
 title: "Brain Rot"
 summary: "How the Attention Economy Is Rewiring Our Minds"
 date: 2026-01-17
-archived: true
 ---
 
 <img src="./brain-rot.png" alt="Brain Rot" />

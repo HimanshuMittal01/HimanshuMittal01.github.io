@@ -1,7 +1,6 @@
 ---
 title: "Custom Tensorrt Plugin"
 summary: "Built a custom TensorRT plugin, boosting LeNet-5 performance 3x."
-archived: true
 ---
 
 <img src="./tensorrt-post-bg.jpg" alt="Custom Tensorrt Plugin" />
