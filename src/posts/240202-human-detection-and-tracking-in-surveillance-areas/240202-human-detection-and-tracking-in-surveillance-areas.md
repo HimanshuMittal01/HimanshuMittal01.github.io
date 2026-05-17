@@ -1,9 +1,10 @@
 ---
 title: "Human Detection and Tracking in Surveillance Areas"
 summary: "Developed a human and vehicle detection system using multi-GPU training on DGX V-100."
-thumbnail: /assets/thumbnails/belodt-post-bg.png
 archived: true
 ---
+
+<img src="/assets/thumbnails/belodt-post-bg.png" alt="Human Detection and Tracking in Surveillance Areas" />
 
 <!-- date: 2024-02-04T16:20:31+05:30
 tags: ["computer vision", "object detection", "tracking"] -->

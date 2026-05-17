@@ -1,10 +1,11 @@
 ---
 title: "A Mental Map of AI Safety"
 summary: "Key concepts from Google DeepMind's 1.5-hour course on AGI Safety"
-thumbnail: "/assets/thumbnails/AI-brain-with-shield-and-connections.png"
 date: 2026-02-08
 archived: true
 ---
+
+<img src="/assets/thumbnails/AI-brain-with-shield-and-connections.png" alt="A Mental Map of AI Safety" />
 
 I completed Google Deepmind's AGI Safety course delivered as [Youtube Playlist](https://www.youtube.com/playlist?list=PLw9kjlF6lD5UqaZvMTbhJB8sV-yuXu5eW)  (~1.5 hours watch time), and I wanted to share some of the key insights I've gained. What I really loved about this course was its clear bifurcation of concerns and research work being done in AI safety. It was incredibly helpful for building a mental map of the different problems we're facing.
 
