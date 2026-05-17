@@ -8,18 +8,14 @@ css:
 ---
 
 <div class="post-list">
-    {% for post in collections.post %}{% unless post.data.archived %}
-        <div class="post-card">
-            <!-- Post Thumbnail -->
-            <div class="post-thumbnail">
-                <img src="{{ post.data.thumbnail | default: '/assets/images/default-thumbnail.jpg' }}" alt="{{ post.data.title }} thumbnail" class="thumbnail-image">
-            </div>
-
+    {% for post in collections.post %}
+        <div class="post-card{% if post.data.archived %} archived-hidden{% endif %}">
+            {% if post.data.archived %}<i class="fas fa-box-archive archive-corner-icon" aria-hidden="true"></i>{% endif %}
             <!-- Post Details (Title and Description) -->
             <div class="post-details">
                 <h2><a href="{{ post.url }}">{{ post.data.title }}</a></h2>
                 <p>{{ post.data.summary }}</p>
             </div>
         </div>
-    {% endunless %}{% endfor %}
+    {% endfor %}
 </div>
