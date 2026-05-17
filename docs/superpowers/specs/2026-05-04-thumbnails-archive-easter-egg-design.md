@@ -159,6 +159,20 @@ Lead image moves:
 | human-detection-and-tracking-in-surveillance-areas | belodt-post-bg.png | `./belodt-post-bg.png` |
 | custom-tensorrt-plugin | tensorrt-post-bg.jpg | `./tensorrt-post-bg.jpg` |
 
+## I. Folder-driven post states: draft / published / archived (added mid-execution)
+
+Posts are grouped under three subfolders and the **folder is the single source of truth** for a post's state (the per-post `archived: true` front-matter flag is removed).
+
+- `src/posts/<state>/<slug>/<slug>.md` where `<state>` ∈ `draft | published | archived`.
+- Eleventy data cascade: `src/posts/posts.json` (layout, `tags: post`, permalink) still applies to every subfolder. Per-state directory data files refine behavior:
+  - `src/posts/archived/archived.json` → `{ "archived": true }` — post renders in the `/learnings/` list but with the `archived-hidden` class + corner icon (revealed only via the footer easter-egg dot).
+  - `src/posts/published/published.json` → `{ "archived": false }` — post shows normally in the list.
+  - `src/posts/draft/draft.json` → `{ "eleventyExcludeFromCollections": true, "permalink": false }` — drafts never build and never appear in `collections.post`.
+- No template changes: `learnings.html` already branches on `{% if post.data.archived %}` and `archive-egg.js` keys off the `.archived-hidden` class. State now flows from the directory data file instead of front matter.
+- URLs are unchanged: `permalink` uses `{{ page.fileSlug }}` (the filename), independent of folder depth.
+- Initial sort: all 12 existing posts move into `archived/`. `draft/` and `published/` are created with a `.gitkeep` so the empty dirs are tracked.
+- Remove the `archived: true` line from all 12 post `.md` files (redundant once the folder drives it).
+
 ## Out of Scope
 
 - Persisting the easter-egg reveal across reloads/visits.

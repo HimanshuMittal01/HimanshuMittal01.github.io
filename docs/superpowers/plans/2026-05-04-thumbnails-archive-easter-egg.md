@@ -514,6 +514,76 @@ git commit -m "chore: delete unused thumbnails directory and default thumbnail"
 
 ---
 
+## Task 12: Group posts under draft/published/archived (folder-driven state)
+
+**Files:** `git mv` all 12 post folders into `src/posts/archived/`; create 3 directory data files; create 2 `.gitkeep`; remove `archived: true` from 12 `.md` files.
+
+Current state: posts are `src/posts/<slug>/<slug>.md`, each `.md` has `archived: true` front matter. `src/posts/posts.json` has `layout`, `tags: post`, `permalink: "/learnings/{{ page.fileSlug }}/"`.
+
+- [ ] **Step 1: Move all 12 post folders into `archived/`**
+
+```bash
+mkdir -p src/posts/archived
+for d in src/posts/*/; do
+  name="$(basename "$d")"
+  case "$name" in archived|draft|published) continue;; esac
+  git mv "src/posts/$name" "src/posts/archived/$name"
+done
+```
+After this, `ls src/posts` should show only `archived/`, `posts.json` (and `draft/`, `published/` after Step 2). All 12 `<slug>/<slug>.md` now live under `src/posts/archived/<slug>/<slug>.md`.
+
+- [ ] **Step 2: Create empty draft/ and published/ (tracked)**
+
+```bash
+mkdir -p src/posts/draft src/posts/published
+touch src/posts/draft/.gitkeep src/posts/published/.gitkeep
+```
+
+- [ ] **Step 3: Create the three directory data files**
+
+Create `src/posts/archived/archived.json` exactly:
+```json
+{
+    "archived": true
+}
+```
+Create `src/posts/published/published.json` exactly:
+```json
+{
+    "archived": false
+}
+```
+Create `src/posts/draft/draft.json` exactly:
+```json
+{
+    "eleventyExcludeFromCollections": true,
+    "permalink": false
+}
+```
+(Eleventy directory data file naming: `<dirname>.json` — matches the existing `posts.json` convention. The deeper file overrides the inherited `posts.json` for that subtree. `posts.json` is left unchanged.)
+
+- [ ] **Step 4: Remove the redundant `archived: true` front matter from all 12 posts**
+
+In each `src/posts/archived/<slug>/<slug>.md`, delete the single front-matter line `archived: true` (between `date:` and the closing `---`). Change nothing else. Verify none remain: `grep -rl "^archived:" src/posts` → empty.
+
+- [ ] **Step 5: Build and verify (state still flows correctly)**
+
+`rm -rf _site && npm run build` — no errors.
+- `find _site/learnings -name index.html | sed 's#_site##;s#index.html##' | sort` → STILL exactly `/learnings/` + the same 12 clean `/learnings/<slug>/` URLs (folder grouping must NOT change URLs — `page.fileSlug` is filename-based).
+- List page (`_site/learnings/index.html`): `grep -c 'class="post-card' ` → 12, and `grep -c 'archived-hidden' ` → 12 (all still archived via `archived.json`), `grep -c 'fa-box-archive' ` → 12.
+- `grep -rl "^archived:" src/posts` → empty (front-matter flag gone; folder drives it).
+- Sanity: a post page e.g. `_site/learnings/brain-rot/index.html` exists and still shows its lead image.
+
+- [ ] **Step 6: Commit**
+
+```bash
+git add -A
+git status --porcelain   # confirm src/quotes.html & .gitignore NOT staged; if so, git restore --staged them
+git commit -m "refactor: group posts into draft/published/archived, folder-driven state"
+```
+
+---
+
 ## Task 8: Final full-site build verification
 
 **Files:** none (verification only)
@@ -535,7 +605,9 @@ Run and confirm each:
 - `find _site/learnings -name index.html | sed 's#_site##;s#index.html##' | sort` → exactly the 12 clean `/learnings/<slug>/` URLs + `/learnings/` (no date prefixes, no nested duplicates)
 - `test ! -d src/assets/thumbnails && echo OK` → `OK`
 - `grep -rn "assets/thumbnails\|default-thumbnail" src/ _site/ ; echo exit:$?` → no matches (`exit:1`)
-- All 12 posts exist as `src/posts/<slug>/<slug>.md` (`find src/posts -name '*.md' | grep -v posts.json` → 12 paths, each `<slug>/<slug>.md`)
+- All 12 posts exist as `src/posts/archived/<slug>/<slug>.md` (`find src/posts -name '*.md'` → 12 paths, each `archived/<slug>/<slug>.md`)
+- `grep -rl "^archived:" src/posts` → empty (folder-driven state; no front-matter flag)
+- `src/posts/draft/` and `src/posts/published/` exist (tracked via `.gitkeep`) with their `<dir>.json` data files; `src/posts/archived/archived.json` present
 
 - [ ] **Step 3: Final commit (only if Step 2 produced any uncommitted formatting/cleanup)**
 
