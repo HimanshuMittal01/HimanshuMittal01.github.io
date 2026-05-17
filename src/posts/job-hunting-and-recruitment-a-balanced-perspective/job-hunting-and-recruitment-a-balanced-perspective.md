@@ -5,7 +5,7 @@ date: 2024-07-28
 archived: true
 ---
 
-<img src="/assets/thumbnails/job-hunting-and-recruitment-post-bg.webp" alt="Job Hunting and Recruitment - A Balanced Perspective" />
+<img src="./job-hunting-and-recruitment-post-bg.webp" alt="Job Hunting and Recruitment - A Balanced Perspective" />
 
 I have been on both sides of the table—giving interviews to secure a good job and conducting interviews to recruit talented individuals. Both roles come with their own set of challenges.
 
