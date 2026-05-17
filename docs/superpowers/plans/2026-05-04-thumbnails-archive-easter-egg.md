@@ -383,6 +383,137 @@ Expected: both files match. (These are outside the git repo; do not `git add` th
 
 ---
 
+## Task 9: Permalink scheme — clean `/learnings/<slug>/` URLs
+
+**Files:**
+- Modify: `src/posts/posts.json`
+
+- [ ] **Step 1: Add the permalink rule**
+
+`src/posts/posts.json` is currently:
+```json
+{
+    "layout": "post.html",
+    "tags": "post"
+}
+```
+Change it to exactly:
+```json
+{
+    "layout": "post.html",
+    "tags": "post",
+    "permalink": "/learnings/{{ page.fileSlug }}/"
+}
+```
+
+- [ ] **Step 2: Build and check URLs (pre-restructure)**
+
+Run: `rm -rf _site && npm run build`
+Then: `find _site/learnings -name index.html | sed 's#_site##;s#index.html##' | sort`
+Expected: post pages now appear under `/learnings/...` (slug still date-prefixed until Task 10 renames files — that's fine here; this step only proves the permalink rule applies). The list page `/learnings/` itself still builds.
+
+- [ ] **Step 3: Commit**
+
+```bash
+git add src/posts/posts.json
+git commit -m "feat: serve posts at clean /learnings/<slug>/ urls"
+```
+
+---
+
+## Task 10: Restructure all posts into `src/posts/<slug>/<slug>.md` + co-locate lead images
+
+**Files:** `git mv` of all 12 posts; move 6 image files; edit 6 lead-image refs.
+
+Slug + image mapping (authoritative):
+
+| Current path | New `src/posts/<slug>/<slug>.md` | Lead image to move into new folder → new ref |
+| --- | --- | --- |
+| `src/posts/260117-brain-rot.md` | `brain-rot` | `src/assets/thumbnails/brain-rot.png` → `./brain-rot.png` |
+| `src/posts/260207-mental-map-of-agi-safety.md` | `a-mental-map-of-ai-safety` | `src/assets/thumbnails/AI-brain-with-shield-and-connections.png` → `./AI-brain-with-shield-and-connections.png` |
+| `src/posts/240218-dsa-notes-part-1.md` | `dsa-interview-notes-array-part-1` | (none) |
+| `src/posts/240219-dsa-notes-part-2/240219-dsa-notes-part-2.md` | `dsa-interview-notes-linked-list-part-2` | (none — but move any existing co-located assets in that folder) |
+| `src/posts/240211-dsa-notes-part-3.md` | `dsa-interview-notes-binary-tree-part-3` | (none) |
+| `src/posts/240224-dsa-notes-part-4.md` | `dsa-interview-notes-matrix-part-4` | (none) |
+| `src/posts/240303-dsa-notes-part-5.md` | `dsa-interview-notes-string-part-5` | (none) |
+| `src/posts/240309-dsa-notes-part-6.md` | `dsa-interview-notes-stack-and-queue-part-6` | (none) |
+| `src/posts/240202-custom-tensorrt-plugin/240202-custom-tensorrt-plugin.md` | `custom-tensorrt-plugin` | `src/assets/thumbnails/tensorrt-post-bg.jpg` → `./tensorrt-post-bg.jpg` (also move any existing body images in the old folder) |
+| `src/posts/240202-face-recognition-for-attendance-management/240202-face-recognition-for-attendance-management.md` | `face-recognition-for-attendance-management` | `src/assets/thumbnails/facerek-post-bg.png` → `./facerek-post-bg.png` (also move existing body images) |
+| `src/posts/240202-human-detection-and-tracking-in-surveillance-areas/240202-human-detection-and-tracking-in-surveillance-areas.md` | `human-detection-and-tracking-in-surveillance-areas` | `src/assets/thumbnails/belodt-post-bg.png` → `./belodt-post-bg.png` (also move existing body images) |
+| `src/posts/240728-job-hunting-and-recruitment-a-balanced-perspective/280724-job-hunting-and-recruitment-a-balanced-perspective.md` | `job-hunting-and-recruitment-a-balanced-perspective` | `src/assets/thumbnails/job-hunting-and-recruitment-post-bg.webp` → `./job-hunting-and-recruitment-post-bg.webp` (KEEP existing `./Concurrent job hunting and recruitment.png` body image — move it into the new folder too) |
+
+- [ ] **Step 1: Move flat posts into folders (git mv)**
+
+For each currently-flat `.md` post: create `src/posts/<slug>/` and `git mv` the file to `src/posts/<slug>/<slug>.md`. (git mv auto-creates the directory when the target path includes it; if not, `mkdir -p` the folder first, then `git mv`.) Example:
+```bash
+mkdir -p src/posts/brain-rot && git mv src/posts/260117-brain-rot.md src/posts/brain-rot/brain-rot.md
+```
+Do this for all flat posts per the table.
+
+- [ ] **Step 2: Rename existing folder posts**
+
+For folder posts, `git mv` both the directory and the markdown file so it ends up `src/posts/<slug>/<slug>.md`, and move any co-located asset files (images already referenced with `./`) into the new folder. Example:
+```bash
+git mv src/posts/240202-custom-tensorrt-plugin src/posts/custom-tensorrt-plugin
+git mv src/posts/custom-tensorrt-plugin/240202-custom-tensorrt-plugin.md src/posts/custom-tensorrt-plugin/custom-tensorrt-plugin.md
+```
+Inspect each old folder first (`ls`) and `git mv` every asset it contains into the new folder (preserving filenames so existing `./` refs keep working).
+
+- [ ] **Step 3: Move the 6 lead images into their post folders & rewrite refs**
+
+For each of the 6 posts with a lead image: `git mv src/assets/thumbnails/<file> src/posts/<slug>/<file>`, then edit that post's lead `<img>` tag, changing `src="/assets/thumbnails/<file>"` to `src="./<file>"` (leave the `alt` exactly as is).
+
+- [ ] **Step 4: Build and verify**
+
+Run: `rm -rf _site && npm run build`
+Verify:
+- `find _site/learnings -name index.html | sed 's#_site##;s#index.html##' | sort` → exactly the 12 clean URLs `/learnings/<slug>/` plus the list page `/learnings/` (13 total `index.html` under `_site/learnings`), no date prefixes, no nested duplicates.
+- No build errors/warnings about missing images.
+- Spot-check 2 posts (one moved-flat e.g. brain-rot, one renamed-folder e.g. job-hunting): the generated `index.html` contains the lead image (image plugin emits `<picture>`/optimized `<img>`); for job-hunting confirm BOTH the lead image and the original `Concurrent…` body image resolve.
+- `find _site -path "*learnings*" -name index.html | xargs grep -l "post-card"` includes the list page and `grep -c "post-card" <list>` still equals 12.
+
+- [ ] **Step 5: Commit**
+
+```bash
+git add -A
+git commit -m "refactor: folder-per-post structure with co-located lead images"
+```
+(`-A` is appropriate here because this task is composed of moves/renames/deletes across many post paths. Do NOT stage `src/quotes.html` or `.gitignore` if they show as modified — explicitly `git restore --staged src/quotes.html .gitignore` before commit if needed; they are unrelated user/working changes.)
+
+---
+
+## Task 11: Delete the thumbnails directory and orphaned default thumbnail
+
+**Files:** delete `src/assets/thumbnails/`, delete `src/assets/images/default-thumbnail.jpg`
+
+- [ ] **Step 1: Confirm nothing references them**
+
+Run: `grep -rn "assets/thumbnails\|default-thumbnail" src/ ; echo "exit:$?"`
+Expected: no matches (grep exit 1). If anything matches, STOP and report — a prior task missed a reference.
+
+- [ ] **Step 2: Delete**
+
+```bash
+git rm -r src/assets/thumbnails
+git rm src/assets/images/default-thumbnail.jpg
+```
+(All 6 used images were moved into post folders in Task 10; the 6 DSA thumbnails and the default were never referenced after Tasks 3/5.)
+
+- [ ] **Step 3: Build and verify**
+
+Run: `rm -rf _site && npm run build`
+Verify: clean build; `test ! -d src/assets/thumbnails && echo "THUMBNAILS-DIR-GONE"` prints the marker; `grep -rn "assets/thumbnails\|default-thumbnail" src/ _site/ ; echo "exit:$?"` → no matches.
+
+- [ ] **Step 4: Commit**
+
+```bash
+git add -A
+git commit -m "chore: delete unused thumbnails directory and default thumbnail"
+```
+(Again: do not stage unrelated `src/quotes.html` / `.gitignore` changes.)
+
+---
+
 ## Task 8: Final full-site build verification
 
 **Files:** none (verification only)
@@ -400,7 +531,11 @@ Run and confirm each:
 - `find _site -path "*learnings*" -name index.html -exec grep -c "post-card" {} \;` → equals total post count
 - `find _site -path "*learnings*" -name index.html -exec grep -c "archived-hidden" {} \;` → equals archived post count (> 0)
 - `grep -rl "fa-box-archive" _site` → includes the learnings page
-- The 6 non-DSA posts' generated `index.html` each contain their lead image (`find _site/posts -name index.html | xargs grep -l "post-bg\|brain-rot.png\|AI-brain-with-shield"` lists 6 files)
+- The 6 non-DSA posts' generated `index.html` each contain their lead image (`find _site/learnings -name index.html | xargs grep -l "post-bg\|brain-rot\|AI-brain-with-shield"` lists 6 files)
+- `find _site/learnings -name index.html | sed 's#_site##;s#index.html##' | sort` → exactly the 12 clean `/learnings/<slug>/` URLs + `/learnings/` (no date prefixes, no nested duplicates)
+- `test ! -d src/assets/thumbnails && echo OK` → `OK`
+- `grep -rn "assets/thumbnails\|default-thumbnail" src/ _site/ ; echo exit:$?` → no matches (`exit:1`)
+- All 12 posts exist as `src/posts/<slug>/<slug>.md` (`find src/posts -name '*.md' | grep -v posts.json` → 12 paths, each `<slug>/<slug>.md`)
 
 - [ ] **Step 3: Final commit (only if Step 2 produced any uncommitted formatting/cleanup)**
 

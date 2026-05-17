@@ -113,15 +113,59 @@ communication possible in the first place.
 
 ## G. Memory Update
 
-Revise the existing no-thumbnails feedback memory to capture the nuance: no thumbnails in the **post list**, but a lead image **inside a post body** is fine.
+Revise the existing no-thumbnails feedback memory to capture the nuance: no thumbnails in the **post list**, but a lead image **inside a post body** is fine (co-located in the post's own folder).
+
+## H. Post URL & Folder Restructure (added mid-execution)
+
+The current post URLs are malformed: date-prefixed and, for the job post, doubly nested (`/posts/240728-…/280724-…/`). The structure is inconsistent (some posts are flat `.md`, some are folders). Goal: clean, consistent URLs and structure.
+
+**H1. Permalink scheme.** Add to `src/posts/posts.json`:
+
+```json
+"permalink": "/learnings/{{ page.fileSlug }}/"
+```
+
+Every post then serves at `/learnings/<fileSlug>/`. `fileSlug` is the post file's basename without extension, which (after H2) equals the chosen clean slug. No date prefix, no nesting, no slugify-library dependence. `learnings.html` uses `{{ post.url }}` so the list links auto-follow.
+
+**H2. Folder-per-post.** Every post becomes `src/posts/<slug>/<slug>.md` using `git mv`. Chosen slugs:
+
+| Old path | New `src/posts/<slug>/<slug>.md` |
+| --- | --- |
+| 260117-brain-rot.md | brain-rot |
+| 260207-mental-map-of-agi-safety.md | a-mental-map-of-ai-safety |
+| 240218-dsa-notes-part-1.md | dsa-interview-notes-array-part-1 |
+| 240219-dsa-notes-part-2/240219-dsa-notes-part-2.md | dsa-interview-notes-linked-list-part-2 |
+| 240211-dsa-notes-part-3.md | dsa-interview-notes-binary-tree-part-3 |
+| 240224-dsa-notes-part-4.md | dsa-interview-notes-matrix-part-4 |
+| 240303-dsa-notes-part-5.md | dsa-interview-notes-string-part-5 |
+| 240309-dsa-notes-part-6.md | dsa-interview-notes-stack-and-queue-part-6 |
+| 240202-custom-tensorrt-plugin/… | custom-tensorrt-plugin |
+| 240202-face-recognition-for-attendance-management/… | face-recognition-for-attendance-management |
+| 240202-human-detection-and-tracking-in-surveillance-areas/… | human-detection-and-tracking-in-surveillance-areas |
+| 240728-job-hunting…/280724-job-hunting….md | job-hunting-and-recruitment-a-balanced-perspective |
+
+Existing folder posts: keep any co-located body images, moving them into the renamed folder; relative `./img` refs are unaffected (same-folder).
+
+**H3. Co-locate lead images + delete thumbnails dir.** The 6 lead images added in section C currently use absolute `/assets/thumbnails/…`. Move each image file into its post's new folder and rewrite the lead `<img>` to a relative `./<filename>` reference. Then delete the entire `src/assets/thumbnails/` directory and the now-orphaned `src/assets/images/default-thumbnail.jpg`. The `eleventyImageTransformPlugin` resolves `<img>` relative to the input file and copies optimized output (proven by the job post's existing `./Concurrent…png`), so no passthrough config change is needed.
+
+Lead image moves:
+
+| Post slug | Image file moved into folder | New ref |
+| --- | --- | --- |
+| a-mental-map-of-ai-safety | AI-brain-with-shield-and-connections.png | `./AI-brain-with-shield-and-connections.png` |
+| brain-rot | brain-rot.png | `./brain-rot.png` |
+| job-hunting-and-recruitment-a-balanced-perspective | job-hunting-and-recruitment-post-bg.webp | `./job-hunting-and-recruitment-post-bg.webp` |
+| face-recognition-for-attendance-management | facerek-post-bg.png | `./facerek-post-bg.png` |
+| human-detection-and-tracking-in-surveillance-areas | belodt-post-bg.png | `./belodt-post-bg.png` |
+| custom-tensorrt-plugin | tensorrt-post-bg.jpg | `./tensorrt-post-bg.jpg` |
 
 ## Out of Scope
 
-- Deleting orphaned DSA thumbnail image files.
 - Persisting the easter-egg reveal across reloads/visits.
 - Any `/archive/` standalone page.
 - Active-post status icons.
 - Dynamic copyright year (line removed instead).
+- Redirects from old `/posts/…` URLs (posts are archived/hidden; acceptable per user).
 
 ## Testing / Verification
 
@@ -132,3 +176,6 @@ Revise the existing no-thumbnails feedback memory to capture the nuance: no thum
 - The 6 non-DSA posts render their lead image directly under the title.
 - DSA posts render with no image and no broken `thumbnail` reference.
 - Job post shows the new section in the correct position.
+- Every post serves at `/learnings/<slug>/` (no date prefix, no nesting); `/learnings/` list links resolve to these URLs.
+- `src/assets/thumbnails/` no longer exists; no template/post references it; lead images load (optimized by the image plugin) from each post's own folder.
+- All 12 posts live as `src/posts/<slug>/<slug>.md`.
