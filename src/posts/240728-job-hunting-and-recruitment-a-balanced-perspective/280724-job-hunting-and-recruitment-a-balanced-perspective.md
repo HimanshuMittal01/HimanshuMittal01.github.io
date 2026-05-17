@@ -44,6 +44,12 @@ For this to work effectively, other processes must be strong as well:
 
 A third party can never solve this problem because the nuances of both the candidate's and the recruiter's needs and expectations are too complex and personalized. Third parties often lack the deep understanding and connection necessary to foster the level of transparency required for a successful match. They may provide tools and platforms to facilitate the process, but the integrity, honesty, and alignment of expectations must come directly from the involved parties.
 
+## The Three Drivers of a Job
+
+Before transparency can mean anything, a candidate has to know what they are being transparent about. Most jobs reward you along three axes: money and status; skills and experience; and desire, motivation, and impact. Few roles maximize all three at once—each job strikes a particular balance, and so does each person evaluating it.
+
+Optimizing for money alone is common, and at certain points in life it is the right call. But the optimal balance is not fixed; it shifts with the phase of life you are in. Early on, skills and experience may compound into everything else. Later, impact and motivation may outweigh another increment of pay. A match that ignores which axis a candidate is actually optimizing for, right now, tends to unravel later—regardless of how transparent the process was. Knowing your own balance is what makes honest communication possible in the first place.
+
 ## Practical Advice for Candidates and Recruiters
 
 ### For Candidates:
