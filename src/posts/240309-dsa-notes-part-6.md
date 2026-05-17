@@ -1,7 +1,6 @@
 ---
 title: "DSA Interview Notes: Stack & Queue [Part 6]"
 summary: "Know when to make monotonic increasing/decreasing data structures"
-thumbnail: "/assets/thumbnails/dsa-part6-bg.png"
 archived: true
 ---
 

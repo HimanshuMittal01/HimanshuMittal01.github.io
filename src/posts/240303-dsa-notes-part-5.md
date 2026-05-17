@@ -1,7 +1,6 @@
 ---
 title: "DSA Interview Notes: String [Part 5]"
 summary: "String: practice subsequences and parentheses question"
-thumbnail: "/assets/thumbnails/dsa-part5-bg.png"
 archived: true
 ---
 

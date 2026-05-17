@@ -1,7 +1,6 @@
 ---
 title: "DSA Interview Notes: Matrix [Part 4]"
 summary: "Matrix: Navigate grids extending concepts of traversal"
-thumbnail: "/assets/thumbnails/dsa-part4-bg.png"
 archived: true
 ---
 
