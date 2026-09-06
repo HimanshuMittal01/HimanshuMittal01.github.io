@@ -7,7 +7,7 @@
                 <img src="/assets/images/logo-light.png" alt="Logo for Dark Mode" class="logo-image dark-mode-logo">
             </a>
             <div class="site-tagline">
-                Notes, ideas, and things I build out of curiosity.
+                AI safety and evaluation. I understand things by building them.
             </div>
         </div>
         <div class="header-right">
@@ -18,7 +18,7 @@
                         <a href="/" class="{% if page.url == '/' %}active{% endif %}" title="A short introduction and a snapshot of my work so far.">About</a>
                     </li>
                     <li class="nav-item">
-                        <a href="/learnings/" class="{% if page.url == '/learnings/' %}active{% endif %}" title="Notes and takeaways from work, books, courses, and travel.">Learnings</a>
+                        <a href="/writing/" class="{% if page.url == '/writing/' %}active{% endif %}" title="Notes and takeaways from work, books, courses, and travel.">Writing</a>
                     </li>
                     <li class="nav-item">
                         <a href="/quotes/" class="{% if page.url == '/quotes/' %}active{% endif %}" title="A collection of quotes I return to.">Quotes</a>
@@ -27,7 +27,7 @@
                         <a href="/experiments/" class="{% if page.url == '/experiments/' %}active{% endif %}" title="Small projects I've built and shared out of curiosity.">Experiments</a>
                     </li> -->
                     {% for entry in collections.page | eleventyNavigation %}
-                        {% if entry.data.menuname != 'About' and entry.data.menuname != 'Learnings' and entry.data.menuname != 'Quotes' %}
+                        {% if entry.data.menuname != 'About' and entry.data.menuname != 'Writing' and entry.data.menuname != 'Quotes' %}
                         <li class="nav-item">
                             <a href="{{ entry.url }}" class="{% if entry.url == page.url %}active{% endif %}">
                                 {{ entry.data.menuname }}
