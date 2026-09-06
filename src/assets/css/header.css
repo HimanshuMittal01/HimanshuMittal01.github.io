@@ -1,24 +1,28 @@
-/* General Header Styling */
-.header-container {
-    width: 100%;
-    max-width: 1200px;
+/* One quiet line: name on the left, Writings and the theme toggle on the right.
+   Overrides the base header rules in index.css, which loads before this file. */
+header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 1.5rem;
-}
-
-.header-left {
-    display: flex;
-    align-items: center;
     gap: 1rem;
+    flex-wrap: nowrap;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 1.5rem;
+    background: none;
+    border: 0;
 }
 
-.site-tagline {
-    font-size: 1.05rem;
-    color: var(--text-color-secondary, #666);
-    margin-left: 0.5rem;
-    white-space: nowrap;
+/* index.css adds a clearfix pseudo-element, which flex turns into a third item */
+header::after { content: none; }
+
+.header-name {
+    font-size: 0.9375rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+    color: var(--text-color);
 }
 
 .header-right {
@@ -27,84 +31,65 @@
     gap: 1.5rem;
 }
 
-/* Logo */
-.logo-image {
-    max-width: 100px;
-    width: 60px;
-    display: none;
-}
-
-.light-mode-logo {
-    display: block;
-}
-
-.dark-mode .light-mode-logo {
-    display: none;
-}
-
-.dark-mode .dark-mode-logo {
-    display: block;
-}
-
-/* @media (prefers-color-scheme: dark) {
-    .light-mode-logo {
-        display: none;
-    }
-
-    .dark-mode-logo {
-        display: block;
-    }
-} */
-
-/* Navigation Menu */
-.site-nav {
-    display: flex;
-    align-items: center;
-}
-
-.nav-list {
-    display: flex;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    gap: 1.5rem;
-}
-
-.nav-item a {
+.site-nav a {
     text-decoration: none;
-    font-size: 1rem;
-    color: var(--text-color);
+    font-size: 0.9375rem;
     font-weight: 500;
+    color: var(--text-color);
     transition: color 0.3s ease;
 }
 
-.nav-item a:hover,
-.nav-item a.active {
+.site-nav a:hover,
+.site-nav a.active {
     color: var(--text-color-link-active);
     text-decoration: underline;
 }
 
-/* Color Mode Toggle */
 .color-mode-toggle {
     background: none;
     border: none;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
+    line-height: 1;
     cursor: pointer;
     color: var(--text-color);
     transition: color 0.3s ease;
 }
 
-.color-mode-toggle:hover {
-    color: var(--text-color-link-active);
+.color-mode-toggle:hover { color: var(--text-color-link-active); }
+
+/* ---------- homepage: the hero is the beginning of the page ---------- */
+
+/* sticky, transparent, and it keeps its box in flow, so nothing hides under it */
+body:has(.home) header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    max-width: calc(74rem + 3rem);
+    padding-block: 0.85rem;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    .nav-list {
-        gap: 1rem;
-    }
+/* the hero already opens with the name; it only appears once the hero is gone */
+body:has(.home) .header-name {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.45s ease;
+}
 
-    .logo-image {
-        height: 32px;
-    }
+body:has(.home) header.past-hero .header-name {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* no bar, no border — just enough blur to keep the nav legible over content */
+body:has(.home) header.past-hero {
+    backdrop-filter: blur(14px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body:has(.home) .header-name { transition: none; }
+}
+
+@media (max-width: 768px) {
+    header { padding: 0.85rem 1rem; }
+    .header-right { gap: 1rem; }
 }

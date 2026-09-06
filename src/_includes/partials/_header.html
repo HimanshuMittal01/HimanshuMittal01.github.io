@@ -1,46 +1,11 @@
 <header>
-    <div class="header-container">
-        <div class="header-left">
-            <!-- Logo and Tagline Grouped -->
-            <a href="/" class="logo">
-                <img src="/assets/images/logo-dark.png" alt="Logo for Light Mode" class="logo-image light-mode-logo">
-                <img src="/assets/images/logo-light.png" alt="Logo for Dark Mode" class="logo-image dark-mode-logo">
-            </a>
-            <div class="site-tagline">
-                AI safety and evaluation. I understand things by building them.
-            </div>
-        </div>
-        <div class="header-right">
-            <!-- Navigation Menu and Color Mode Toggle Grouped -->
-            <nav class="site-nav">
-                <ul class="nav-list">
-                    <li class="nav-item">
-                        <a href="/" class="{% if page.url == '/' %}active{% endif %}" title="A short introduction and a snapshot of my work so far.">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/writing/" class="{% if page.url == '/writing/' %}active{% endif %}" title="Notes and takeaways from work, books, courses, and travel.">Writing</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/quotes/" class="{% if page.url == '/quotes/' %}active{% endif %}" title="A collection of quotes I return to.">Quotes</a>
-                    </li>
-                    <!-- <li class="nav-item">
-                        <a href="/experiments/" class="{% if page.url == '/experiments/' %}active{% endif %}" title="Small projects I've built and shared out of curiosity.">Experiments</a>
-                    </li> -->
-                    {% for entry in collections.page | eleventyNavigation %}
-                        {% if entry.data.menuname != 'About' and entry.data.menuname != 'Writing' and entry.data.menuname != 'Quotes' %}
-                        <li class="nav-item">
-                            <a href="{{ entry.url }}" class="{% if entry.url == page.url %}active{% endif %}">
-                                {{ entry.data.menuname }}
-                            </a>
-                        </li>
-                        {% endif %}
-                    {% endfor %}
-                </ul>
-            </nav>
-            <button class="color-mode-toggle" aria-label="Toggle Color Mode">
-                <span class="toggle-icon">🌞</span>
-            </button>
-        </div>
+    <a href="/" class="header-name">{{ site.name }}</a>
+    <div class="header-right">
+        <nav class="site-nav">
+            <a href="/writings/" class="{% if page.url == '/writings/' %}active{% endif %}">Writings</a>
+        </nav>
+        <button class="color-mode-toggle" aria-label="Toggle Color Mode">
+            <span class="toggle-icon">🌞</span>
         </button>
     </div>
 </header>
