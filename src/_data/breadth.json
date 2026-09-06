@@ -141,13 +141,13 @@
         {
             "id": "a28",
             "title": "Personal Genie",
-            "descriptor": "Quiz answers in, recommendations out",
+            "descriptor": "Answer a few questions, buy a TV",
             "year": "2019",
-            "url": null,
-            "linkLabel": null,
+            "url": "https://github.com/HimanshuMittal01/Personal-Genie",
+            "linkLabel": "Repository",
             "popover": [
-                "A quiz that asked you enough questions to recommend something back. Built for a hackathon at SRM, which meant flying to Chennai for the final round.",
-                "We finished in the top ten."
+                "A quiz that asked a few questions about how you actually live, then pointed at a television, a phone or a laptop. Behind it sat catalogues of all three and a model guessing what you would rate them.",
+                "Built for a hackathon at SRM, which meant flying to Chennai for the final round. We finished in the top ten."
             ]
         },
         {
