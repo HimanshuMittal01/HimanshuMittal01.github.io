@@ -238,6 +238,18 @@
             ]
         },
         {
+            "id": "a27",
+            "title": "Dealer EOS map",
+            "descriptor": "Who we could actually reach",
+            "year": "2022",
+            "url": null,
+            "linkLabel": null,
+            "popover": [
+                "Where the dealers were, and which of them we could actually reach. Four maps in the end: everyone, then three narrower cuts of the same question.",
+                "The coordinates came as several dealer lists from different months that disagreed with each other, so most of the work was deciding which version of a dealer was true. The stock map markers were not good enough either, so I wrote my own."
+            ]
+        },
+        {
             "id": "a14",
             "title": "Tri-colour palette",
             "descriptor": "One colour in, five out",
