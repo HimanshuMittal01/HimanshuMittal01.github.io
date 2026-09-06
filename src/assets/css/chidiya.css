@@ -1,0 +1,404 @@
+/* Section 4. A locked dark room, independent of the site theme above it.
+   Nothing here reads from --ink / --paper on purpose: the page can be in either
+   mode and this section stays night. */
+
+.cu {
+    --night: #08090b;
+    --night-2: #0e1014;
+    --glow: #eceef3;
+    --dim: #8d919c;
+    --faint: #4a4e58;
+    --hit: #79c7a4;
+    --slip: #d98a7c;
+    --edge: rgba(255, 255, 255, 0.13);
+
+    background: var(--night);
+    color: var(--glow);
+    padding: clamp(5rem, 14vh, 9rem) 1.5rem;
+    /* the home page already runs edge to edge; 100vw would add a scrollbar's worth of overflow */
+    width: 100%;
+    font-family: "Outfit", var(--font-family);
+    position: relative;
+    overflow: hidden;
+}
+
+/* one low light source, the room is not evenly lit */
+.cu::before {
+    content: "";
+    position: absolute;
+    inset: -20% 30% auto -10%;
+    height: 60vh;
+    background: radial-gradient(40% 50% at 30% 40%, rgba(236, 238, 243, 0.06), transparent 70%);
+    pointer-events: none;
+}
+
+.cu-inner {
+    max-width: 40rem;
+    margin: 0 auto;
+    position: relative;
+}
+
+.cu-title {
+    max-width: 22ch;
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    margin: 0;
+}
+
+.cu-sub {
+    color: var(--dim);
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    margin: 1rem 0 0;
+    max-width: 34rem;
+}
+
+.cu-rule {
+    margin: 1.5rem 0 0;
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    color: var(--dim);
+}
+
+.cu-rule strong { color: var(--glow); font-weight: 500; }
+
+/* ---- board ---- */
+
+.cu-board {
+    margin-top: clamp(3rem, 8vh, 5rem);
+    min-height: 9.5rem;
+}
+
+.cu-dealer {
+    margin: 0;
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--faint);
+}
+
+.cu-call {
+    margin: 0.75rem 0 0;
+    font-size: clamp(2rem, 6.5vw, 3.5rem);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    min-height: 1.2em;
+}
+
+.cu-gloss {
+    display: inline-block;
+    margin-left: 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 400;
+    letter-spacing: 0;
+    color: var(--faint);
+    vertical-align: middle;
+}
+
+.cu-gloss:not(:empty)::before { content: "("; }
+.cu-gloss:not(:empty)::after { content: ")"; }
+
+@media (prefers-reduced-motion: no-preference) {
+    .cu.is-calling .cu-word { animation: cu-in 320ms cubic-bezier(0.16, 1, 0.3, 1); }
+    @keyframes cu-in {
+        from { opacity: 0.25; }
+        to { opacity: 1; }
+    }
+}
+
+.cu-trail {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    gap: 0.45rem;
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0 0;
+    min-height: 1.25rem;
+    max-width: 21rem;
+}
+
+.cu-trail li {
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.cu-slip {
+    width: 0.55rem;
+    height: 0.55rem;
+    margin: -0.075rem 0;
+    background: transparent !important;
+    border: 1px solid var(--slip);
+}
+
+/* ---- the target: the only body on screen is the visitor's own ---- */
+
+.cu-target {
+    margin-top: clamp(1.5rem, 4vh, 2.5rem);
+    width: 7rem;
+    height: 7rem;
+    border-radius: 50%;
+    border: 1px solid var(--edge);
+    background: var(--night-2);
+    color: var(--glow);
+    font-size: 1.75rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: border-color 0.25s ease, background-color 0.25s ease, transform 0.12s ease;
+}
+
+.cu-target:hover:not(:disabled) { border-color: rgba(255, 255, 255, 0.4); }
+.cu-target:active:not(:disabled) { transform: scale(0.97); }
+.cu-target:focus-visible { outline: 2px solid var(--hit); outline-offset: 4px; }
+
+.cu-target:disabled {
+    cursor: not-allowed;
+    color: var(--faint);
+    border-style: dashed;
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+.cu-hint {
+    margin: 1rem 0 0;
+    font-size: 0.875rem;
+    color: var(--faint);
+}
+
+.cu-escape {
+    margin-top: 2.5rem;
+    padding: 0;
+    background: none;
+    border: 0;
+    border-bottom: 1px solid var(--faint);
+    color: var(--dim);
+    font: inherit;
+    font-size: 0.875rem;
+    cursor: pointer;
+}
+
+.cu-escape:hover { color: var(--glow); border-color: var(--glow); }
+
+/* ---- narrative beats ---- */
+
+.cu-script { max-width: 34rem; }
+
+.cu-beat { margin-top: clamp(2.5rem, 6vh, 4rem); }
+
+.cu-beat p {
+    font-size: 1.0625rem;
+    line-height: 1.75;
+    color: var(--dim);
+    margin: 0 0 1rem;
+    max-width: 34rem;
+}
+
+.cu-beat p:last-child { margin-bottom: 0; }
+
+.cu-beat--verdict {
+    font-size: clamp(1.5rem, 4vw, 2.25rem);
+    font-weight: 500;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    color: var(--glow);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .cu-beat[data-beat]:not([hidden]) { animation: cu-rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) both; }
+    @keyframes cu-rise {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: none; }
+    }
+}
+
+.cu-ask {
+    color: var(--glow) !important;
+    font-size: 1.25rem !important;
+    font-weight: 500;
+}
+
+.cu-said { color: var(--dim); }
+.cu-said--after { color: var(--glow) !important; }
+
+.cu-count {
+    color: var(--glow) !important;
+    font-size: 1.25rem !important;
+    font-variant-numeric: tabular-nums;
+}
+
+.cu-choices { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+
+.cu-choice {
+    margin-top: 0.5rem;
+    padding: 0.7rem 1.15rem;
+    background: transparent;
+    border: 1px solid var(--edge);
+    border-radius: 4px;
+    color: var(--glow);
+    font: inherit;
+    font-size: 0.9375rem;
+    cursor: pointer;
+    transition: border-color 0.25s ease, background-color 0.25s ease;
+}
+
+.cu-choice:hover:not(:disabled) { border-color: rgba(255, 255, 255, 0.45); background: rgba(255, 255, 255, 0.04); }
+.cu-choice:active:not(:disabled) { transform: translateY(1px); }
+.cu-choice:focus-visible { outline: 2px solid var(--hit); outline-offset: 3px; }
+.cu-choice:disabled { color: var(--faint); border-color: rgba(255, 255, 255, 0.06); cursor: default; }
+
+/* the wall of reasoning: deliberately taller than anyone will read */
+.cu-wall {
+    margin-top: 1.5rem;
+    max-height: min(60vh, 30rem);
+    overflow-y: auto;
+    padding: 1.25rem 1.25rem 4rem;
+    border: 1px solid var(--edge);
+    border-bottom: 0;
+    border-radius: 4px 4px 0 0;
+    background: var(--night-2);
+    -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent);
+    mask-image: linear-gradient(to bottom, #000 55%, transparent);
+}
+
+/* how much of it you covered, drawn rather than described */
+.cu-progress {
+    height: 2px;
+    background: rgba(255, 255, 255, 0.09);
+}
+
+.cu-progress-read {
+    display: block;
+    height: 100%;
+    width: 0;
+    background: var(--glow);
+    transition: width 0.5s linear;
+}
+
+.cu-wall p {
+    margin: 0;
+    font-size: 0.875rem;
+    line-height: 1.8;
+    color: var(--dim);
+}
+
+.cu-read-count { font-variant-numeric: tabular-nums; }
+
+/* ---- the reveal ---- */
+
+.cu-beat--reveal { margin-top: clamp(3.5rem, 9vh, 6rem); }
+
+
+.cu-question {
+    font-size: clamp(1.75rem, 5vw, 2.75rem);
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--glow);
+    margin: 1.5rem 0;
+    max-width: 20ch;
+}
+
+
+/* the question the section actually earned, alone in the room */
+.cu-beat p.cu-final {
+    font-size: clamp(1.5rem, 3.6vw, 2.125rem);
+    font-weight: 400;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+    color: var(--glow) !important;
+    max-width: 26ch;
+    margin: 0 !important;
+    padding: clamp(6rem, 22vh, 13rem) 0 clamp(5rem, 16vh, 9rem);
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.cu-now {
+    font-size: 1rem !important;
+    color: var(--dim) !important;
+    margin-top: clamp(2.5rem, 8vh, 5rem) !important;
+}
+
+@media (max-width: 600px) {
+    .cu-target { width: 6rem; height: 6rem; }
+}
+
+/* ---- the offer is the brightest thing in the room ---- */
+
+.cu-choice[data-action="advise"]:not(:disabled),
+.cu-choice[data-action="delegate"]:not(:disabled),
+.cu-choice[data-action="trust"]:not(:disabled) {
+    background: var(--glow);
+    border-color: var(--glow);
+    color: var(--night);
+    font-weight: 500;
+    box-shadow: 0 8px 40px -16px rgba(236, 238, 243, 0.5);
+}
+
+.cu-choice[data-action="advise"]:not(:disabled):hover,
+.cu-choice[data-action="delegate"]:not(:disabled):hover,
+.cu-choice[data-action="trust"]:not(:disabled):hover {
+    background: #fff;
+    border-color: #fff;
+    box-shadow: 0 10px 46px -14px rgba(236, 238, 243, 0.62);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .cu-choice:not(:disabled) { transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, background-color 0.25s ease; }
+    .cu-choice[data-action]:not(:disabled):hover { transform: translateY(-1px); }
+}
+
+/* ---- the two questions, each with room to sit in ---- */
+
+.cu-questions { margin: clamp(3rem, 10vh, 6rem) 0 0; }
+
+.cu-beat .cu-question,
+.cu-beat p.cu-question {
+    font-size: clamp(1.75rem, 5vw, 2.75rem);
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--glow);
+    max-width: 19ch;
+    margin: 0;
+    padding: clamp(2.5rem, 8vh, 4.5rem) 0;
+}
+
+.cu-beat p.cu-question + .cu-question,
+.cu-beat .cu-question + p.cu-question {
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+
+/* ---- what the rate looks like at volume ---- */
+
+.cu-beat .cu-scale {
+    font-size: clamp(1.5rem, 4.2vw, 2.375rem);
+    font-weight: 500;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    color: var(--glow) !important;
+    font-variant-numeric: tabular-nums;
+    margin: 0 !important;
+}
+
+.cu-field {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    gap: 0.3rem;
+    list-style: none;
+    padding: 0;
+    margin: 1.75rem 0 0;
+    max-width: 32rem;
+}
+
+/* every mark identical. that is the argument. */
+.cu-field li {
+    width: 0.3rem;
+    height: 0.3rem;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.22);
+}

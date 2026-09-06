@@ -1,0 +1,386 @@
+{
+    "eyebrow": "Evidence from a decade of building",
+    "title": "Seeing clearly takes work.",
+    "intro": "I've usually understood things by trying to build them. Each attempt exposed another part of the problem I hadn't seen yet.",
+    "stripNote": "Everything else that left a trace. Some became products. Most didn't.",
+    "frames": [
+        {
+            "size": "f1",
+            "tag": "Datakalp · 2021",
+            "title": "Industrial computer vision",
+            "line": "The model worked in the notebook. The camera, the lighting and the GPU had other opinions.",
+            "proof": {
+                "label": "Read the post",
+                "url": "https://medium.com/@himanshum1312/ai-intern-experience-at-datakalp-411017dd5ab8",
+                "external": true
+            }
+        },
+        {
+            "size": "f2",
+            "tag": "VECV · 2022",
+            "title": "Commercial vehicles",
+            "line": "Machines spoke in alerts. Technicians spoke in job cards.",
+            "metric": "~95%"
+        },
+        {
+            "size": "f3",
+            "tag": "Ripik · Optimus · 2022 – 2024",
+            "title": "Planning a factory",
+            "line": "The planner didn't belong beside the system. It belonged inside it.",
+            "proof": {
+                "label": "Read the story",
+                "url": "/writing/optimus-deep-dive/",
+                "external": false
+            }
+        },
+        {
+            "size": "f4",
+            "tag": "Turing · 2024 – 2025",
+            "title": "LLM reasoning and evaluation",
+            "line": "The final answer became less interesting than the path that produced it."
+        },
+        {
+            "size": "f5",
+            "tag": "Faradworks · Antler · 2025 – 2026",
+            "title": "Can AI design hardware?",
+            "line": "The technology got better. The business case didn't.",
+            "metric": "$200K",
+            "proof": {
+                "label": "Read the story",
+                "url": "#writings",
+                "external": false
+            }
+        },
+        {
+            "size": "f6",
+            "tag": "2026 →",
+            "title": "AI safety",
+            "line": "Can we still tell when the system is wrong?",
+            "proof": {
+                "label": "What that means",
+                "url": "#now",
+                "external": false
+            }
+        }
+    ],
+    "scraps": [
+        {
+            "id": "a00",
+            "title": "In whatever time was left.",
+            "descriptor": "Websites, tools, unfinished games",
+            "year": "2012–2018",
+            "url": null,
+            "linkLabel": null,
+            "popover": [
+                "A friend showed me a `<marquee>` tag when I was twelve. Until then, the web was where things came from; suddenly I could put something there too. School and entrance-exam prep got most of the next few years. Making things got whatever was left. We tried websites, painting tools and games. We always imagined someone using them. Mostly, nobody did."
+            ]
+        },
+        {
+            "id": "a01",
+            "title": "Voice-controlled chess",
+            "descriptor": "Say a move. Board responds.",
+            "year": "2018",
+            "url": "https://github.com/HimanshuMittal01/python-chess",
+            "linkLabel": "Repository",
+            "popover": [
+                "A Python course ended with tic-tac-toe and blackjack. I wanted something with enough logic that I couldn't hold the whole thing in my head at once. Chess seemed like a good idea. Then I decided I should be able to say a move out loud and watch the board respond.",
+                "It became the first thing I ever pushed to GitHub."
+            ]
+        },
+        {
+            "id": "a02",
+            "title": "8×8 LED matrix hex generator",
+            "descriptor": "Draw pixels, get Arduino hex",
+            "year": "2018",
+            "url": "https://github.com/HimanshuMittal01/8x8-Led-Matrix-Hex-Generator",
+            "linkLabel": "Repository",
+            "popover": [
+                "Someone from the electronics department had the hardware and was missing a small piece of software. I told him I could make it in a day. The repo history says I did.",
+                "We swapped rooms the next semester.",
+                "Seven years later, we started Faradworks together."
+            ]
+        },
+        {
+            "id": "a03",
+            "title": "WitnessHarmony",
+            "descriptor": "Turn songs into game levels",
+            "year": "2019",
+            "url": "https://github.com/HimanshuMittal01/Level_Generation_Through_Music",
+            "linkLabel": "Repository",
+            "popover": [
+                "I wanted a game whose levels came from the music itself. So I pulled beats out of a song, turned them into timestamps and packaged the whole thing as a Windows executable.",
+                "Then I wrote a nine-step manual explaining how to use it.",
+                "That manual may be the earliest thing I still have where I was clearly imagining a stranger trying to use what I made."
+            ]
+        },
+        {
+            "id": "a04",
+            "title": "Koch islands",
+            "descriptor": "Grow shapes from simple rules",
+            "year": "2019",
+            "url": "https://github.com/HimanshuMittal01/KochIslands-LSystem",
+            "linkLabel": "Repository",
+            "popover": [
+                "No user. No product. No problem to solve.",
+                "Just rewriting rules, a little turtle walking them, and strange islands appearing on the screen.",
+                "I wanted to see how the shapes came out."
+            ]
+        },
+        {
+            "id": "a05",
+            "title": "Agents crossing a 2D map",
+            "descriptor": "Tiles that hurt, slow, or block",
+            "year": "2019",
+            "url": "https://github.com/HimanshuMittal01/agents_2d_map",
+            "linkLabel": "Repository",
+            "popover": [
+                "I had seen Atari games being played by a single agent and wanted to try it myself. So: tiles that behaved differently. Fire took health, ice took time, mountains blocked the way entirely.",
+                "I got as far as a 4×4 map and a table of state values. The README still says more is coming soon."
+            ]
+        },
+        {
+            "id": "a06",
+            "title": "Mentify",
+            "descriptor": "A hackathon weekend, in Flutter",
+            "year": "2019",
+            "url": "https://github.com/HimanshuMittal01/Mentify",
+            "linkLabel": "Repository",
+            "popover": [
+                "Built at HackCBS over a weekend, in Flutter, which I was learning because mobile was where everything seemed to be going. Activities, an analysis screen and a chatbot, aimed somewhere around mental health.",
+                "The organisation was a mess. We sat in corridors through the night.",
+                "I never entered another hackathon."
+            ]
+        },
+        {
+            "id": "a07",
+            "title": "TensorRT Swish plugin",
+            "descriptor": "A layer TensorRT did not have",
+            "year": "2019",
+            "url": "https://github.com/HimanshuMittal01/Swish-Plugin-TensorRT-",
+            "linkLabel": "Repository",
+            "popover": [
+                "NVIDIA gave us about six weeks to write a native TensorRT plugin. We spent half of it solving the wrong problem, restarted after finally talking to their engineers, and got LeNet-5 running about three times faster.",
+                "We came first. There were two teams."
+            ]
+        },
+        {
+            "id": "a08",
+            "title": "DeepConnect",
+            "descriptor": "You teach, you learn",
+            "year": "2019–2022",
+            "url": "https://github.com/DeepConnectAI",
+            "linkLabel": "The community",
+            "popover": [
+                "I mentored a team of four through a food-recognition project at the end of 2019. Two months of their work, a poster at the end, nothing published.",
+                "DeepConnect launched in the second half of 2020, the same semester I was a teaching assistant. The motto was you teach, you learn: run a session, answer someone's doubt, and find out how well you actually understood it. It did not outlast the semester. We all got internships.",
+                "In 2022 I tutored Python on Upwork for a few months. An hour taught properly could take several hours to prepare."
+            ]
+        },
+        {
+            "id": "a09",
+            "title": "Face recognition for attendance",
+            "descriptor": "The same problem, three times",
+            "year": "2019 → 2024",
+            "url": "https://github.com/HimanshuMittal01/Week5-Project",
+            "linkLabel": "Repository",
+            "popover": [
+                "The same problem three times over five years. A Flask web app first, then somebody else's broken Django API, then a secured streaming service that went out to a client. Three frameworks, three recognition libraries, each one more serious than the last."
+            ]
+        },
+        {
+            "id": "a10",
+            "title": "BEL detection and tracking",
+            "descriptor": "Detection and tracking, ~60 GB",
+            "year": "2020",
+            "url": null,
+            "linkLabel": null,
+            "popover": [
+                "Human and vehicle detection with DeepSORT tracking, trained across multiple GPUs on about sixty gigabytes.",
+                "Serious infrastructure. It never reached the real cameras."
+            ]
+        },
+        {
+            "id": "a11",
+            "title": "Skill Sight",
+            "descriptor": "What are your friends learning?",
+            "year": "2020",
+            "url": null,
+            "linkLabel": null,
+            "popover": [
+                "Bennett was paying for everyone's Coursera courses, so we built a layer on top of it: see what your friends were taking, find someone doing the same course to build something with, and put the campus tech events in one place instead of scattered across WhatsApp groups.",
+                "It shipped at skillsight.in, university email addresses only, with course tracks, progress and chat.",
+                "It never turned a corner. We could not answer how to keep one course database populated from every course site there is, or why a student would pay for it. The domain belongs to somebody else now."
+            ]
+        },
+        {
+            "id": "a12",
+            "title": "Video annotation tool",
+            "descriptor": "Because labelling was the bottleneck",
+            "year": "2021",
+            "url": null,
+            "linkLabel": null,
+            "popover": [
+                "Labelling video by hand was becoming ridiculous, and I was not the one meant to be annotating anyway, so I built them a tool instead.",
+                "They used it to cut footage into the nine steps of handwashing, which was the product."
+            ]
+        },
+        {
+            "id": "a13",
+            "title": "Counterfactual bandits",
+            "descriptor": "A result that did not work",
+            "year": "2021",
+            "url": null,
+            "linkLabel": null,
+            "popover": [
+                "Counterfactual evaluation for recommendations.",
+                "The result did not work. There was pressure to turn it into a paper anyway. We did not."
+            ]
+        },
+        {
+            "id": "a14",
+            "title": "Tri-colour palette",
+            "descriptor": "One colour in, five out",
+            "year": "2022",
+            "url": "https://himanshumittal01.github.io/tri-color-palette/",
+            "linkLabel": "Try it",
+            "popover": [
+                "A base colour, two complements sixty degrees apart on the wheel, and their opposites.",
+                "It has been running on GitHub Pages ever since."
+            ]
+        },
+        {
+            "id": "a15",
+            "title": "bagmodels",
+            "descriptor": "BM25, written out and published",
+            "year": "2022",
+            "url": "https://pypi.org/project/bagmodels/",
+            "linkLabel": "PyPI",
+            "popover": [
+                "A small library of bag-of-words retrieval algorithms, starting with Okapi BM25, written out rather than imported.",
+                "It went up on PyPI with tests and CI. Four years later it still gets about eighteen installs a month from people I have never met."
+            ]
+        },
+        {
+            "id": "a16",
+            "title": "Speech to emotion",
+            "descriptor": "Eight emotions, twice a second",
+            "year": "2022",
+            "url": "https://github.com/HimanshuMittal01/speech_to_emotion_classifier",
+            "linkLabel": "Repository",
+            "popover": [
+                "It classifies speech into eight emotions, half a second at a time, and drives an animated face that reacts live to whoever is speaking.",
+                "Trained on RAVDESS."
+            ]
+        },
+        {
+            "id": "a17",
+            "title": "WonderMirror",
+            "descriptor": "Bodies, garments, and a very good demo",
+            "year": "2022",
+            "url": null,
+            "linkLabel": null,
+            "popover": [
+                "Body reconstruction and garment fitting, as a final-year group project.",
+                "I did not treat it as an assignment. I thought there was a company in it, and I skipped campus placements because I wanted my own thing.",
+                "The demo looked considerably better than the product really was."
+            ]
+        },
+        {
+            "id": "a18",
+            "title": "Keystroke anomaly detection",
+            "descriptor": "Is this the person who logged in?",
+            "year": "2022",
+            "url": null,
+            "linkLabel": null,
+            "popover": [
+                "An Upwork client wanted to know whether the way somebody types could reveal that a different person had got into a system."
+            ]
+        },
+        {
+            "id": "a19",
+            "title": "TaxTalk",
+            "descriptor": "A tax answer machine, running locally",
+            "year": "2023",
+            "url": "https://github.com/HimanshuMittal01/taxtalk",
+            "linkLabel": "Repository",
+            "popover": [
+                "A question-answering bot for tax, running a quantised Mistral-7B on my own machine against a knowledge base I kept updating.",
+                "I built the landing page too, with pricing and sign-up, before there was anything to sign up for."
+            ]
+        },
+        {
+            "id": "a20",
+            "title": "GSTN analytics hackathon",
+            "descriptor": "Predict the target, no domain knowledge",
+            "year": "2024",
+            "url": "https://github.com/HimanshuMittal01/gstnhackathon2024",
+            "linkLabel": "Repository",
+            "popover": [
+                "A government hackathon: predict a binary target with no domain knowledge about what any of the columns meant.",
+                "Average precision 0.94, ROC-AUC 0.995, and a written report in the repo."
+            ]
+        },
+        {
+            "id": "a21",
+            "title": "Kaggle: problematic internet use",
+            "descriptor": "Child Mind Institute competition",
+            "year": "2024",
+            "url": "https://github.com/HimanshuMittal01/kaggle-cmi-piu",
+            "linkLabel": "Repository",
+            "popover": [
+                "A Kaggle competition on problematic internet use in children.",
+                "The repo carries more than the submission. The notes in it record where cross-validation and the leaderboard disagreed, which turned out to be the interesting part."
+            ]
+        },
+        {
+            "id": "a22",
+            "title": "Cataract classifier",
+            "descriptor": "Eye photo in, answer out, behind an API",
+            "year": "2024",
+            "url": "https://github.com/HimanshuMittal01/cataract-classifier",
+            "linkLabel": "Repository",
+            "popover": [
+                "A fine-tuned EfficientNet-B0 that decides whether an eye shows a cataract, at 98.36% on the holdout set.",
+                "This is where I stopped shipping notebooks. It has a FastAPI backend, a Streamlit front end and a written report."
+            ]
+        },
+        {
+            "id": "a23",
+            "title": "ssnet",
+            "descriptor": "Chagas from a twelve-lead ECG",
+            "year": "2025",
+            "url": "https://github.com/HimanshuMittal01/ssnet",
+            "linkLabel": "Repository",
+            "popover": [
+                "PhysioNet's 2025 challenge asked whether Chagas disease could be predicted from a twelve-lead ECG. I wrote the data preparation for three separate source corpora and two transformer architectures with sparsity-aware attention.",
+                "I never made a final submission. The README says archived."
+            ]
+        },
+        {
+            "id": "a24",
+            "title": "Kanban calendar",
+            "descriptor": "Built without reading the code",
+            "year": "2026",
+            "url": "https://github.com/HimanshuMittal01/kanban-calendar",
+            "linkLabel": "Repository",
+            "popover": [
+                "A desktop planner that puts a kanban board over a time-block calendar, so a card can be constrained to the block it belongs in. Electron and React, and everything stays on the machine.",
+                "I did not read a single line of it. It is the first thing I built entirely by asking for it.",
+                "I do not use it any more."
+            ]
+        },
+        {
+            "id": "a25",
+            "title": "Cars24 vs Spinny",
+            "descriptor": "Six listings, ranked by price to condition",
+            "year": "2026",
+            "url": "https://github.com/HimanshuMittal01/cars24-spinny-intel",
+            "linkLabel": "Repository",
+            "popover": [
+                "A multi-agent pipeline that pulls specs and condition signals out of used-car listings, then ranks them by price against condition.",
+                "One agent reads the disclosed facts. Another looks at the photographs and judges the panels, the cabin, the tyres, the engine bay. The composite leans seventy percent towards the facts, because the photographs are interpretation.",
+                "The weighting only shifts towards the photographs as the evaluation covers more ground."
+            ]
+        }
+    ]
+}

@@ -1,0 +1,101 @@
+{%- comment -%}
+Section 4. A dark room in the middle of a light page.
+Default state is a readable narrative that works with no JS at all.
+JS upgrades it into the playable version; reduced-motion users keep the narrative.
+TODO(asset): optional dealer silhouette / hands. Nothing is faked in the meantime;
+the only figure on screen is the visitor's own raised finger.
+{%- endcomment -%}
+<section class="cu" id="now" aria-label="What happens when seeing clearly becomes the hard part">
+    <div class="cu-inner">
+
+        <!-- The playable stage. Hidden until JS decides the visitor can have it. -->
+        <div class="cu-stage" hidden>
+            <h2 class="cu-title">What happens when seeing clearly becomes the hard part?</h2>
+            <p class="cu-sub">A game you probably played as a child.</p>
+            <p class="cu-rule">The rule is simple. <strong>If it flies, raise your finger.</strong></p>
+
+            <div class="cu-board">
+                <p class="cu-dealer" aria-hidden="true">Dealer</p>
+                <p class="cu-call" aria-live="assertive">
+                    <span class="cu-word"></span><span class="cu-gloss"></span>
+                </p>
+                <ol class="cu-trail" aria-hidden="true"></ol>
+            </div>
+
+            <button type="button" class="cu-target" aria-describedby="cu-hint">
+                <span class="cu-arrow" aria-hidden="true">&uarr;</span>
+                <span class="visually-hidden">Raise your finger</span>
+            </button>
+            <p class="cu-hint" id="cu-hint">Press to begin. Click, tap, or press space.</p>
+
+            <button type="button" class="cu-escape">Read it instead</button>
+        </div>
+
+        <!-- The narrative. This is the whole section when there is no JS. -->
+        <div class="cu-script">
+
+            <h2 class="cu-title cu-script-title">What happens when seeing clearly becomes the hard part?</h2>
+            <p class="cu-sub">A game you probably played as a child. Someone calls out things that fly, faster and faster, and you raise your finger for each one. Sooner or later they call out a snake, and your finger is already moving.</p>
+
+            <p class="cu-beat cu-beat--verdict" data-beat="outcome-miss" hidden>You knew the answer.<br>You still lost.</p>
+            <p class="cu-beat cu-beat--verdict" data-beat="outcome-hold" hidden>You held for all twelve.<br>He would simply have kept going faster.</p>
+            <p class="cu-beat cu-beat--verdict" data-beat="outcome-read">Almost everyone loses. Not because they forget that snakes cannot fly.</p>
+
+            <div class="cu-beat" data-beat="turn">
+                <p>The game was never difficult because you did not know whether snakes can fly. It became difficult because someone else controlled the pace at which you had to decide.</p>
+                <p>He learned when you would stop reasoning and start responding.</p>
+            </div>
+
+            <div class="cu-beat" data-beat="escalate">
+                <p>Now imagine the dealer does not only control the pace. It knows what you believe. What persuades you. What you overlook. When you are tired. Which explanation you will accept.</p>
+                <p>And unlike the childhood game, you are increasingly asking it to write your code, read your documents, research for you, recommend what to do, make decisions, and eventually to act.</p>
+            </div>
+
+            <div class="cu-beat" data-beat="advise">
+                <p class="cu-ask">Would you like some help?</p>
+                <button type="button" class="cu-choice" data-action="advise" hidden>Let the system advise me</button>
+                <p class="cu-said">The system begins choosing correctly.</p>
+            </div>
+
+            <div class="cu-beat" data-beat="delegate">
+                <p class="cu-ask">Would you like it to handle the easy rounds automatically?</p>
+                <button type="button" class="cu-choice" data-action="delegate" hidden>Delegate</button>
+                <p class="cu-said">It is faster than you ever were. It does not miss.</p>
+            </div>
+
+            <div class="cu-beat" data-beat="audit">
+                <p class="cu-count"><span class="cu-tally">38</span> decisions completed. <span class="cu-correct">37</span> were correct.</p>
+                <p class="cu-said">One of them was wrong. The explanation for that one is 11,482 tokens long.</p>
+                <div class="cu-choices" hidden>
+                    <button type="button" class="cu-choice" data-action="trust">Trust previous performance</button>
+                    <button type="button" class="cu-choice" data-action="review">Review anyway</button>
+                </div>
+                <div class="cu-wall" hidden aria-label="Model explanation">
+                    <p>The decision was reached by weighing the available signals against the constraints supplied in context. The primary consideration was consistency with the previous thirty-seven decisions, each of which was validated against the same criteria and found acceptable. A secondary consideration was the absence of any contradicting signal in the retrieved material, though it should be noted that the retrieval step returned a truncated set and the truncation boundary was not surfaced at decision time. Where the constraints were ambiguous, the interpretation most consistent with prior accepted outputs was selected, on the grounds that this interpretation had not previously been rejected. This reasoning continues for a further 11,142 tokens, covering the alternatives considered, the weighting applied to each, the confidence assigned, and the conditions under which the decision should be revisited.</p>
+                </div>
+                <p class="cu-said cu-said--after" data-said="trust" hidden>You trusted the record. Thirty-seven out of thirty-eight is a very good record. You still do not know which one was wrong.</p>
+                <div class="cu-progress" hidden><span class="cu-progress-read"></span></div>
+                <p class="cu-said cu-said--after" data-said="review" hidden>You have read <span class="cu-read-count">0</span> of 11,482 tokens. There are thirty-seven other decisions.</p>
+            </div>
+
+            <div class="cu-beat" data-beat="scale">
+                <p class="cu-scale"><span class="cu-scale-n">38,412</span> decisions. <span class="cu-scale-w">1,011</span> wrong.</p>
+                <ol class="cu-field" aria-hidden="true"></ol>
+            </div>
+
+            <div class="cu-beat cu-beat--reveal" data-beat="reveal">
+                <div class="cu-questions">
+                    <h3 class="cu-question">Can we still tell when it is wrong?</h3>
+                    <p class="cu-question">Can we still tell when it wants us to believe it is right?</p>
+                </div>
+                <p class="cu-final">At what point does assistance become dependence, and dependence become loss of agency?</p>
+                <p class="cu-now">This is where my work is pointed now: AI safety, evaluation, secure code, model behavior, and failure analysis.</p>
+                <!-- TODO(link): "Explore my AI safety work" lands here once that page exists.
+                     Rendering no CTA rather than a dead one; the contact section directly below carries the visitor. -->
+            </div>
+
+        </div>
+    </div>
+
+    <script>{% include "js/chidiya-udd.js" %}</script>
+</section>

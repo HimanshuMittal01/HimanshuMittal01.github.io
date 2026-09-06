@@ -4,41 +4,103 @@ tags: page
 menuname: About
 permalink: /
 css:
-- /assets/css/profilecard.css
+- /assets/css/home.css
+- /assets/css/chidiya.css
 ---
 
-<!-- Profile Card -->
-<div class="intro-card">
-    <img src="/assets/images/profile-photo.jpeg" alt="Profile Photo" class="profile-photo">
+<div class="home">
 
-    <div class="intro-card-content">
-        <p class="name">{{ bio.name }}</p>
-        <p class="description">
-            Full-stack data scientist passionate about building impactful AI systems to unlock human potential and solve
-            complex challenges.
-        </p>
-
-        <div class="social-links">
-            <a href="https://www.linkedin.com/in/himanshumittal13/" class="linkedin" title="LinkedIn" target="_blank"
-                aria-label="LinkedIn">
-                <i class="fab fa-linkedin"></i>
-            </a>
-            <a href="https://github.com/HimanshuMittal01" class="github" title="GitHub" target="_blank"
-                aria-label="GitHub">
-                <i class="fab fa-github"></i>
-            </a>
+    <!-- 1. Hero -->
+    <section class="home-section hero">
+        <div class="home-inner">
+            <p class="eyebrow">{{ bio.name }}</p>
+            <h1 class="hero-title">See clearly. Build accordingly.</h1>
+            <p class="hero-lede">
+                Currently leading technical work around AI safety and evaluation. Previously built industrial
+                optimization systems and a venture-backed hardware-AI startup.
+            </p>
+            <a class="hero-cue" href="#writings">Selected work ↓</a>
         </div>
-    </div>
-</div>
+    </section>
 
-<div class="bio-section">
-    <p>
-        Coding for the past 10 years, decoding patterns of life through science and engineering. With over 4 years of
-        hands-on experience, I specialize in leveraging advanced analytics and deep learning techniques to extract
-        actionable insights across diverse industries like manufacturing, automotive, healthcare, and defense.
-    </p>
-    <p>
-        I thrive on collaborating with highly creative teams to develop innovative solutions, solve challenging
-        problems, and build enterprise-grade products that make a difference.
-    </p>
+    <!-- 2. Featured writings
+         TODO(proof): fill `url` in src/_data/featured.json once the Optimus deep dive is published
+         (src/posts/draft/optimus-deep-dive/ → published/) and the Faradworks write-up exists.
+         TODO(asset): add `asset` + `assetAlt` (product screenshot, system diagram, PCB/Pinscope shot).
+         Cards render without a media plate until a real asset exists — do not stand in a placeholder image. -->
+    <section class="home-section featured" id="writings">
+        <div class="home-inner">
+            <p class="eyebrow">Selected writings</p>
+            <div class="featured-grid">
+                {% for story in featured %}
+                {% if story.url %}<a class="story story--{{ story.accent }}" href="{{ story.url }}">{% else %}<article class="story story--{{ story.accent }}">{% endif %}
+                    {% if story.asset %}
+                    <div class="story-media"><img src="{{ story.asset }}" alt="{{ story.assetAlt }}"></div>
+                    {% endif %}
+                    <p class="story-project">{{ story.project }}</p>
+                    <h2 class="story-headline">{{ story.headline }}</h2>
+                    <p class="story-meta">{{ story.meta }}</p>
+                    {% if story.url %}
+                    <span class="story-cue">Read the story →</span>
+                    {% else %}
+                    <span class="story-cue story-cue--pending">{{ story.note }}</span>
+                    {% endif %}
+                {% if story.url %}</a>{% else %}</article>{% endif %}
+                {% endfor %}
+            </div>
+            <a class="section-cue" href="/writing/">Explore more writings →</a>
+        </div>
+    </section>
+
+    <!-- 3. Breadth — six professional chapters, then the strip of everything else -->
+    <section class="home-section breadth" id="breadth">
+        <div class="home-inner museum">
+
+            <p class="eyebrow">{{ breadth.eyebrow }}</p>
+            <h2 class="museum-title">{{ breadth.title }}</h2>
+            <p class="museum-intro">{{ breadth.intro }}</p>
+
+            <div class="museum-shell">
+                <div class="wall">
+                    {% for f in breadth.frames %}
+                    <article class="frame {{ f.size }} glass">
+                        <p class="tag">{{ f.tag }}</p>
+                        <h3>{{ f.title }}</h3>
+                        <p class="line">{{ f.line }}</p>
+                        {% if f.metric %}<p class="metric">{{ f.metric }}</p>{% endif %}
+                        {% if f.proof %}<a class="proof" href="{{ f.proof.url }}"{% if f.proof.external %} target="_blank" rel="noopener"{% endif %}>{{ f.proof.label }} {% if f.proof.external %}&#8599;{% elsif f.proof.url == "#now" %}&#8595;{% else %}&#8594;{% endif %}</a>{% endif %}
+                    </article>
+                    {% endfor %}
+                </div>
+
+                <div class="carousel-wrap">
+                    <p class="strip-note">{{ breadth.stripNote }}</p>
+                    <div class="scrap-progress" aria-hidden="true"><span></span></div>
+                    <div class="scraps" id="scraps" tabindex="0" role="region" aria-label="Other things I built">
+                        {% for s in breadth.scraps %}
+                        <div class="scrap glass">
+                            <button type="button" class="scrap-face" popovertarget="pop-{{ s.id }}">
+                                <span class="title">{{ s.title | escape }}</span>
+                                <span class="desc">{{ s.descriptor | escape }}</span>
+                                <span class="year">{{ s.year }}</span>
+                            </button>
+                            <div class="scrap-pop" id="pop-{{ s.id }}" popover>
+                                <p class="pop-head">{{ s.title | escape }} <span>{{ s.year }}</span></p>
+                                {% for p in s.popover %}<p>{{ p | escape }}</p>{% endfor %}
+                                {% if s.url %}<a href="{{ s.url }}" target="_blank" rel="noopener">{{ s.linkLabel }} &#8599;</a>{% endif %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="scrap-dots" aria-label="Jump through the strip"></div>
+                </div>
+
+            </div>
+        </div>
+        <script>{% include "js/scraps-carousel.js" %}</script>
+    </section>
+
+    <!-- 4. What I'm working on now -->
+    {% include "partials/_chidiya-udd.html" %}
+
 </div>

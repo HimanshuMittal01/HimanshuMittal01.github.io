@@ -1,0 +1,22 @@
+[
+    {
+        "project": "Optimus",
+        "meta": "Ripik · Production planning & scheduling",
+        "headline": "Planning a factory is not an optimization problem.",
+        "url": "/writing/optimus-deep-dive/",
+        "note": null,
+        "asset": null,
+        "assetAlt": null,
+        "accent": "sky"
+    },
+    {
+        "project": "Faradworks",
+        "meta": "Faradworks · Antler · AI × electronics",
+        "headline": "We raised $200K to automate PCB design. Then the market changed the question.",
+        "url": null,
+        "note": "Write-up in progress",
+        "asset": null,
+        "assetAlt": null,
+        "accent": "gold"
+    }
+]
