@@ -159,7 +159,7 @@
             "url": "https://github.com/HimanshuMittal01/Swish-Plugin-TensorRT-",
             "linkLabel": "Repository",
             "popover": [
-                "NVIDIA gave us about six weeks to write a native TensorRT plugin. We spent half of it solving the wrong problem, restarted after finally talking to their engineers, and got LeNet-5 running about three times faster.",
+                "NVIDIA gave us about six weeks to write a native TensorRT plugin. We spent half of it solving the wrong problem, restarted after finally talking to their engineers, wrote the plugin in C++, and got LeNet-5 running about three times faster.",
                 "We came first. There were two teams."
             ]
         },
@@ -184,7 +184,8 @@
             "url": "https://github.com/HimanshuMittal01/Week5-Project",
             "linkLabel": "Repository",
             "popover": [
-                "The same problem three times over five years. A Flask web app first, then somebody else's broken Django API, then a secured streaming service that went out to a client. Three frameworks, three recognition libraries, each one more serious than the last."
+                "I ended up solving essentially the same face-recognition problem three times over five years: first as a Flask project, later fixing a Django API, and finally as a secured FastAPI service used by a client.",
+                "The problem barely changed. My idea of what “finished” meant did."
             ]
         },
         {
@@ -196,7 +197,7 @@
             "linkLabel": null,
             "popover": [
                 "Human and vehicle detection with DeepSORT tracking, trained across multiple GPUs on about sixty gigabytes.",
-                "Serious infrastructure. It never reached the real cameras."
+                "Our detector could find someone partly hidden behind cover and miss someone standing plainly in front of it. We changed the training dataset until it generalized."
             ]
         },
         {
