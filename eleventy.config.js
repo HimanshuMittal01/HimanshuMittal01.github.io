@@ -1,6 +1,5 @@
 import syntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
 import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
-import pluginNavigation from "@11ty/eleventy-navigation";
 
 export default function (eleventyConfig) {
     // Copy the contents of the `assets` folder to the output folder
@@ -11,9 +10,7 @@ export default function (eleventyConfig) {
     // Watch content images for the image pipeline.
 	eleventyConfig.addWatchTarget("content/**/*.{svg,webp,png,jpeg}");
 
-    // Adds code highlight and navigation plugins
-	eleventyConfig.addPlugin(syntaxHighlight);
-    eleventyConfig.addPlugin(pluginNavigation);
+    eleventyConfig.addPlugin(syntaxHighlight);
 
     // Image optimization: https://www.11ty.dev/docs/plugins/image/#eleventy-transform
 	eleventyConfig.addPlugin(eleventyImageTransformPlugin, {
