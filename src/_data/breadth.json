@@ -139,6 +139,18 @@
             ]
         },
         {
+            "id": "a28",
+            "title": "Personal Genie",
+            "descriptor": "Quiz answers in, recommendations out",
+            "year": "2019",
+            "url": null,
+            "linkLabel": null,
+            "popover": [
+                "A quiz that asked you enough questions to recommend something back. Built for a hackathon at SRM, which meant flying to Chennai for the final round.",
+                "We finished in the top ten."
+            ]
+        },
+        {
             "id": "a06",
             "title": "Mentify",
             "descriptor": "A hackathon weekend, in Flutter",
@@ -148,7 +160,7 @@
             "popover": [
                 "Built at HackCBS over a weekend, in Flutter, which I was learning because mobile was where everything seemed to be going. Activities, an analysis screen and a chatbot, aimed somewhere around mental health.",
                 "The organisation was a mess. We sat in corridors through the night.",
-                "I never entered another hackathon."
+                "I stopped doing the overnight kind after that."
             ]
         },
         {
