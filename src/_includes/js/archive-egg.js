@@ -1,7 +1,7 @@
 (function () {
   function onLearnings() {
     const p = window.location.pathname.replace(/\/+$/, "");
-    return p === "/learnings" || p.endsWith("/learnings");
+    return p === "/writing" || p.endsWith("/writing");
   }
   document.addEventListener("DOMContentLoaded", function () {
     const dot = document.querySelector(".archive-dot");
