@@ -153,6 +153,12 @@ body:has(.home) .main-content {
 
 /* ---------- 2. Featured writings ---------- */
 
+.featured-title {
+    font-size: clamp(2.25rem, 5vw, 3.75rem);
+    max-width: 18ch;
+    margin: 0;
+}
+
 .featured-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -161,7 +167,13 @@ body:has(.home) .main-content {
 }
 
 @media (max-width: 800px) {
-    .featured-grid { grid-template-columns: minmax(0, 1fr); }
+    .featured-title {
+    font-size: clamp(2.25rem, 5vw, 3.75rem);
+    max-width: 18ch;
+    margin: 0;
+}
+
+.featured-grid { grid-template-columns: minmax(0, 1fr); }
 }
 
 .story {
@@ -320,16 +332,6 @@ a.story:focus-visible {
 
 .museum .eyebrow { color: var(--m-faint); }
 
-.museum-title {
-    font-family: var(--m-serif);
-    font-weight: 500;
-    font-size: clamp(2.5rem, 6.4vw, 4.6rem);
-    line-height: 0.98;
-    letter-spacing: -0.05em;
-    margin: 0 0 2.5rem;
-    max-width: 20ch;
-    color: var(--m-ink);
-}
 
 
 .glass {
@@ -349,11 +351,11 @@ a.story:focus-visible {
 /* the only line explaining why the strip is a different kind of thing to the wall */
 .strip-note {
     font-family: var(--m-serif);
-    font-size: 1.0625rem;
-    line-height: 1.5;
-    color: var(--m-muted);
+    font-size: clamp(1.25rem, 2vw, 1.625rem);
+    line-height: 1.45;
+    color: var(--m-body);
     max-width: 44rem;
-    margin: 0 0 1.25rem;
+    margin: 0 0 2.25rem;
     text-wrap: pretty;
 }
 
