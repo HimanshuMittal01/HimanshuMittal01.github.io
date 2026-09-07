@@ -331,14 +331,6 @@ a.story:focus-visible {
     color: var(--m-ink);
 }
 
-.museum-intro {
-    font-family: var(--m-serif);
-    font-size: clamp(1.125rem, 1.6vw, 1.375rem);
-    line-height: 1.5;
-    color: var(--m-body);
-    max-width: 53rem;
-    margin: 0 0 2.25rem;
-}
 
 .glass {
     background: linear-gradient(135deg, var(--m-glass-strong), var(--m-glass));
@@ -347,97 +339,12 @@ a.story:focus-visible {
     backdrop-filter: blur(18px);
 }
 
-/* no outer container: the panels sit straight on the section wash */
-.museum-shell {
-    padding: 0;
-    border: 0;
-    background: none;
-}
 
 
 
-
-
-/* the wall */
-.wall {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    grid-auto-rows: minmax(4.625rem, auto);
-    gap: 0.5625rem;
-}
-
-.frame {
-    border-radius: 18px;
-    padding: 0.875rem 1rem;
-    display: flex;
-    flex-direction: column;
-    text-decoration: none;
-    color: inherit;
-}
-
-.frame .tag {
-    font-size: 0.6875rem;
-    letter-spacing: 0.08em;
-    color: var(--m-muted);
-    font-variant-numeric: tabular-nums;
-    margin: 0;
-}
-
-.frame h3 {
-    font-family: var(--m-serif);
-    font-weight: 500;
-    font-size: clamp(1.25rem, 2.4vw, 1.95rem);
-    line-height: 1.06;
-    letter-spacing: -0.035em;
-    margin: 0.45rem 0;
-    color: var(--m-ink);
-}
-
-/* the one line that survived from this chapter. everything after it sits at the foot of the card. */
-.frame .line {
-    font-family: var(--m-serif);
-    font-style: italic;
-    font-size: 0.9375rem;
-    line-height: 1.45;
-    color: var(--m-body);
-    text-wrap: pretty;
-    margin: 0 0 auto;
-}
-
-.frame .metric {
-    font-family: var(--m-serif);
-    font-size: 1.75rem;
-    line-height: 1;
-    letter-spacing: -0.03em;
-    color: var(--m-ink);
-    margin: 0.9rem 0 0;
-}
-
-.frame .proof {
-    font-size: 0.625rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--m-muted);
-    text-decoration: none;
-    margin-top: 0.625rem;
-    align-self: flex-start;
-    border-bottom: 1px solid transparent;
-    transition: color 0.3s ease, border-color 0.3s ease;
-}
-
-.frame .proof:hover,
-.frame .proof:focus-visible { color: var(--m-ink); border-bottom-color: var(--m-ink); }
-
-/* read left to right, two rows. the chronology is in the dates, not the shape.
-   turing gets the narrowest tile: it is the one chapter with no number and no link. */
-.frame { grid-row: span 2; }
-.f1, .f2, .f3 { grid-column: span 4; }
-.f4 { grid-column: span 3; }
-.f5 { grid-column: span 4; }
-.f6 { grid-column: span 5; }
 
 /* scraps */
-.carousel-wrap { position: relative; margin-top: 2.75rem; }
+.carousel-wrap { position: relative; }
 
 /* the only line explaining why the strip is a different kind of thing to the wall */
 .strip-note {
@@ -602,16 +509,9 @@ a.story:focus-visible {
 
 
 @media (max-width: 900px) {
-    .wall { grid-template-columns: repeat(6, 1fr); }
-    .f1, .f2 { grid-column: span 3; }
-    .f3 { grid-column: span 6; }
-    .f4, .f5 { grid-column: span 3; }
-    .f6 { grid-column: span 6; }
 }
 
 @media (max-width: 640px) {
-    .wall { display: flex; flex-direction: column; }
-    .frame { min-height: 11rem; }
     .scrap { flex-basis: 74vw; max-width: 16rem; }
 
 }

@@ -49,27 +49,15 @@ css:
         </div>
     </section>
 
-    <!-- 3. Breadth — six professional chapters, then the strip of everything else -->
+    <!-- 3. Breadth — one line, then the strip of artifacts -->
     <section class="home-section breadth" id="breadth">
         <div class="home-inner museum">
 
             <h2 class="museum-title">{{ breadth.title }}</h2>
 
             <div class="museum-shell">
-                <div class="wall">
-                    {% for f in breadth.frames %}
-                    <article class="frame {{ f.size }} glass">
-                        <p class="tag">{{ f.tag }}</p>
-                        <h3>{{ f.title }}</h3>
-                        <p class="line">{{ f.line }}</p>
-                        {% if f.metric %}<p class="metric">{{ f.metric }}</p>{% endif %}
-                        {% if f.proof %}<a class="proof" href="{{ f.proof.url }}"{% if f.proof.external %} target="_blank" rel="noopener"{% endif %}>{{ f.proof.label }} {% if f.proof.external %}&#8599;{% elsif f.proof.url == "#now" %}&#8595;{% else %}&#8594;{% endif %}</a>{% endif %}
-                    </article>
-                    {% endfor %}
-                </div>
-
                 <div class="carousel-wrap">
-                    <p class="strip-note">{{ breadth.stripNote }}</p>
+                    <p class="strip-note">{{ breadth.intro }}</p>
                     <div class="scrap-progress" aria-hidden="true"><span></span></div>
                     <div class="scraps" id="scraps" tabindex="0" role="region" aria-label="Other things I built">
                         {% for s in breadth.scraps %}

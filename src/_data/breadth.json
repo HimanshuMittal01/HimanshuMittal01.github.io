@@ -1,66 +1,6 @@
 {
     "title": "See clearly. Build accordingly.",
-    "stripNote": "Everything else that left a trace. Some became products. Most didn't.",
-    "frames": [
-        {
-            "size": "f1",
-            "tag": "Datakalp · 2021",
-            "title": "Industrial computer vision",
-            "line": "The model worked in the notebook. The camera, the lighting and the GPU had other opinions.",
-            "proof": {
-                "label": "Read the post",
-                "url": "https://medium.com/@himanshum1312/ai-intern-experience-at-datakalp-411017dd5ab8",
-                "external": true
-            }
-        },
-        {
-            "size": "f2",
-            "tag": "VECV · 2022",
-            "title": "Commercial vehicles",
-            "line": "Machines spoke in alerts. Technicians spoke in job cards.",
-            "metric": "~95%"
-        },
-        {
-            "size": "f3",
-            "tag": "Ripik · Optimus · 2022 – 2024",
-            "title": "Planning a factory",
-            "line": "The planner didn't belong beside the system. It belonged inside it.",
-            "proof": {
-                "label": "Read the story",
-                "url": "/writings/optimus-deep-dive/",
-                "external": false
-            }
-        },
-        {
-            "size": "f4",
-            "tag": "Turing · 2024 – 2025",
-            "title": "LLM reasoning and evaluation",
-            "line": "The final answer became less interesting than the path that produced it."
-        },
-        {
-            "size": "f5",
-            "tag": "Faradworks · Antler · 2025 – 2026",
-            "title": "Can AI design hardware?",
-            "line": "The technology got better. The business case didn't.",
-            "metric": "$200K",
-            "proof": {
-                "label": "Read the story",
-                "url": "#writings",
-                "external": false
-            }
-        },
-        {
-            "size": "f6",
-            "tag": "2026 →",
-            "title": "AI safety",
-            "line": "Can we still tell when the system is wrong?",
-            "proof": {
-                "label": "What that means",
-                "url": "#now",
-                "external": false
-            }
-        }
-    ],
+    "intro": "A decade of making, mostly because I wanted to know what would happen.",
     "scraps": [
         {
             "id": "a00",
