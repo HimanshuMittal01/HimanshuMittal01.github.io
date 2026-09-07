@@ -59,35 +59,9 @@ header::after { content: none; }
 
 /* ---------- homepage: the hero is the beginning of the page ---------- */
 
-/* sticky, transparent, and it keeps its box in flow, so nothing hides under it */
-body:has(.home) header {
-    position: sticky;
-    top: 0;
-    z-index: 20;
-    max-width: calc(74rem + 2 * var(--gutter));   /* inner box matches .home-inner exactly */
-    padding-block: 0.85rem;
-}
-
-/* the hero already opens with the name; it only appears once the hero is gone */
-body:has(.home) .header-name {
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.45s ease;
-}
-
-body:has(.home) header.past-hero .header-name {
-    opacity: 1;
-    pointer-events: auto;
-}
-
-/* no bar, no border — just enough blur to keep the nav legible over content */
-body:has(.home) header.past-hero {
-    backdrop-filter: blur(14px);
-}
-
-@media (prefers-reduced-motion: reduce) {
-    body:has(.home) .header-name { transition: none; }
-}
+/* the hero opens with the name at display size, so the header does not repeat it */
+body:has(.home) .header-name { display: none; }
+body:has(.home) header { justify-content: flex-end; }
 
 @media (max-width: 768px) {
     header { padding-block: 0.85rem; }
