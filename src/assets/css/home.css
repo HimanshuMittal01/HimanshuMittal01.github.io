@@ -54,7 +54,7 @@ body:has(.home) .main-content {
 
 .home-section {
     width: 100%;
-    padding: clamp(4.5rem, 11vh, 9rem) 1.5rem;
+    padding: clamp(4.5rem, 11vh, 9rem) var(--gutter);
     border-top: 1px solid var(--line-soft);
 }
 

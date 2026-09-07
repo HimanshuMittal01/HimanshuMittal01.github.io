@@ -64,6 +64,12 @@
 	navigation: auto;
 }
 
+/* One page gutter, shared by the header, the homepage sections and article pages,
+   so every left edge on the site lines up. */
+:root {
+	--gutter: clamp(1.5rem, 4.5vw, 3.5rem);
+}
+
 html,
 body {
 	padding: 0;
@@ -85,9 +91,10 @@ html {
 }
 
 .main-content {
-	padding: 0;
+	padding: 0 var(--gutter);
 	margin: 1.5em auto;
 	max-width: 45em;
+	box-sizing: content-box;
 }
 
 /* https://www.a11yproject.com/posts/how-to-hide-content/ */

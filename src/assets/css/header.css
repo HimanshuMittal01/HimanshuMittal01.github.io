@@ -9,7 +9,7 @@ header {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 1rem 1.5rem;
+    padding: 1rem var(--gutter);
     background: none;
     border: 0;
 }
@@ -64,7 +64,7 @@ body:has(.home) header {
     position: sticky;
     top: 0;
     z-index: 20;
-    max-width: calc(74rem + 3rem);
+    max-width: calc(74rem + 2 * var(--gutter));   /* inner box matches .home-inner exactly */
     padding-block: 0.85rem;
 }
 
@@ -90,6 +90,6 @@ body:has(.home) header.past-hero {
 }
 
 @media (max-width: 768px) {
-    header { padding: 0.85rem 1rem; }
+    header { padding-block: 0.85rem; }
     .header-right { gap: 1rem; }
 }
