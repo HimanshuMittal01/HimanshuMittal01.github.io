@@ -3,7 +3,6 @@ layout: base.html
 permalink: /
 css:
 - /assets/css/home.css
-- /assets/css/chidiya.css
 ---
 
 <div class="home">
@@ -21,8 +20,8 @@ css:
     </section>
 
     <!-- 2. Featured writings
-         TODO(proof): fill `url` in src/_data/featured.json once the Optimus deep dive is published
-         (src/posts/draft/optimus-deep-dive/ → published/) and the Faradworks write-up exists.
+         TODO(proof): fill the Faradworks `url` in src/_data/featured.json once
+         src/posts/draft/faradworks/ is written and moved to published/.
          TODO(asset): add `asset` + `assetAlt` (product screenshot, system diagram, PCB/Pinscope shot).
          Cards render without a media plate until a real asset exists — do not stand in a placeholder image. -->
     <section class="home-section featured" id="writings">
@@ -83,7 +82,6 @@ css:
         <script>{% include "js/scraps-carousel.js" %}</script>
     </section>
 
-    <!-- 4. What I'm working on now -->
-    {% include "partials/_chidiya-udd.html" %}
+    {% include "partials/_now.html" %}
 
 </div>

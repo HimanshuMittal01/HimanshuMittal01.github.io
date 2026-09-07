@@ -522,3 +522,33 @@ a.story:focus-visible {
 @media (max-width: 640px) {
     }
 
+
+/* ---------- 4. Where the work is pointed now ---------- */
+
+.now-title {
+    font-size: clamp(2rem, 4.4vw, 3.25rem);
+    max-width: 22ch;
+    margin: 0 0 2.75rem;
+}
+
+.now-body {
+    display: grid;
+    gap: 1.5rem;
+    max-width: 40rem;
+}
+
+.now-body p {
+    margin: 0;
+    font-size: clamp(1.0625rem, 1.35vw, 1.1875rem);
+    line-height: 1.72;
+    color: var(--ink-soft);
+    text-wrap: pretty;
+}
+
+/* the one line that says what the rest of it was for */
+.now-body .now-close {
+    margin-top: 1rem;
+    font-size: clamp(1.1875rem, 1.7vw, 1.4375rem);
+    line-height: 1.55;
+    color: var(--ink);
+}
