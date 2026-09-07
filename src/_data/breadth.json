@@ -311,7 +311,7 @@
             "title": "Optimus",
             "descriptor": "Planning a pharma plant",
             "year": "2022 → 2024",
-            "url": "/writings/optimus-deep-dive/",
+            "url": "/writing/optimus-deep-dive/",
             "linkLabel": "The write-up",
             "popover": [
                 "Demand, inventory, recipes, blending, machines, changeovers, constraints, schedules, planners.",

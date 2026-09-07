@@ -1,13 +1,13 @@
 (function () {
-  function onWritings() {
+  function onWriting() {
     const p = window.location.pathname.replace(/\/+$/, "");
-    return p === "/writings" || p.endsWith("/writings");
+    return p === "/writing" || p.endsWith("/writing");
   }
   document.addEventListener("DOMContentLoaded", function () {
     const dot = document.querySelector(".archive-dot");
     if (!dot) return;
     dot.addEventListener("click", function () {
-      if (!onWritings()) return;
+      if (!onWriting()) return;
       const hidden = document.querySelectorAll(".post-card.archived-hidden");
       for (let i = 0; i < hidden.length; i++) {
         hidden[i].classList.remove("archived-hidden");
