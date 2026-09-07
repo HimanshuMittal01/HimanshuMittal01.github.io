@@ -1,7 +1,5 @@
 {
-    "eyebrow": "Evidence from a decade of building",
-    "title": "Seeing clearly takes work.",
-    "intro": "I've usually understood things by trying to build them. Each attempt exposed another part of the problem I hadn't seen yet.",
+    "title": "See clearly. Build accordingly.",
     "stripNote": "Everything else that left a trace. Some became products. Most didn't.",
     "frames": [
         {
@@ -223,6 +221,18 @@
                 "Bennett was paying for everyone's Coursera courses, so we built a layer on top of it: see what your friends were taking, find someone doing the same course to build something with, and put the campus tech events in one place instead of scattered across WhatsApp groups.",
                 "It shipped at skillsight.in, university email addresses only, with course tracks, progress and chat.",
                 "It never turned a corner. We could not answer how to keep one course database populated from every course site there is, or why a student would pay for it. The domain belongs to somebody else now."
+            ]
+        },
+        {
+            "id": "a29",
+            "title": "Crop radiation prediction",
+            "descriptor": "Net radiation, from cheaper signals",
+            "year": "2020 → 2022",
+            "url": "https://link.springer.com/article/10.1007/s00484-022-02364-5",
+            "linkLabel": "The paper",
+            "popover": [
+                "Net radiation over a crop is expensive to measure directly, so we tried predicting it from global solar radiation and canopy temperature instead. I wrote the training side: regression splines, gradient boosting and a small neural network, all driven from one config file.",
+                "It ended up in the International Journal of Biometeorology. I am fourth of twelve authors, and it is the only peer-reviewed thing with my name on it."
             ]
         },
         {
