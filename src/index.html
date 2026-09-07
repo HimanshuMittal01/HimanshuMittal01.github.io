@@ -70,7 +70,7 @@ css:
                             <div class="scrap-pop" id="pop-{{ s.id }}" popover>
                                 <p class="pop-head">{{ s.title | escape }} <span>{{ s.year }}</span></p>
                                 {% for p in s.popover %}<p>{{ p | escape }}</p>{% endfor %}
-                                {% if s.url %}<a href="{{ s.url }}" target="_blank" rel="noopener">{{ s.linkLabel }} &#8599;</a>{% endif %}
+                                {% if s.url %}{% assign scheme = s.url | slice: 0, 4 %}<a href="{{ s.url }}"{% if scheme == "http" %} target="_blank" rel="noopener"{% endif %}>{{ s.linkLabel }} {% if scheme == "http" %}&#8599;{% else %}&#8594;{% endif %}</a>{% endif %}
                             </div>
                         </div>
                         {% endfor %}

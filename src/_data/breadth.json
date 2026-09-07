@@ -176,6 +176,18 @@
             ]
         },
         {
+            "id": "a30",
+            "title": "Industrial PPE detection",
+            "descriptor": "Helmets, vests, camera feeds",
+            "year": "2021",
+            "url": "https://medium.com/@himanshum1312/ai-intern-experience-at-datakalp-411017dd5ab8",
+            "linkLabel": "The post",
+            "popover": [
+                "An internship at Datakalp. PPE detection on camera feeds, which turned into data collection, annotation, pose estimation to help the classifier read what it was looking at, and GStreamer pipelines to get the thing deployed.",
+                "The model was the part that already worked."
+            ]
+        },
+        {
             "id": "a12",
             "title": "Video annotation tool",
             "descriptor": "Because labelling was the bottleneck",
@@ -209,6 +221,30 @@
             "popover": [
                 "Where the dealers were, and which of them we could actually reach. Four maps in the end: everyone, then three narrower cuts of the same question.",
                 "The coordinates came as several dealer lists from different months that disagreed with each other, so most of the work was deciding which version of a dealer was true. The stock map markers were not good enough either, so I wrote my own."
+            ]
+        },
+        {
+            "id": "a31",
+            "title": "Vehicle application",
+            "descriptor": "What the truck was actually doing",
+            "year": "2022",
+            "url": null,
+            "linkLabel": null,
+            "popover": [
+                "Trucks say a great deal about themselves if you read the bus. This took CAN logs off BS4 and BS6 vehicles, joined them to the gearbox tables and the chassis records, and worked out how each truck was actually being driven.",
+                "Six weeks of merged logs went in at a time. A CSV came out."
+            ]
+        },
+        {
+            "id": "a32",
+            "title": "Job-card analyser",
+            "descriptor": "Free text against machine alerts",
+            "year": "2022",
+            "url": null,
+            "linkLabel": null,
+            "popover": [
+                "Matching what technicians wrote on workshop job cards against the alerts the vehicles themselves raised.",
+                "About ninety-five percent, measured against an internal golden set we built out of old data."
             ]
         },
         {
@@ -272,6 +308,18 @@
             ]
         },
         {
+            "id": "a33",
+            "title": "Optimus",
+            "descriptor": "Planning a pharma plant",
+            "year": "2022 → 2024",
+            "url": "/writings/optimus-deep-dive/",
+            "linkLabel": "The write-up",
+            "popover": [
+                "Demand, inventory, recipes, blending, machines, changeovers, constraints, schedules, planners.",
+                "The planner I was trying to automate turned out to belong inside the system."
+            ]
+        },
+        {
             "id": "a19",
             "title": "TaxTalk",
             "descriptor": "A tax answer machine, running locally",
@@ -317,6 +365,18 @@
             "popover": [
                 "A fine-tuned EfficientNet-B0 that decides whether an eye shows a cataract, at 98.36% on the holdout set.",
                 "This is where I stopped shipping notebooks. It has a FastAPI backend, a Streamlit front end and a written report."
+            ]
+        },
+        {
+            "id": "a34",
+            "title": "Trajectory evaluation",
+            "descriptor": "Reading the path, not the answer",
+            "year": "2024 → 2025",
+            "url": null,
+            "linkLabel": null,
+            "popover": [
+                "At Turing I was producing coding and reasoning data, comparing models against each other, and reading back what agents had actually done.",
+                "Somewhere in there the final answer started to matter less to me than the path the model took to get there."
             ]
         },
         {
