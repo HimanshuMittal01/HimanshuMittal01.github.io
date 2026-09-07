@@ -9,12 +9,16 @@ css:
 
     <!-- 1. Hero -->
     <section class="home-section hero">
-        <div class="home-inner">
-            <h1 class="hero-title">{{ bio.name }}</h1>
-            <p class="hero-lede">
-                Currently leading technical work around AI safety and evaluation. Previously built industrial
-                optimization systems and a venture-backed hardware-AI startup.
-            </p>
+        <div class="home-inner hero-split">
+            <div class="hero-text">
+                <h1 class="hero-title">{{ bio.name }}</h1>
+                <p class="hero-lede">
+                    Currently leading technical work around AI safety and evaluation. Previously built industrial
+                    optimization systems and a venture-backed hardware-AI startup.
+                </p>
+            </div>
+            <img class="hero-portrait" src="/assets/images/himanshu.jpg" alt="{{ bio.name }}"
+                 width="900" height="1200" loading="eager" decoding="sync">
         </div>
     </section>
 

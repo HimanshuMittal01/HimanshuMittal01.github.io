@@ -114,6 +114,29 @@ body:has(.home) .main-content {
     z-index: 1;
 }
 
+/* text left, portrait right. the portrait is sized to balance the name, not to lead. */
+.hero-split {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) clamp(13rem, 28%, 21rem);
+    gap: clamp(2rem, 5vw, 4.5rem);
+    align-items: center;
+}
+
+.hero-portrait {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    object-position: 50% 22%;
+    border-radius: 14px;
+    border: 1px solid var(--line);
+    display: block;
+}
+
+@media (max-width: 800px) {
+    .hero-split { grid-template-columns: minmax(0, 1fr); }
+    .hero-portrait { max-width: 15rem; }
+}
+
 /* the name is the headline now, so it carries the weight the tagline used to */
 .hero-title {
     font-size: clamp(3rem, 9vw, 6.5rem);
