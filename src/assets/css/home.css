@@ -114,42 +114,43 @@ body:has(.home) .main-content {
     z-index: 1;
 }
 
-/* text left, portrait right. the portrait is sized to balance the name, not to lead. */
+/* text left, portrait right. the portrait is the tallest thing here: two elements of
+   equal weight side by side read as unresolved, so one has to lead. */
 .hero-split {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) clamp(13rem, 28%, 21rem);
-    gap: clamp(2rem, 5vw, 4.5rem);
+    grid-template-columns: minmax(0, 1fr) clamp(15rem, 34%, 25rem);
+    gap: clamp(2.5rem, 8vw, 7rem);
     align-items: center;
 }
 
+/* no border, no radius: chrome makes a photograph read as an avatar component */
 .hero-portrait {
     width: 100%;
     aspect-ratio: 3 / 4;
     object-fit: cover;
-    object-position: 50% 22%;
-    border-radius: 14px;
-    border: 1px solid var(--line);
+    object-position: 50% 20%;
     display: block;
 }
 
 @media (max-width: 800px) {
     .hero-split { grid-template-columns: minmax(0, 1fr); }
-    .hero-portrait { max-width: 15rem; }
+    .hero-portrait { max-width: 17rem; }
 }
 
 /* the name is the headline now, so it carries the weight the tagline used to */
 .hero-title {
-    font-size: clamp(3rem, 9vw, 6.5rem);
+    font-size: clamp(3rem, 8.5vw, 6rem);
     letter-spacing: -0.035em;
-    margin: 0;
-    max-width: 16ch;
+    line-height: 0.95;
+    margin: 0.85rem 0 0;
+    max-width: 9ch;
 }
 
 .hero-lede {
-    max-width: var(--measure);
-    margin: 2rem 0 0;
-    font-size: clamp(1.0625rem, 1.4vw, 1.1875rem);
-    line-height: 1.65;
+    max-width: 30rem;
+    margin: 2.25rem 0 0;
+    font-size: clamp(1.0625rem, 1.3vw, 1.125rem);
+    line-height: 1.7;
     color: var(--ink-soft);
 }
 
