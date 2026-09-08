@@ -7,7 +7,7 @@ header {
     gap: 1rem;
     flex-wrap: nowrap;
     width: 100%;
-    max-width: 1200px;
+    max-width: calc(74rem + 2 * var(--gutter));
     margin: 0 auto;
     padding: 1rem var(--gutter);
     background: none;
@@ -18,12 +18,27 @@ header {
 header::after { content: none; }
 
 .header-name {
-    font-size: 0.9375rem;
-    font-weight: 500;
-    letter-spacing: -0.01em;
+    display: inline-flex;
+    align-items: center;
     text-decoration: none;
     color: var(--text-color);
 }
+
+/* index.css has `img[width][height] { height: auto }` at (0,2,1), which outranks a
+   two-class selector. Matching its specificity exactly lets load order decide, the
+   same way the header rules at the top of this file override index.css. */
+.header-name img.header-logo {
+    display: block;
+    width: auto;
+    height: 1.5rem;
+}
+
+/* The file names describe the ink, not the background: the dark logo is the one that
+   belongs on light paper. Every rule below has to stay above the (0,2,1) sizing rule
+   or `display: block` wins and both logos render on top of each other. */
+:root .header-name img.header-logo--on-dark { display: none; }
+:root.dark-mode .header-name img.header-logo--on-dark { display: block; }
+:root.dark-mode .header-name img.header-logo--on-light { display: none; }
 
 .header-right {
     display: flex;
@@ -57,11 +72,25 @@ header::after { content: none; }
 
 .color-mode-toggle:hover { color: var(--text-color-link-active); }
 
-/* ---------- homepage: the hero is the beginning of the page ---------- */
+/* ---------- homepage ---------- */
 
-/* the hero opens with the name at display size, so the header does not repeat it */
-body:has(.home) .header-name { display: none; }
-body:has(.home) header { justify-content: flex-end; }
+/* one hairline under the header, inset to the content column so it lines up with the
+   section rules further down the page. index.css already puts an ::after here for its
+   clearfix, so the rule reuses it rather than asking the markup for a wrapper. */
+body:has(.home) header { position: relative; }
+
+body:has(.home) header::after {
+    content: "";
+    display: block;
+    position: absolute;
+    left: var(--gutter);
+    right: var(--gutter);
+    bottom: 0;
+    height: 1px;
+    background: rgba(16, 16, 20, 0.09);
+}
+
+:root.dark-mode body:has(.home) header::after { background: rgba(255, 255, 255, 0.08); }
 
 @media (max-width: 768px) {
     header { padding-block: 0.85rem; }

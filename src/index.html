@@ -11,11 +11,13 @@ css:
     <section class="home-section hero">
         <div class="home-inner hero-split">
             <div class="hero-text">
+                <span class="rule" aria-hidden="true"></span>
                 <p class="eyebrow">Hi, I&rsquo;m</p>
                 <h1 class="hero-title">{{ bio.name }}</h1>
                 <p class="hero-lede">
-                    Currently leading technical work around AI safety and evaluation. Previously built industrial
-                    optimization systems and a venture-backed hardware-AI startup.
+                    Currently leading technical work on frontier-model safety and evaluation, especially interested in
+                    scalable oversight. Previously built industrial optimization systems and a
+                    venture-backed hardware-AI startup.
                 </p>
             </div>
             <img class="hero-portrait" src="/assets/images/himanshu.jpg" alt="{{ bio.name }}"
@@ -23,67 +25,66 @@ css:
         </div>
     </section>
 
-    <!-- 2. Featured writings
+    {% include "partials/_now.html" %}
+
+    <!-- 3. Selected work — the two long-form pieces, then the strip of everything else.
+         Depth and breadth are one claim, so they share a section rather than sitting as
+         numbered peers; Optimus appears in both, as a story card and as scrap a33.
          TODO(proof): fill the Faradworks `url` in src/_data/featured.json once
          src/posts/draft/faradworks/ is written and moved to published/.
          TODO(asset): add `asset` + `assetAlt` (product screenshot, system diagram, PCB/Pinscope shot).
          Cards render without a media plate until a real asset exists — do not stand in a placeholder image. -->
     <section class="home-section featured" id="writings">
         <div class="home-inner">
-            <h2 class="featured-title">See clearly. Build accordingly.</h2>
+            <p class="section-head"><span class="section-num">03</span> Selected work</p>
+            <div class="section-lead">
+                <h2 class="featured-title">See clearly. Build accordingly.</h2>
+                <a class="section-cue" href="/writing/">Explore more writing &rarr;</a>
+            </div>
             <div class="featured-grid">
                 {% for story in featured %}
                 {% if story.url %}<a class="story story--{{ story.accent }}" href="{{ story.url }}">{% else %}<article class="story story--{{ story.accent }}">{% endif %}
+                    <div class="story-text">
+                        <p class="story-project">{{ story.project }}</p>
+                        <h3 class="story-headline">{{ story.headline }}</h3>
+                        <p class="story-meta">{{ story.meta }}</p>
+                        {% if story.url %}
+                        <span class="story-cue">Read the story &rarr;</span>
+                        {% else %}
+                        <span class="story-cue story-cue--pending">{{ story.note }}</span>
+                        {% endif %}
+                    </div>
                     {% if story.asset %}
                     <div class="story-media"><img src="{{ story.asset }}" alt="{{ story.assetAlt }}"></div>
-                    {% endif %}
-                    <p class="story-project">{{ story.project }}</p>
-                    <h2 class="story-headline">{{ story.headline }}</h2>
-                    <p class="story-meta">{{ story.meta }}</p>
-                    {% if story.url %}
-                    <span class="story-cue">Read the story →</span>
-                    {% else %}
-                    <span class="story-cue story-cue--pending">{{ story.note }}</span>
                     {% endif %}
                 {% if story.url %}</a>{% else %}</article>{% endif %}
                 {% endfor %}
             </div>
-            <a class="section-cue" href="/writing/">Explore more writing →</a>
-        </div>
-    </section>
 
-    <!-- 3. Breadth — one line, then the strip of artifacts -->
-    <section class="home-section breadth" id="breadth">
-        <div class="home-inner museum">
-
-            <div class="museum-shell">
-                <div class="carousel-wrap">
-                    <p class="strip-note">{{ breadth.intro }}</p>
-                    <div class="scrap-progress" aria-hidden="true"><span></span></div>
-                    <div class="scraps" id="scraps" tabindex="0" role="region" aria-label="Other things I built">
-                        {% for s in breadth.scraps %}
-                        <div class="scrap glass">
-                            <button type="button" class="scrap-face" popovertarget="pop-{{ s.id }}">
-                                <span class="title">{{ s.title | escape }}</span>
-                                <span class="desc">{{ s.descriptor | escape }}</span>
-                                <span class="year">{{ s.year }}</span>
-                            </button>
-                            <div class="scrap-pop" id="pop-{{ s.id }}" popover>
-                                <p class="pop-head">{{ s.title | escape }} <span>{{ s.year }}</span></p>
-                                {% for p in s.popover %}<p>{{ p | escape }}</p>{% endfor %}
-                                {% if s.url %}{% assign scheme = s.url | slice: 0, 4 %}<a href="{{ s.url }}"{% if scheme == "http" %} target="_blank" rel="noopener"{% endif %}>{{ s.linkLabel }} {% if scheme == "http" %}&#8599;{% else %}&#8594;{% endif %}</a>{% endif %}
-                            </div>
-                        </div>
-                        {% endfor %}
-                    </div>
-                    <div class="scrap-dots" aria-label="Jump through the strip"></div>
+            <!-- same section, quieter register: the strip of everything else -->
+            <div class="breadth" id="breadth">
+                <div class="section-lead section-lead--sub">
+                    <p class="sub-head">Other things I&rsquo;ve made</p>
+                    <a class="section-cue" href="/archive/">Explore all {{ breadth.scraps.size }} things &rarr;</a>
                 </div>
-
+                <div class="scraps">
+                {% for s in breadth.scraps %}{% if s.featured %}
+                <div class="scrap">
+                    <button type="button" class="scrap-face" popovertarget="pop-{{ s.id }}">
+                        <span class="scrap-plate"><span class="desc">{{ s.descriptor | escape }}</span></span>
+                        <span class="title">{{ s.title | escape }}</span>
+                        <span class="year">{{ s.year }}</span>
+                    </button>
+                    <div class="scrap-pop" id="pop-{{ s.id }}" popover>
+                        <p class="pop-head">{{ s.title | escape }} <span>{{ s.year }}</span></p>
+                        {% for p in s.popover %}<p>{{ p | escape }}</p>{% endfor %}
+                        {% if s.url %}{% assign scheme = s.url | slice: 0, 4 %}<a href="{{ s.url }}"{% if scheme == "http" %} target="_blank" rel="noopener"{% endif %}>{{ s.linkLabel }} {% if scheme == "http" %}&#8599;{% else %}&#8594;{% endif %}</a>{% endif %}
+                    </div>
+                </div>
+                {% endif %}{% endfor %}
+                </div>
             </div>
         </div>
-        <script>{% include "js/scraps-carousel.js" %}</script>
     </section>
-
-    {% include "partials/_now.html" %}
 
 </div>

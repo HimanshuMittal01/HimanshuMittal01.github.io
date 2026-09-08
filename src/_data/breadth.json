@@ -22,7 +22,8 @@
             "popover": [
                 "A Python course ended with tic-tac-toe and blackjack. I wanted something with enough logic that I couldn't hold the whole thing in my head at once. Chess seemed like a good idea. Then I decided I should be able to say a move out loud and watch the board respond.",
                 "It became the first thing I ever pushed to GitHub."
-            ]
+            ],
+            "featured": true
         },
         {
             "id": "a02",
@@ -48,7 +49,8 @@
                 "I wanted a game whose levels came from the music itself. So I pulled beats out of a song, turned them into timestamps and packaged the whole thing as a Windows executable.",
                 "Then I wrote a nine-step manual explaining how to use it.",
                 "That manual may be the earliest thing I still have where I was clearly imagining a stranger trying to use what I made."
-            ]
+            ],
+            "featured": true
         },
         {
             "id": "a04",
@@ -110,7 +112,8 @@
             "popover": [
                 "NVIDIA gave us about six weeks to write a native TensorRT plugin. We spent half of it solving the wrong problem, restarted after finally talking to their engineers, wrote the plugin in C++, and got LeNet-5 running about three times faster.",
                 "We came first. There were two teams."
-            ]
+            ],
+            "featured": true
         },
         {
             "id": "a08",
@@ -184,7 +187,8 @@
             "popover": [
                 "An internship at Datakalp. PPE detection on camera feeds, which turned into data collection, annotation, pose estimation to help the classifier read what it was looking at, and GStreamer pipelines to get the thing deployed.",
                 "The model was the part that already worked."
-            ]
+            ],
+            "featured": true
         },
         {
             "id": "a12",
@@ -244,7 +248,8 @@
             "popover": [
                 "Matching what technicians wrote on workshop job cards against the alerts the vehicles themselves raised.",
                 "About ninety-five percent, measured against an internal golden set we built out of old data."
-            ]
+            ],
+            "featured": true
         },
         {
             "id": "a14",
@@ -293,7 +298,8 @@
                 "Body reconstruction and garment fitting, as a final-year group project.",
                 "I did not treat it as an assignment. I thought there was a company in it, and I skipped campus placements because I wanted my own thing.",
                 "The demo looked considerably better than the product really was."
-            ]
+            ],
+            "featured": true
         },
         {
             "id": "a18",

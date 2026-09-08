@@ -1,5 +1,10 @@
 <header>
-    <a href="/" class="header-name">{{ site.name }}</a>
+    <a href="/" class="header-name" aria-label="{{ site.name }} — home">
+        <img class="header-logo header-logo--on-light" src="/assets/images/logo-dark.png"
+             alt="" width="80" height="48" eleventy:ignore>
+        <img class="header-logo header-logo--on-dark" src="/assets/images/logo-light.png"
+             alt="" width="80" height="48" eleventy:ignore>
+    </a>
     <div class="header-right">
         <nav class="site-nav">
             <a href="/writing/" class="{% if page.url == '/writing/' %}active{% endif %}">Writing</a>

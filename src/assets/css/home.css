@@ -5,22 +5,23 @@
     --ink: #101014;
     --ink-soft: #45454f;
     --ink-faint: #8b8b96;
-    --paper: #ffffff;
-    --paper-2: #f7f7f9;
-    --line: rgba(16, 16, 20, 0.10);
-    --line-soft: rgba(16, 16, 20, 0.06);
-    --glass: rgba(255, 255, 255, 0.55);
-    --glass-edge: rgba(255, 255, 255, 0.75);
+    --paper: #f4f4f1;
+    --paper-2: #fbfbf9;
+    --line: rgba(16, 16, 20, 0.14);
+    --line-soft: rgba(16, 16, 20, 0.09);
 
-    /* luminous accents */
+    /* luminous accents — used as card washes, not gradients */
     --lavender: #b7abee;
-    --sky: #a6cbef;
-    --mint: #a8dfc7;
-    --gold: #e3c489;
+    --sky: #dce8f4;
+    --mint: #dcefe5;
+    --gold: #f2e6cf;
+    --fig-blue: #4a6c99;
 
-    --measure: 34rem;
     --wide: 74rem;
+    /* both section headlines are peers — one token so they can't drift apart */
+    --h-section: clamp(1.875rem, 3.8vw, 2.875rem);
     --font-display: "Outfit", var(--font-family);
+    --font-serif: Georgia, "Times New Roman", serif;
 
     color: var(--ink);
     background: var(--paper);
@@ -32,11 +33,15 @@
     --ink-soft: #b3b5bf;
     --ink-faint: #7d808c;
     --paper: #101318;
-    --paper-2: #151a21;
-    --line: rgba(255, 255, 255, 0.12);
-    --line-soft: rgba(255, 255, 255, 0.07);
-    --glass: rgba(255, 255, 255, 0.045);
-    --glass-edge: rgba(255, 255, 255, 0.10);
+    --paper-2: #161a21;
+    --line: rgba(255, 255, 255, 0.14);
+    --line-soft: rgba(255, 255, 255, 0.08);
+
+    --sky: #182430;
+    --mint: #16261f;
+    --gold: #2a2418;
+    --lavender: #211f30;
+    --fig-blue: #7ea6d4;
 }
 
 /* The home page opts out of the 45em article column. */
@@ -46,6 +51,12 @@ body:has(.home) .main-content {
     padding: 0;
 }
 
+/* the header and footer sit outside .home, so the page background itself has to
+   become the homepage paper — otherwise both strips keep the global colour and
+   the page shows a hard seam above the hero and below the last section. */
+:root:has(.home) { --background-color: #f4f4f1; }
+:root.dark-mode:has(.home) { --background-color: #101318; }
+
 /* the global a[href]:visited rule outranks a bare .home a, so match its specificity */
 .home a[href],
 .home a[href]:visited {
@@ -54,18 +65,17 @@ body:has(.home) .main-content {
 
 .home-section {
     width: 100%;
-    padding: clamp(4.5rem, 11vh, 9rem) var(--gutter);
-    border-top: 1px solid var(--line-soft);
-}
-
-.home-section:first-child {
-    border-top: 0;
+    padding: 0 var(--gutter);
 }
 
 .home-inner {
     max-width: var(--wide);
     margin: 0 auto;
+    padding: clamp(3.5rem, 8vh, 6rem) 0;
+    border-top: 1px solid var(--line-soft);
 }
+
+.hero .home-inner { border-top: 0; }
 
 .home h1,
 .home h2,
@@ -79,47 +89,82 @@ body:has(.home) .main-content {
 }
 
 .eyebrow {
-    font-size: 0.8125rem;
-    letter-spacing: 0.14em;
+    font-size: 0.75rem;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
     color: var(--ink-faint);
     margin: 0;
 }
 
+/* a short hairline used as an opening beat */
+.rule {
+    display: block;
+    width: 3.5rem;
+    height: 1px;
+    background: var(--line);
+}
+
+/* ---------- section furniture: hanging number, eyebrow, optional right-hand cue ---------- */
+
+/* the number hangs out into the gutter so the eyebrow lines up with the content column */
+.section-head {
+    position: relative;
+    margin: 0 0 1.5rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+}
+
+.section-num {
+    position: absolute;
+    left: -2.5rem;
+    font-variant-numeric: tabular-nums;
+}
+
+/* the number has nowhere to hang once the gutter closes up */
+@media (max-width: 1220px) {
+    .section-num { position: static; margin-right: 1.25rem; }
+}
+
+/* headline left, "explore more" right, sharing a baseline */
+.section-lead {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.section-lead--tight { margin-bottom: 1.75rem; }
+.section-lead--tight .section-head { margin-bottom: 0; }
+
+.section-cue {
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+    white-space: nowrap;
+    padding-bottom: 0.25rem;
+    border-bottom: 1px solid var(--line);
+    transition: border-color 0.4s ease;
+}
+
+.section-cue:hover,
+.section-cue:focus-visible { border-color: var(--ink); }
+
 /* ---------- 1. Hero ---------- */
 
-.hero {
-    padding-top: clamp(5rem, 16vh, 11rem);
-    padding-bottom: clamp(5rem, 14vh, 10rem);
-    position: relative;
-    overflow: hidden;
-}
-
-/* one slow, quiet light source — no spectacle */
-.hero::before {
-    content: "";
-    position: absolute;
-    inset: -30% -10% auto -20%;
-    height: 70vh;
-    background:
-        radial-gradient(38% 55% at 22% 30%, color-mix(in srgb, var(--lavender) 26%, transparent), transparent 70%),
-        radial-gradient(32% 45% at 68% 18%, color-mix(in srgb, var(--sky) 22%, transparent), transparent 70%);
-    filter: blur(20px);
-    pointer-events: none;
-    z-index: 0;
-}
-
 .hero .home-inner {
-    position: relative;
-    z-index: 1;
+    padding-top: clamp(3rem, 9vh, 6rem);
+    padding-bottom: clamp(4rem, 11vh, 8rem);
 }
 
 /* text left, portrait right. the portrait is the tallest thing here: two elements of
    equal weight side by side read as unresolved, so one has to lead. */
 .hero-split {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) clamp(15rem, 34%, 25rem);
-    gap: clamp(2.5rem, 8vw, 7rem);
+    grid-template-columns: minmax(0, 1fr) clamp(14rem, 30%, 19rem);
+    gap: clamp(2.5rem, 8vw, 6rem);
     align-items: center;
 }
 
@@ -137,30 +182,34 @@ body:has(.home) .main-content {
     .hero-portrait { max-width: 17rem; }
 }
 
+.hero-text .rule { margin-bottom: 1.75rem; }
+
 /* the name is the headline now, so it carries the weight the tagline used to */
 .hero-title {
-    font-size: clamp(3rem, 8.5vw, 6rem);
+    font-size: clamp(2.75rem, 7vw, 5rem);
     letter-spacing: -0.035em;
     line-height: 0.95;
     margin: 0.85rem 0 0;
-    max-width: 9ch;
+    /* 16ch clears "Himanshu Mittal" on one line at every desktop size, and still
+       lets it wrap once the column itself gets narrower than the name. */
+    max-width: 16ch;
 }
 
 .hero-lede {
-    max-width: 30rem;
-    margin: 2.25rem 0 0;
-    font-size: clamp(1.0625rem, 1.3vw, 1.125rem);
-    line-height: 1.7;
+    max-width: 27rem;
+    margin: 2rem 0 0;
+    font-size: clamp(1rem, 1.2vw, 1.0625rem);
+    line-height: 1.65;
     color: var(--ink-soft);
 }
 
-
-
-
 /* ---------- 2. Featured writings ---------- */
 
-.featured-title {
-    font-size: clamp(2.25rem, 5vw, 3.75rem);
+.home .featured-title {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    font-size: var(--h-section);
     max-width: 18ch;
     margin: 0;
 }
@@ -168,310 +217,264 @@ body:has(.home) .main-content {
 .featured-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1.5rem;
-    margin-top: 2.5rem;
+    gap: 1.25rem;
+    margin-top: 2rem;
 }
 
 @media (max-width: 800px) {
-    .featured-title {
-    font-size: clamp(2.25rem, 5vw, 3.75rem);
-    max-width: 18ch;
-    margin: 0;
+    .featured-grid { grid-template-columns: minmax(0, 1fr); }
 }
 
-.featured-grid { grid-template-columns: minmax(0, 1fr); }
-}
-
+/* the tint is the card. no border, no glass, no shadow — a plate of colour with
+   type on it, so a real screenshot can bleed into the right half later. */
 .story {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    padding: clamp(1.75rem, 3vw, 2.75rem);
-    min-height: clamp(18rem, 32vh, 24rem);
-    border: 1px solid var(--line);
-    border-radius: 14px;
-    background: var(--glass);
-    backdrop-filter: blur(14px);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    align-items: stretch;
+    min-height: clamp(14rem, 24vh, 17rem);
+    background: var(--paper-2);
     text-decoration: none;
     position: relative;
     overflow: hidden;
-    transition: border-color 0.5s ease, transform 0.5s ease;
+    transition: filter 0.4s ease, transform 0.4s ease;
 }
 
-/* the accent is a single quiet edge of light, not a gradient card */
-.story::before {
-    content: "";
-    position: absolute;
-    inset: 0 0 auto 0;
-    height: 2px;
-    opacity: 0.85;
+.story:has(.story-media) { grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); }
+
+.story-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    padding: clamp(1.5rem, 2.6vw, 2.25rem);
 }
 
-.story--sky::before { background: linear-gradient(90deg, var(--sky), transparent 70%); }
-.story--gold::before { background: linear-gradient(90deg, var(--gold), transparent 70%); }
-.story--mint::before { background: linear-gradient(90deg, var(--mint), transparent 70%); }
-.story--lavender::before { background: linear-gradient(90deg, var(--lavender), transparent 70%); }
-
-a.story:hover,
-a.story:focus-visible {
-    border-color: color-mix(in srgb, var(--ink) 28%, transparent);
-}
+.story--sky { background: var(--sky); }
+.story--gold { background: var(--gold); }
+.story--mint { background: var(--mint); }
+.story--lavender { background: color-mix(in srgb, var(--lavender) 30%, var(--paper-2)); }
+:root.dark-mode .story--lavender { background: var(--lavender); }
 
 @media (prefers-reduced-motion: no-preference) {
     a.story:hover { transform: translateY(-3px); }
 }
 
-.story-media {
-    margin: -0.5rem 0 0.5rem;
-    border-radius: 8px;
-    overflow: hidden;
-    border: 1px solid var(--line-soft);
-}
+a.story:hover,
+a.story:focus-visible { filter: brightness(0.98); }
 
-.story-media img { display: block; width: 100%; height: auto; }
+.story-media { overflow: hidden; }
+.story-media img { display: block; width: 100%; height: 100%; object-fit: cover; }
 
 .story-project {
     margin: 0;
-    font-size: 0.8125rem;
-    letter-spacing: 0.12em;
+    font-size: 0.75rem;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--ink-faint);
+    color: color-mix(in srgb, var(--ink) 55%, transparent);
 }
 
-.story-headline {
-    font-size: clamp(1.5rem, 2.6vw, 2.125rem);
-    line-height: 1.15;
-    margin: 0;
+/* serif here: these are headlines from written pieces, not interface labels */
+.home .story-headline {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    letter-spacing: -0.005em;
+    font-size: clamp(1.25rem, 2.1vw, 1.75rem);
+    line-height: 1.2;
+    margin: 0.25rem 0 0;
     max-width: 20ch;
+    color: var(--ink);
 }
 
 .story-meta {
-    margin: 0;
-    font-size: 0.9375rem;
-    color: var(--ink-soft);
+    margin: auto 0 0;
+    padding-top: 1.5rem;
+    font-size: 0.875rem;
+    color: color-mix(in srgb, var(--ink) 62%, transparent);
 }
 
 .story-cue {
-    margin-top: auto;
-    padding-top: 1.5rem;
-    font-size: 0.9375rem;
+    font-size: 0.875rem;
     font-weight: 500;
 }
 
 .story-cue--pending {
-    color: var(--ink-faint);
+    color: color-mix(in srgb, var(--ink) 55%, transparent);
     font-weight: 400;
-    font-style: italic;
 }
 
-.section-cue {
-    display: inline-block;
-    margin-top: 2.5rem;
-    font-size: 0.9375rem;
-    font-weight: 500;
-    text-decoration: none;
-    padding-bottom: 0.3rem;
-    border-bottom: 1px solid var(--line);
-    transition: border-color 0.5s ease;
+/* ---------- 3. Where the work is pointed now ---------- */
+
+/* the question on the left, the argument on the right */
+.now-split {
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    gap: clamp(2rem, 5vw, 4.5rem);
+    align-items: start;
 }
 
-.section-cue:hover,
-.section-cue:focus-visible { border-color: var(--ink); }
-
-/* ---------- 3. Breadth — evidence museum (variant B) ---------- */
-
-.breadth {
-    --m-bg: #f7f7f5;
-    --m-ink: #141414;
-    --m-body: #45454b;
-    --m-muted: #707078;
-    --m-faint: #8a8a91;
-    --m-line: rgba(20, 20, 25, 0.10);
-    --m-glass: rgba(255, 255, 255, 0.54);
-    --m-glass-strong: rgba(255, 255, 255, 0.76);
-    --m-edge: rgba(255, 255, 255, 0.88);
-    --m-shadow: 0 18px 55px rgba(40, 45, 65, 0.08);
-    --m-lav: rgba(228, 218, 255, 0.52);
-    --m-sky: rgba(211, 233, 255, 0.55);
-    --m-mint: rgba(219, 249, 235, 0.46);
-    --m-gold: rgba(255, 237, 199, 0.46);
-    --m-accent: #7d8fd8;
-    --m-serif: Georgia, "Times New Roman", serif;
-
-    position: relative;
-    isolation: isolate;
-    background: var(--m-bg);
-    color: var(--m-ink);
+@media (max-width: 900px) {
+    .now-split { grid-template-columns: minmax(0, 1fr); }
 }
 
-:root.dark-mode .breadth {
-    --m-bg: #12151a;
-    --m-ink: #ecedf1;
-    --m-body: #b6b9c3;
-    --m-muted: #9498a3;
-    --m-faint: #7e828d;
-    --m-line: rgba(255, 255, 255, 0.12);
-    --m-glass: rgba(255, 255, 255, 0.045);
-    --m-glass-strong: rgba(255, 255, 255, 0.085);
-    --m-edge: rgba(255, 255, 255, 0.10);
-    --m-shadow: 0 18px 55px rgba(0, 0, 0, 0.38);
-    --m-accent: #93a4ef;
-    --m-lav: rgba(150, 130, 220, 0.16);
-    --m-sky: rgba(120, 175, 225, 0.16);
-    --m-mint: rgba(120, 205, 175, 0.13);
-    --m-gold: rgba(220, 185, 115, 0.13);
+/* the diagram fills the column under the claim; on narrow screens the split collapses
+   and it simply sits between the claim and the prose */
+.now-figure {
+    margin: clamp(2rem, 5vh, 3.25rem) 0 0;
+    max-width: 26rem;
 }
 
-/* the light wash lives on the section, not the page */
-.breadth::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    background:
-        radial-gradient(circle at 9% 6%, var(--m-sky), transparent 25rem),
-        radial-gradient(circle at 91% 16%, var(--m-lav), transparent 25rem),
-        radial-gradient(circle at 25% 67%, var(--m-mint), transparent 28rem),
-        radial-gradient(circle at 87% 84%, var(--m-gold), transparent 24rem);
-    pointer-events: none;
+.now-figure svg { display: block; width: 100%; height: auto; overflow: visible; }
+
+.now-figure path { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+
+/* axes and arrowheads recede; the two curves are the content */
+.fig-axis path { stroke: var(--ink-faint); stroke-width: 1; }
+.fig-axis path:not(:first-child) { fill: var(--ink-faint); stroke: none; }
+
+.fig-ai { stroke: var(--ink); stroke-width: 2; }
+.fig-human { stroke: var(--fig-blue); stroke-width: 2; }
+
+.fig-gap path { stroke: var(--ink-faint); stroke-width: 1; }
+.fig-gap path:not(:first-child) { fill: var(--ink-faint); stroke: none; }
+
+.now-figure text {
+    font-family: var(--font-family);
+    font-size: 11px;
+    fill: var(--ink-soft);
 }
 
-.museum .eyebrow { color: var(--m-faint); }
+.now-figure .fig-label { font-size: 12px; fill: var(--ink); }
+.now-figure .fig-label--human { fill: var(--fig-blue); }
 
-
-
-.glass {
-    background: linear-gradient(135deg, var(--m-glass-strong), var(--m-glass));
-    border: 1px solid var(--m-edge);
-    box-shadow: var(--m-shadow);
-    backdrop-filter: blur(18px);
+.now-figure .fig-note,
+.now-figure .fig-axis-label {
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    fill: var(--ink-faint);
 }
-
-
-
-
-
-/* scraps */
-.carousel-wrap { position: relative; }
-
-/* the only line explaining why the strip is a different kind of thing to the wall */
-.strip-note {
-    font-family: var(--m-serif);
-    font-size: clamp(1.25rem, 2vw, 1.625rem);
-    line-height: 1.45;
-    color: var(--m-body);
-    max-width: 44rem;
-    margin: 0 0 2.25rem;
+.now-figure figcaption {
+    margin-top: 1rem;
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    color: var(--ink-faint);
+    text-align: center;
     text-wrap: pretty;
 }
 
-/* one line, running out. when it empties the strip moves. */
-.scrap-progress {
-    height: 2px;
-    border-radius: 2px;
-    margin: 0 0.125rem 0.75rem;
-    background: color-mix(in srgb, var(--m-ink) 8%, transparent);
-    overflow: hidden;
-    opacity: 0;
-    transition: opacity 0.4s ease;
+.now-title {
+    font-size: var(--h-section);
+    max-width: 16ch;
+    margin: 0;
 }
 
-.carousel-wrap.is-ticking .scrap-progress { opacity: 1; }
-
-.scrap-progress span {
-    display: block;
-    height: 100%;
-    background: var(--m-accent);
-    transform: scaleX(0);
-    transform-origin: left;
+.now-body {
+    display: grid;
+    gap: 1.15rem;
+    max-width: 36rem;
 }
 
-.carousel-wrap.is-ticking .scrap-progress span {
-    animation: scrap-tick 3800ms linear infinite;
+.now-body p {
+    margin: 0;
+    font-size: 0.9375rem;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    text-wrap: pretty;
 }
 
-@keyframes scrap-tick {
-    from { transform: scaleX(0); }
-    to { transform: scaleX(1); }
+/* said once, quietly, and not asking the reader for anything */
+.now-body .now-close {
+    margin-top: 0.5rem;
+    color: var(--ink);
 }
 
-@media (prefers-reduced-motion: reduce) {
-    .scrap-progress { display: none; }
+/* ---------- 4. Breadth — six tiles, the rest at /archive/ ---------- */
+
+/* the second register inside section 03: same column, quieter, and set far enough
+   below the cards that it reads as a change of scale rather than a new section */
+.breadth { margin-top: clamp(3.5rem, 8vh, 5.5rem); }
+
+.sub-head {
+    margin: 0;
+    font-size: 0.75rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
 }
 
-/* clickable pages, kept for people who would rather drive */
-.scrap-dots {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 0.375rem;
-    margin-top: 0.75rem;
-}
-
-.dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 999px;
-    border: 0;
-    padding: 0;
-    cursor: pointer;
-    background: color-mix(in srgb, var(--m-ink) 18%, transparent);
-    transition: width 0.25s ease, background-color 0.25s ease;
-}
-
-.dot:hover { background: color-mix(in srgb, var(--m-ink) 38%, transparent); }
-.dot.active { width: 18px; background: var(--m-accent); }
-.dot:focus-visible { outline: 2px solid var(--m-ink); outline-offset: 3px; }
+.section-lead--sub { margin-bottom: 1.5rem; }
 
 .scraps {
-    display: flex;
-    gap: 0.5625rem;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none;
-    padding: 0.125rem 0.125rem 0.5rem;
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 1rem;
 }
 
-.scraps::-webkit-scrollbar { display: none; }
-.scraps:focus-visible { outline: 2px solid var(--m-ink); outline-offset: 3px; border-radius: 16px; }
-
-.scrap {
-    flex: 0 0 11.5rem;
-    border-radius: 15px;
-    scroll-snap-align: start;
-    transition: border-color 0.3s ease, transform 0.3s ease;
-}
+@media (max-width: 1000px) { .scraps { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .scraps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 
 .scrap-face {
     display: flex;
     flex-direction: column;
-    gap: 0.3rem;
+    gap: 0.55rem;
     width: 100%;
-    min-height: 7.4rem;
-    padding: 0.85rem;
+    padding: 0;
     background: none;
     border: 0;
-    border-radius: 15px;
     text-align: left;
     font: inherit;
     color: inherit;
     cursor: pointer;
 }
 
-.scrap-face .title { font-weight: 700; font-size: 0.8125rem; line-height: 1.3; color: var(--m-ink); }
-.scrap-face .desc { font-size: 0.75rem; line-height: 1.4; color: var(--m-muted); }
-.scrap-face .year { margin-top: auto; font-size: 0.6875rem; color: var(--m-faint); font-variant-numeric: tabular-nums; }
-.scrap-face:focus-visible { outline: 2px solid var(--m-ink); outline-offset: 2px; }
+/* the plate stands in for the artwork: the descriptor is the image */
+.scrap-plate {
+    display: flex;
+    align-items: flex-end;
+    aspect-ratio: 4 / 3;
+    padding: 0.75rem;
+    background: var(--paper-2);
+    border: 1px solid var(--line-soft);
+    transition: background-color 0.35s ease, border-color 0.35s ease;
+}
 
-/* the annotation. native popover, so it escapes the strip's overflow and
-   handles keyboard, touch and light-dismiss without a line of JS. */
+.scrap-plate .desc {
+    font-size: 0.75rem;
+    line-height: 1.35;
+    color: var(--ink-soft);
+    text-wrap: pretty;
+}
+
+.scrap-face .title {
+    font-size: 0.8125rem;
+    line-height: 1.35;
+    color: var(--ink);
+}
+
+.scrap-face .year {
+    font-size: 0.75rem;
+    color: var(--ink-faint);
+    font-variant-numeric: tabular-nums;
+}
+
+/* the wash is what the thumbnail used to be: it gives the row its rhythm */
+.scrap:nth-child(4n+1) .scrap-plate { background: var(--sky); }
+.scrap:nth-child(4n+2) .scrap-plate { background: var(--mint); }
+.scrap:nth-child(4n+3) .scrap-plate { background: var(--gold); }
+.scrap:nth-child(4n+4) .scrap-plate { background: color-mix(in srgb, var(--lavender) 26%, var(--paper-2)); }
+:root.dark-mode .scrap:nth-child(4n+4) .scrap-plate { background: var(--lavender); }
+
+.scrap-face:hover .scrap-plate { border-color: var(--ink); }
+.scrap-face:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+
+/* the annotation. native popover, so it escapes the grid, and handles keyboard,
+   touch and light-dismiss without a line of JS. */
 .scrap-pop {
     max-width: 30rem;
     padding: 1.5rem 1.6rem;
-    border: 1px solid var(--m-line);
-    border-radius: 16px;
-    background: var(--m-bg);
-    color: var(--m-ink);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background: var(--paper-2);
+    color: var(--ink);
     box-shadow: 0 24px 70px rgba(30, 34, 50, 0.18);
 }
 
@@ -481,9 +484,9 @@ a.story:focus-visible {
 .scrap-pop .pop-head {
     margin: 0 0 0.9rem;
     font-size: 0.75rem;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--m-faint);
+    color: var(--ink-faint);
 }
 
 .scrap-pop .pop-head span { float: right; text-transform: none; letter-spacing: 0; }
@@ -492,71 +495,86 @@ a.story:focus-visible {
     margin: 0 0 0.8rem;
     font-size: 0.9375rem;
     line-height: 1.62;
-    color: var(--m-body);
+    color: var(--ink-soft);
 }
 
 .scrap-pop a {
     display: inline-block;
     margin-top: 0.4rem;
     font-size: 0.8125rem;
-    color: var(--m-ink);
     text-decoration: none;
-    border-bottom: 1px solid var(--m-line);
+    border-bottom: 1px solid var(--line);
 }
 
-.scrap-pop a:hover { border-color: var(--m-ink); }
+.scrap-pop a:hover { border-color: var(--ink); }
 
+/* ---------- /archive/ — the same furniture, one long column ---------- */
 
-
-.scrap:hover { border-color: var(--m-ink); }
-
-@media (prefers-reduced-motion: no-preference) {
-    .scrap:hover { transform: translateY(-2px); }
+.home .archive-title {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: clamp(1.625rem, 3.2vw, 2.375rem);
+    line-height: 1.25;
+    max-width: 30ch;
+    margin: 0 0 clamp(3rem, 7vh, 4.5rem);
 }
 
-
-
-@media (max-width: 900px) {
-}
-
-@media (max-width: 640px) {
-    .scrap { flex-basis: 74vw; max-width: 16rem; }
-
-}
-
-/* a beat that carries a story rather than a label */
-
-
-@media (max-width: 640px) {
-    }
-
-
-/* ---------- 4. Where the work is pointed now ---------- */
-
-.now-title {
-    font-size: clamp(2rem, 4.4vw, 3.25rem);
-    max-width: 22ch;
-    margin: 0 0 2.75rem;
-}
-
-.now-body {
-    display: grid;
-    gap: 1.5rem;
-    max-width: 40rem;
-}
-
-.now-body p {
+.archive-list {
+    list-style: none;
     margin: 0;
-    font-size: clamp(1.0625rem, 1.35vw, 1.1875rem);
-    line-height: 1.72;
+    padding: 0;
+}
+
+.archive-item {
+    display: grid;
+    grid-template-columns: minmax(0, 0.6fr) minmax(0, 1.4fr);
+    gap: clamp(1.5rem, 4vw, 4rem);
+    padding: clamp(1.75rem, 3.5vh, 2.5rem) 0;
+    border-top: 1px solid var(--line-soft);
+}
+
+@media (max-width: 800px) {
+    .archive-item { grid-template-columns: minmax(0, 1fr); gap: 0.75rem; }
+}
+
+.archive-name {
+    font-size: clamp(1.0625rem, 1.8vw, 1.375rem);
+    line-height: 1.25;
+    margin: 0;
+}
+
+.archive-year {
+    margin: 0.4rem 0 0;
+    font-size: 0.8125rem;
+    color: var(--ink-faint);
+    font-variant-numeric: tabular-nums;
+}
+
+.archive-desc {
+    margin: 0 0 1rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+}
+
+.archive-body p {
+    margin: 0 0 0.8rem;
+    font-size: 0.9375rem;
+    line-height: 1.65;
     color: var(--ink-soft);
     text-wrap: pretty;
 }
 
-/* the one line that says what the rest of it was for */
-.now-body .now-close {
-    margin-top: 1rem;
-    font-size: clamp(1.1875rem, 1.7vw, 1.4375rem);
-    line-height: 1.55;
-    color: var(--ink);
+.archive-link {
+    display: inline-block;
+    margin-top: 0.3rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    text-decoration: none;
+    border-bottom: 1px solid var(--line);
 }
+
+.archive-link:hover { border-color: var(--ink); }
+
+.archive-page .section-cue { margin-top: clamp(2.5rem, 6vh, 4rem); display: inline-block; }

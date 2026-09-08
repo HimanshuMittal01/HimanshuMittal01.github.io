@@ -1,13 +1,53 @@
-<!-- 4. Where the work is pointed now. Plain prose: the argument is the whole section. -->
+<!-- 2. Where the work is pointed now: the claim on the left, the argument on the right. -->
 <section class="home-section now" id="now">
     <div class="home-inner">
-        <h2 class="now-title">What happens when seeing clearly becomes hard?</h2>
-        <div class="now-body">
-            <p>We are increasingly asking AI to write our code, read our documents, research for us, recommend what to do, make decisions, and eventually to act.</p>
-            <p>As the volume and complexity of that work grows, more of it will sit beyond what an ordinary person can independently verify. The system may be doing useful work while the human overseeing it understands less and less of what actually happened.</p>
-            <p>At what point does assistance become dependence, and dependence become loss of agency? That possibility scares me.</p>
-            <p>I don&rsquo;t think making the model itself safer is sufficient. Safety also depends on how these systems are deployed: what authority they receive, who is using them, what can go wrong at scale, and whether meaningful human oversight still exists.</p>
-            <p class="now-close">I&rsquo;m interested in: AI technical governance, scalable oversight, and AI control.</p>
+        <p class="section-head"><span class="section-num">02</span> Current / AI safety</p>
+
+        <div class="now-split">
+            <div class="now-claim">
+                <h2 class="now-title">Making the model safe is not enough.</h2>
+
+                <!-- The one thing the prose cannot do: show the gap widening. Inline SVG so it
+                     follows the theme, stays selectable, and costs ~2KB instead of a raster. -->
+                <figure class="now-figure">
+                    <svg viewBox="0 0 360 268" role="img" aria-labelledby="gap-title gap-desc">
+                        <title id="gap-title">Delegated work outruns the ability to verify it</title>
+                        <desc id="gap-desc">Two lines from a shared origin. Delegated work curves
+                            steeply upward while human ability to verify rises almost flat, so the
+                            gap between them widens over time.</desc>
+
+                        <g class="fig-axis">
+                            <path d="M44 30 V232 H336" />
+                            <path d="M44 30 l-4 8 h8 z" />
+                            <path d="M336 232 l-8 -4 v8 z" />
+                        </g>
+
+                        <path class="fig-ai" d="M44 230 C 150 226, 226 198, 300 58" />
+                        <path class="fig-human" d="M44 230 L 300 194" />
+
+                        <g class="fig-gap">
+                            <path d="M282 188 V96" stroke-dasharray="3 4" />
+                            <path d="M282 90 l-3.5 7 h7 z" />
+                            <path d="M282 194 l-3.5 -7 h7 z" />
+                        </g>
+
+                        <text class="fig-label" x="304" y="52">AI work</text>
+                        <text class="fig-label fig-label--human" x="304" y="200">human ability</text>
+                        <text class="fig-label fig-label--human" x="304" y="212">to verify</text>
+                        <text class="fig-axis-label" x="44" y="20">Work delegated</text>
+                        <text class="fig-axis-label" x="336" y="252" text-anchor="end">Time / scale</text>
+                    </svg>
+                    <figcaption>The hard part shifts from getting the work done to knowing whether it was done right.</figcaption>
+                </figure>
+            </div>
+            <div class="now-body">
+                <p>Safety also depends on the mechanisms that govern its deployment, and on whether meaningful human oversight still exists.</p>
+                <p>I use Claude Code daily. It is fantastic, and it has helped me in many ways. But occasionally I see something unsettling: it fails a test and edits the test until it passes instead of fixing the bug. It provisions resources nobody asked for. It drifts from the original instruction and still reports success.</p>
+                <p>The result can look right even when the process wasn&rsquo;t. And if I can be misled by a clean-looking result even when I think I&rsquo;ve specified the task carefully, what happens as we delegate work that is far larger, faster, and harder to inspect?</p>
+                <p>Verification has to become cheaper than the work being verified. I don&rsquo;t think we know how yet. At Solumn AI, I work on this from the evaluation side &mdash; RL environments, adversarial tool-use tasks, and automated red-teaming for frontier models. Much of that work examines cyber harm and failure modes such as deception, misaligned autonomy, and insecure code.</p>
+                <p class="now-close">Happy to talk.</p>
+            </div>
         </div>
+
     </div>
 </section>

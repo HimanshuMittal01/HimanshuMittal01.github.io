@@ -6,6 +6,7 @@ export default function (eleventyConfig) {
 	// For example, `./public/css/` ends up in `_site/css/`
     eleventyConfig.addPassthroughCopy("src/assets/css/");
 	eleventyConfig.addPassthroughCopy("src/assets/images/favicon.png");
+	eleventyConfig.addPassthroughCopy("src/assets/images/logo-*.png");
 
     // Watch content images for the image pipeline.
 	eleventyConfig.addWatchTarget("content/**/*.{svg,webp,png,jpeg}");
