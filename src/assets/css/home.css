@@ -405,12 +405,23 @@ a.story:focus-visible { filter: brightness(0.98); }
 
 .scraps {
     display: grid;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: 1rem;
 }
 
-@media (max-width: 1000px) { .scraps { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-@media (max-width: 560px) { .scraps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+/* narrow: one strip that scrolls sideways. the cut-off card is the affordance,
+   so the cards keep a fixed width instead of wrapping into a second row. */
+@media (max-width: 1000px) {
+    .scraps {
+        grid-template-columns: none;
+        grid-auto-flow: column;
+        grid-auto-columns: clamp(10rem, 58vw, 14rem);
+        overflow-x: auto;
+        scroll-snap-type: x proximity;
+        padding-bottom: 0.5rem;
+    }
+    .scrap { scroll-snap-align: start; }
+}
 
 .scrap-face {
     display: flex;
@@ -424,13 +435,16 @@ a.story:focus-visible { filter: brightness(0.98); }
     font: inherit;
     color: inherit;
     cursor: pointer;
+    height: 100%;
 }
 
-/* the plate stands in for the artwork: the descriptor is the image */
+/* the plate stands in for the artwork: the descriptor is the image, so the
+   descriptor sets the height. flex:1 keeps every plate in the row level. */
 .scrap-plate {
     display: flex;
     align-items: flex-end;
-    aspect-ratio: 4 / 3;
+    flex: 1;
+    min-height: 5rem;
     padding: 0.75rem;
     background: var(--paper-2);
     border: 1px solid var(--line-soft);
@@ -438,7 +452,7 @@ a.story:focus-visible { filter: brightness(0.98); }
 }
 
 .scrap-plate .desc {
-    font-size: 0.75rem;
+    font-size: 0.875rem;
     line-height: 1.35;
     color: var(--ink-soft);
     text-wrap: pretty;

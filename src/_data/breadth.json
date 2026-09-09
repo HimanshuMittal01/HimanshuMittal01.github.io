@@ -1,5 +1,5 @@
 {
-    "intro": "A decade of making, mostly because I wanted to know what would happen.",
+    "intro": "Things I built, tried, and kept around.",
     "scraps": [
         {
             "id": "a00",
@@ -61,8 +61,7 @@
                 "I wanted a game whose levels came from the music itself. So I pulled beats out of a song, turned them into timestamps and packaged the whole thing as a Windows executable.",
                 "Then I wrote a nine-step manual explaining how to use it.",
                 "That manual may be the earliest thing I still have where I was clearly imagining a stranger trying to use what I made."
-            ],
-            "featured": true
+            ]
         },
         {
             "id": "a04",
@@ -239,7 +238,8 @@
             "popover": [
                 "Under the guidance of Dr. Gaurav Singhal, I built the training pipeline: regression splines, gradient boosting and a small neural network, all driven by one config file.",
                 "The work was published in the International Journal of Biometeorology. My first peer-reviewed paper."
-            ]
+            ],
+            "featured": true
         },
         {
             "id": "a30",
@@ -255,8 +255,7 @@
             "popover": [
                 "At Datakalp, I worked on PPE detection under Dr. Kalpit Desai's guidance. Helmet data was available. For safety vests, gloves and glasses, we ended up hunting through Getty Images and other sites.",
                 "Different sites had different safety rules, so the pipeline had to support different combinations of PPE checks. I worked through data collection, modelling and GStreamer pipelines to get it running."
-            ],
-            "featured": true
+            ]
         },
         {
             "id": "a12",
@@ -299,8 +298,7 @@
             ],
             "popover": [
                 "At VECV, we needed to check whether vehicle alerts matched what technicians actually found in the workshop. I built an NLP pipeline to compare workshop notes with alerts, bringing the analysis down from 3–5 days to about ten minutes."
-            ],
-            "featured": true
+            ]
         },
         {
             "id": "a14",
@@ -371,7 +369,7 @@
         {
             "id": "a33",
             "title": "Optimus",
-            "descriptor": "Planning a pharma plant",
+            "descriptor": "Planning and scheduling for pharma plants",
             "year": "2022 → 2024",
             "links": [
                 {
@@ -380,46 +378,49 @@
                 }
             ],
             "popover": [
-                "Demand, inventory, recipes, blending, machines, changeovers, constraints, schedules, planners.",
-                "The planner I was trying to automate turned out to belong inside the system."
+                "At Ripik, I started building Optimus for Sun Pharma from the ground up. Over the next year and a half, I worked closely with planners and plant teams to encode how pharma production actually runs: recipes, multi-level BOMs, machines, rooms, campaign rules, changeovers, cleaning, material dependencies, and hundreds of smaller constraints.",
+                "It became one of the most complex systems I have built. We compared it directly against SAP PP/DS, and Optimus could schedule the plant at a level of precision the standard planning systems simply could not reach. The underlying engine was also written generically enough to extend beyond pharma to FMCG, construction, project planning, and other constraint-heavy operations."
+            ]
+        },
+        {
+            "id": "a26",
+            "title": "BurdenMix",
+            "descriptor": "Blending ore against a chemistry window",
+            "year": "2023",
+            "popover": [
+                "Two of our clients at Ripik, IMFA and ESL (Vedanta), needed their ferro-alloy ore blends to land inside a chemistry window on every run: iron content and gangue content were both bounded and non-negotiable, using whichever suppliers and stockpiles happened to be available that day."
+            ]
+        },
+        {
+            "id": "a35",
+            "title": "AdvanceMix",
+            "descriptor": "Planning ore from shipment to production",
+            "year": "2024",
+            "popover": [
+                "Another product I made in Ripik. It took the blend problem beyond deciding today's recipe. Incoming shipments, quality grades, inventory, production demand, future campaigns, and the downtime caused by material availability all had to be planned together.",
+                "We used a mix of custom heuristics, MILP, and genetic algorithms to balance those competing realities over time: serve demand, preserve quality, use inventory intelligently, and keep the plant running with as little downtime as possible."
             ]
         },
         {
             "id": "a19",
-            "title": "TaxTalk",
-            "descriptor": "A tax answer machine, running locally",
-            "year": "2023",
-            "links": [
-                {
-                    "url": "https://github.com/HimanshuMittal01/taxtalk",
-                    "label": "Repository"
-                }
-            ],
-            "popover": [
-                "A question-answering bot for tax, running a quantised Mistral-7B on my own machine against a knowledge base I kept updating.",
-                "I built the landing page too, with pricing and sign-up, before there was anything to sign up for."
-            ]
-        },
-        {
-            "id": "a20",
-            "title": "GSTN analytics hackathon",
-            "descriptor": "Predict the target, no domain knowledge",
+            "title": "MyGSTConsultant",
+            "descriptor": "Automating the messy parts of GST",
             "year": "2024",
             "links": [
                 {
-                    "url": "https://github.com/HimanshuMittal01/gstnhackathon2024",
-                    "label": "Repository"
+                    "url": "https://mygstconsultant.com/",
+                    "label": "Website"
                 }
             ],
             "popover": [
-                "A government hackathon: predict a binary target with no domain knowledge about what any of the columns meant.",
-                "Average precision 0.94, ROC-AUC 0.995, and a written report in the repo."
-            ]
+                "I saw my father working through a GST calculation in Excel and thought it looked like a ten-minute scripting job. Then he explained all the rules and edge cases hiding underneath it. I built the first calculator in a day, and we have kept adding tools occasionally."
+            ],
+            "featured": true
         },
         {
             "id": "a21",
             "title": "Kaggle: problematic internet use",
-            "descriptor": "Child Mind Institute competition",
+            "descriptor": "A Kaggle submission built like a research pipeline",
             "year": "2024",
             "links": [
                 {
@@ -428,56 +429,39 @@
                 }
             ],
             "popover": [
-                "A Kaggle competition on problematic internet use in children.",
-                "The repo carries more than the submission. The notes in it record where cross-validation and the leaderboard disagreed, which turned out to be the interesting part."
-            ]
-        },
-        {
-            "id": "a22",
-            "title": "Cataract classifier",
-            "descriptor": "Eye photo in, answer out, behind an API",
-            "year": "2024",
-            "links": [
-                {
-                    "url": "https://github.com/HimanshuMittal01/cataract-classifier",
-                    "label": "Repository"
-                }
-            ],
-            "popover": [
-                "A fine-tuned EfficientNet-B0 that decides whether an eye shows a cataract, at 98.36% on the holdout set.",
-                "This is where I stopped shipping notebooks. It has a FastAPI backend, a Streamlit front end and a written report."
+                "For the Child Mind Institute competition, I ended up building much more than a submission: Metaflow pipelines, Hydra configs, CLI-driven training and tuning, experiment logging, and notes on what each change actually did. The repo became a small experimentation system of its own."
             ]
         },
         {
             "id": "a34",
-            "title": "Trajectory evaluation",
-            "descriptor": "Reading the path, not the answer",
+            "title": "Turing",
+            "descriptor": "A year inside the data behind LLMs",
             "year": "2024 → 2025",
             "popover": [
-                "At Turing I was producing coding and reasoning data, comparing models against each other, and reading back what agents had actually done.",
-                "Somewhere in there the final answer started to matter less to me than the path the model took to get there."
+                "After Ripik, I moved to Turing and spent about a year creating and reviewing SFT/RLHF data for large language models. A lot of it was around implicit code execution: coding tasks for data and ML analytics, document generation, model-trajectory comparisons, and classifying behavioural logs against detailed rubrics.",
+                "It was probably the most repetitive work I have done, but also the first time I spent months looking at model behaviour one example at a time. That eventually pulled me towards evaluation, agents, and AI safety."
             ]
         },
         {
-            "id": "a23",
-            "title": "ssnet",
-            "descriptor": "Chagas from a twelve-lead ECG",
+            "id": "a36",
+            "title": "Faradworks",
+            "descriptor": "AI agents reviewing hardware designs",
             "year": "2025",
             "links": [
                 {
-                    "url": "https://github.com/HimanshuMittal01/ssnet",
-                    "label": "Repository"
+                    "url": "https://www.pinscope.ai/",
+                    "label": "Pinscope"
                 }
             ],
             "popover": [
-                "PhysioNet's 2025 challenge asked whether Chagas disease could be predicted from a twelve-lead ECG. I wrote the data preparation for three separate source corpora and two transformer architectures with sparsity-aware attention.",
-                "I never made a final submission. The README says archived."
+                "Seven years after we first built that little LED-matrix tool together, Siddharth and I started Faradworks. We were trying to automate a particularly painful part of hardware design: checking a schematic against hundreds of pages of datasheets, reference designs, and engineering constraints.",
+                "It was also my first real education in startups: fundraising, visas, customers, TAMs and SAMs, positioning, and an impressive amount of advice about how companies are supposed to be built. I came out of it believing much less in playbooks. There are useful principles, but mostly you do what works."
             ]
         },
         {
             "id": "a24",
             "title": "Kanban calendar",
-            "descriptor": "Built without reading the code",
+            "descriptor": "Kanban cards constrained by calendar blocks",
             "year": "2026",
             "links": [
                 {
@@ -486,26 +470,9 @@
                 }
             ],
             "popover": [
-                "A desktop planner that puts a kanban board over a time-block calendar, so a card can be constrained to the block it belongs in. Electron and React, and everything stays on the machine.",
-                "I did not read a single line of it. It is the first thing I built entirely by asking for it.",
+                "A desktop planner - your own Trello. Electron and React, with everything stored locally.",
+                "I did not read a single line of the code. It was the first thing I built entirely by asking for it.",
                 "I do not use it any more."
-            ]
-        },
-        {
-            "id": "a25",
-            "title": "Cars24 vs Spinny",
-            "descriptor": "Six listings, ranked by price to condition",
-            "year": "2026",
-            "links": [
-                {
-                    "url": "https://github.com/HimanshuMittal01/cars24-spinny-intel",
-                    "label": "Repository"
-                }
-            ],
-            "popover": [
-                "A multi-agent pipeline that pulls specs and condition signals out of used-car listings, then ranks them by price against condition.",
-                "One agent reads the disclosed facts. Another looks at the photographs and judges the panels, the cabin, the tyres, the engine bay. The composite leans seventy percent towards the facts, because the photographs are interpretation.",
-                "The weighting only shifts towards the photographs as the evaluation covers more ground."
             ]
         }
     ]

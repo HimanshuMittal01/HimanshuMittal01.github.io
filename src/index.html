@@ -39,7 +39,7 @@ css:
             <p class="section-head"><span class="section-num">03</span> Selected work</p>
             <div class="section-lead">
                 <h2 class="featured-title">See clearly. Build accordingly.</h2>
-                <a class="section-cue" href="/writing/">Explore more writing &rarr;</a>
+                <a class="section-cue" href="/writing/">More writing &rarr;</a>
             </div>
             <div class="featured-grid">
                 {% for story in featured %}
@@ -61,11 +61,11 @@ css:
                 {% endfor %}
             </div>
 
-            <!-- same section, quieter register: the strip of everything else -->
+            <!-- same section, quieter register: six from the archive, chosen for range -->
             <div class="breadth" id="breadth">
                 <div class="section-lead section-lead--sub">
-                    <p class="sub-head">Other things I&rsquo;ve made</p>
-                    <a class="section-cue" href="/archive/">Explore all {{ breadth.scraps.size }} things &rarr;</a>
+                    <p class="sub-head">From the archive</p>
+                    <a class="section-cue" href="/archive/">Explore the archive &rarr;</a>
                 </div>
                 <div class="scraps">
                 {% for s in breadth.scraps %}{% if s.featured %}
