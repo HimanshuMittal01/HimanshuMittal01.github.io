@@ -123,7 +123,7 @@ Taken together, these effects suggest that engagement-optimized platforms are no
 
 ## What Helps (Digital Well-Being)
 
-There is no single fix, but certain practices consistently help restore balance by strengthening attention, self-regulation, and real-world connection:
+In my opinion, digital well-being means being aware of what we consume and setting boundaries around it - using technology mindfully. Much of this comes down to managing notifications and setting time blocks, alongside making space for rest, focused attention, and real-world connection.
 
 - **Mindfulness meditation:** Regular practice (10–20 minutes daily) is one of the most evidence-supported ways to strengthen attention and PFC regulation.
 

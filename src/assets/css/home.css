@@ -499,6 +499,7 @@ a.story:focus-visible { filter: brightness(0.98); }
 }
 
 .scrap-pop a {
+    margin-right: 1.1rem;
     display: inline-block;
     margin-top: 0.4rem;
     font-size: 0.8125rem;
@@ -567,6 +568,7 @@ a.story:focus-visible { filter: brightness(0.98); }
 }
 
 .archive-link {
+    margin-right: 1.1rem;
     display: inline-block;
     margin-top: 0.3rem;
     font-size: 0.8125rem;

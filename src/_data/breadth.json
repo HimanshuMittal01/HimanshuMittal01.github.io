@@ -3,13 +3,13 @@
     "scraps": [
         {
             "id": "a00",
-            "title": "In whatever time was left.",
+            "title": "Before Github.",
             "descriptor": "Websites, tools, unfinished games",
             "year": "2012–2018",
-            "url": null,
-            "linkLabel": null,
             "popover": [
-                "A friend showed me a `<marquee>` tag when I was twelve. Until then, the web was where things came from; suddenly I could put something there too. School and entrance-exam prep got most of the next few years. Making things got whatever was left. We tried websites, painting tools and games. We always imagined someone using them. Mostly, nobody did."
+                "When I was twelve, a friend showed me my name scrolling across a browser using the `<marquee>` tag. It amazed me that I could make the browser show whatever I wanted.",
+                "School and entrance-exam prep took up most of my time, but I spent whatever was left making things with friends: websites, painting tools, and games. We always imagined someone using them. Mostly, nobody did.",
+                "Somewhere along the way, my school selected me as one of ten students for a trip to Singapore. I’m still grateful for that. My friends still ask, “What school does that?” Hahaha."
             ]
         },
         {
@@ -17,11 +17,15 @@
             "title": "Voice-controlled chess",
             "descriptor": "Say a move. Board responds.",
             "year": "2018",
-            "url": "https://github.com/HimanshuMittal01/python-chess",
-            "linkLabel": "Repository",
+            "links": [
+                {
+                    "url": "https://github.com/HimanshuMittal01/python-chess",
+                    "label": "Repository"
+                }
+            ],
             "popover": [
                 "A Python course ended with tic-tac-toe and blackjack. I wanted something with enough logic that I couldn't hold the whole thing in my head at once. Chess seemed like a good idea. Then I decided I should be able to say a move out loud and watch the board respond.",
-                "It became the first thing I ever pushed to GitHub."
+                "It became the first thing I ever pushed to GitHub. I still play occasionally, around 2000 on Lichess."
             ],
             "featured": true
         },
@@ -30,10 +34,14 @@
             "title": "8×8 LED matrix hex generator",
             "descriptor": "Draw pixels, get Arduino hex",
             "year": "2018",
-            "url": "https://github.com/HimanshuMittal01/8x8-Led-Matrix-Hex-Generator",
-            "linkLabel": "Repository",
+            "links": [
+                {
+                    "url": "https://github.com/HimanshuMittal01/8x8-Led-Matrix-Hex-Generator",
+                    "label": "Repository"
+                }
+            ],
             "popover": [
-                "Someone from the electronics department had the hardware and was missing a small piece of software. I told him I could make it in a day. The repo history says I did.",
+                "Someone from the electronics department had the hardware and was missing a small piece of software. I told him I could make it in a day. And I did.",
                 "We swapped rooms the next semester.",
                 "Seven years later, we started Faradworks together."
             ]
@@ -43,8 +51,12 @@
             "title": "WitnessHarmony",
             "descriptor": "Turn songs into game levels",
             "year": "2019",
-            "url": "https://github.com/HimanshuMittal01/Level_Generation_Through_Music",
-            "linkLabel": "Repository",
+            "links": [
+                {
+                    "url": "https://github.com/HimanshuMittal01/Level_Generation_Through_Music",
+                    "label": "Repository"
+                }
+            ],
             "popover": [
                 "I wanted a game whose levels came from the music itself. So I pulled beats out of a song, turned them into timestamps and packaged the whole thing as a Windows executable.",
                 "Then I wrote a nine-step manual explaining how to use it.",
@@ -57,12 +69,15 @@
             "title": "Koch islands",
             "descriptor": "Grow shapes from simple rules",
             "year": "2019",
-            "url": "https://github.com/HimanshuMittal01/KochIslands-LSystem",
-            "linkLabel": "Repository",
+            "links": [
+                {
+                    "url": "https://github.com/HimanshuMittal01/KochIslands-LSystem",
+                    "label": "Repository"
+                }
+            ],
             "popover": [
-                "No user. No product. No problem to solve.",
-                "Just rewriting rules, a little turtle walking them, and strange islands appearing on the screen.",
-                "I wanted to see how the shapes came out."
+                "Exploring bio-inspired simulation.",
+                "Just rewriting rules, a little turtle walking them, and strange, beautiful islands appearing on the screen."
             ]
         },
         {
@@ -70,47 +85,62 @@
             "title": "Agents crossing a 2D map",
             "descriptor": "Tiles that hurt, slow, or block",
             "year": "2019",
-            "url": "https://github.com/HimanshuMittal01/agents_2d_map",
-            "linkLabel": "Repository",
+            "links": [
+                {
+                    "url": "https://github.com/HimanshuMittal01/agents_2d_map",
+                    "label": "Repository"
+                }
+            ],
             "popover": [
                 "I had seen Atari games being played by a single agent and wanted to try it myself. So: tiles that behaved differently. Fire took health, ice took time, mountains blocked the way entirely.",
-                "I got as far as a 4×4 map and a table of state values. The README still says more is coming soon."
+                "I got as far as a 4×4 map and a table of state values. The agent found a short route to the goal, but didn’t care enough about walking through fire. Getting somewhere quickly and getting there safely were two different things to teach it."
             ]
         },
         {
             "id": "a28",
             "title": "Personal Genie",
-            "descriptor": "Answer a few questions, buy a TV",
+            "descriptor": "A few questions to find your next gadget",
             "year": "2019",
-            "url": "https://github.com/HimanshuMittal01/Personal-Genie",
-            "linkLabel": "Repository",
+            "links": [
+                {
+                    "url": "https://github.com/HimanshuMittal01/Personal-Genie",
+                    "label": "Repository"
+                }
+            ],
             "popover": [
-                "A quiz that asked a few questions about how you actually live, then pointed at a television, a phone or a laptop. Behind it sat catalogues of all three and a model guessing what you would rate them.",
+                "Could a few questions capture someone's preferences as a vector, then match it against TVs, phones and laptops? That was the idea behind Personal Genie. I later learned about content-based and collaborative filtering. Turns out I had wandered into recommender systems.",
                 "Built for a hackathon at SRM, which meant flying to Chennai for the final round. We finished in the top ten."
             ]
         },
         {
             "id": "a06",
             "title": "Mentify",
-            "descriptor": "A hackathon weekend, in Flutter",
+            "descriptor": "Mental health chatbot",
             "year": "2019",
-            "url": "https://github.com/HimanshuMittal01/Mentify",
-            "linkLabel": "Repository",
+            "links": [
+                {
+                    "url": "https://github.com/HimanshuMittal01/Mentify",
+                    "label": "Repository"
+                }
+            ],
             "popover": [
-                "Built at HackCBS over a weekend, in Flutter, which I was learning because mobile was where everything seemed to be going. Activities, an analysis screen and a chatbot, aimed somewhere around mental health.",
-                "The organisation was a mess. We sat in corridors through the night.",
-                "I stopped doing the overnight kind after that."
+                "Built a mental-health app over a weekend at HackCBS hackathon, with activities, an analysis screen and a chatbot. I was learning Flutter because mobile dev was hot back then.",
+                "We spent the night sitting in corridors. That turned out to be my last overnight hackathon."
             ]
         },
         {
             "id": "a07",
             "title": "TensorRT Swish plugin",
-            "descriptor": "A layer TensorRT did not have",
+            "descriptor": "Custom C++ plugin, ~3× faster LeNet-5 inference",
             "year": "2019",
-            "url": "https://github.com/HimanshuMittal01/Swish-Plugin-TensorRT-",
-            "linkLabel": "Repository",
+            "links": [
+                {
+                    "url": "https://github.com/HimanshuMittal01/Swish-Plugin-TensorRT-",
+                    "label": "Repository"
+                }
+            ],
             "popover": [
-                "NVIDIA gave us about six weeks to write a native TensorRT plugin. We spent half of it solving the wrong problem, restarted after finally talking to their engineers, wrote the plugin in C++, and got LeNet-5 running about three times faster.",
+                "An NVIDIA bootcamp gave us 45 days to build a native TensorRT plugin. My teammate and I spent half of them solving the wrong problem, until a session with NVIDIA engineers cleared things up. I must have read the developer guide fifteen times. We wrote a Swish plugin in C++ and measured roughly 3× faster inference on LeNet-5.",
                 "We came first. There were two teams."
             ],
             "featured": true
@@ -120,134 +150,155 @@
             "title": "DeepConnect",
             "descriptor": "You teach, you learn",
             "year": "2019–2022",
-            "url": "https://github.com/DeepConnectAI",
-            "linkLabel": "The community",
+            "url": null,
+            "linkLabel": null,
+            "links": [
+                {
+                    "url": "https://www.youtube.com/@deepconnect5639",
+                    "label": "The sessions"
+                },
+                {
+                    "url": "https://drive.google.com/file/d/1mGJD6HXhOX3usdhMEzNtnJZ2UrviCMjL/view?usp=sharing",
+                    "label": "The poster"
+                },
+                {
+                    "url": "https://github.com/DeepConnectAI",
+                    "label": "The community"
+                }
+            ],
             "popover": [
-                "I mentored a team of four through a food-recognition project at the end of 2019. Two months of their work, a poster at the end, nothing published.",
-                "DeepConnect launched in the second half of 2020, the same semester I was a teaching assistant. The motto was you teach, you learn: run a session, answer someone's doubt, and find out how well you actually understood it. It did not outlast the semester. We all got internships.",
-                "In 2022 I tutored Python on Upwork for a few months. An hour taught properly could take several hours to prepare."
+                "I love teaching. At the end of 2019, LeadingIndia.AI appointed me to mentor four winter interns on food recognition. We worked with Mask R-CNN, with sessions on convolutions and loss functions along the way. Two months later, they presented their work to an evaluation panel.",
+                "We launched DeepConnect in the second half of 2020, the same semester I was a teaching assistant. The motto was 'you teach, you learn'. We ran teaching sessions and put the videos on YouTube. Then internships took us in different directions.",
+                "In 2022, I tutored Python for a few months. One client was in Singapore, so some sessions meant getting up at 3 a.m."
             ]
         },
         {
             "id": "a09",
             "title": "Face recognition for attendance",
-            "descriptor": "The same problem, three times",
-            "year": "2019 → 2024",
-            "url": "https://github.com/HimanshuMittal01/Week5-Project",
-            "linkLabel": "Repository",
+            "descriptor": "Three projects, three Python frameworks",
+            "year": "2019, 2022, 2024",
+            "links": [
+                {
+                    "url": "https://github.com/HimanshuMittal01/Week5-Project",
+                    "label": "Flask project (2019)"
+                }
+            ],
             "popover": [
-                "I ended up solving essentially the same face-recognition problem three times over five years: first as a Flask project, later fixing a Django API, and finally as a secured FastAPI service used by a client.",
-                "The problem barely changed. My idea of what “finished” meant did."
+                "Face recognition kept finding its way back to me. In 2019, I built a Flask app with a teammate while barely knowing Flask or databases. In 2022, I fixed a client's Django API. In 2024, I built and deployed a secured FastAPI service for a client.",
+                "Somehow, that added up to three Python web frameworks and three face-recognition libraries. None of it was planned."
             ]
         },
         {
             "id": "a10",
             "title": "BEL detection and tracking",
-            "descriptor": "Detection and tracking, ~60 GB",
+            "descriptor": "Restricted-area surveillance with RGB and infrared",
             "year": "2020",
-            "url": null,
-            "linkLabel": null,
             "popover": [
-                "Human and vehicle detection with DeepSORT tracking, trained across multiple GPUs on about sixty gigabytes.",
-                "Our detector could find someone partly hidden behind cover and miss someone standing plainly in front of it. We changed the training dataset until it generalized."
+                "A project from Bharat Electronics Limited through Bennett University, under Dr. Vipul Kumar Mishra. We tried YOLOv4 and YOLOv5 for detection, with DeepSORT for tracking, using RGB footage by day and infrared by night. Training eventually moved to a remote DGX system after we couldn't get GPU quota on Google Cloud.",
+                "Our detector could spot someone partly hidden behind cover and miss someone standing right in front of it. We revised the dataset several times, varying backgrounds and lighting, until it handled both."
             ]
         },
         {
             "id": "a11",
             "title": "Skill Sight",
-            "descriptor": "What are your friends learning?",
+            "descriptor": "What next to learn, and who else is learning it",
             "year": "2020",
-            "url": null,
-            "linkLabel": null,
+            "links": [
+                {
+                    "url": "https://github.com/HimanshuMittal01/knowledge-miners",
+                    "label": "Repository"
+                }
+            ],
             "popover": [
-                "Bennett was paying for everyone's Coursera courses, so we built a layer on top of it: see what your friends were taking, find someone doing the same course to build something with, and put the campus tech events in one place instead of scattered across WhatsApp groups.",
-                "It shipped at skillsight.in, university email addresses only, with course tracks, progress and chat.",
-                "It never turned a corner. We could not answer how to keep one course database populated from every course site there is, or why a student would pay for it. The domain belongs to somebody else now."
+                "Bennett was paying for everyone's Coursera courses, so we built a way to see what friends were learning and find someone taking the same course to build something with. We also gathered campus tech events scattered across WhatsApp groups into one place.",
+                "We launched at skillsight.in (the domain belongs to somebody else now), university email addresses only, with course tracks, progress and chat.",
+                "We never figured out how to keep the course catalogue updated across different platforms, or why a student would pay for it."
+            ]
+        },
+        {
+            "id": "a13",
+            "title": "CTR optimization",
+            "descriptor": "Choosing ad audiences from past campaign logs",
+            "year": "2020",
+            "popover": [
+                "A project for Times Internet under Dr. Gaurav Singhal's guidance: could we choose better audiences for ads using only past campaign logs? We used counterfactual bandits to learn a targeting policy, estimating what a different choice might have earned.",
+                "Of 6.8 million rows, only 6,696 recorded ads actually being shown. With so little usable data, we generated combinations from those rows to create 343,000 trajectories. The reward model fit the training data well but failed on the held-out month. It seemed to be learning our generated combinations rather than anything that carried over to real data."
             ]
         },
         {
             "id": "a29",
             "title": "Crop radiation prediction",
-            "descriptor": "Net radiation, from cheaper signals",
-            "year": "2020 → 2022",
-            "url": "https://link.springer.com/article/10.1007/s00484-022-02364-5",
-            "linkLabel": "The paper",
+            "descriptor": "Net radiation, from solar radiation and canopy temperature",
+            "year": "2020",
+            "links": [
+                {
+                    "url": "https://link.springer.com/article/10.1007/s00484-022-02364-5",
+                    "label": "The paper"
+                }
+            ],
             "popover": [
-                "Net radiation over a crop is expensive to measure directly, so we tried predicting it from global solar radiation and canopy temperature instead. I wrote the training side: regression splines, gradient boosting and a small neural network, all driven from one config file.",
-                "It ended up in the International Journal of Biometeorology. I am fourth of twelve authors, and it is the only peer-reviewed thing with my name on it."
+                "Under the guidance of Dr. Gaurav Singhal, I built the training pipeline: regression splines, gradient boosting and a small neural network, all driven by one config file.",
+                "The work was published in the International Journal of Biometeorology. My first peer-reviewed paper."
             ]
         },
         {
             "id": "a30",
             "title": "Industrial PPE detection",
-            "descriptor": "Helmets, vests, camera feeds",
+            "descriptor": "Detecting missing safety gear (helmets, vests, gloves, glasses) in camera feeds",
             "year": "2021",
-            "url": "https://medium.com/@himanshum1312/ai-intern-experience-at-datakalp-411017dd5ab8",
-            "linkLabel": "The post",
+            "links": [
+                {
+                    "url": "https://medium.com/@himanshum1312/ai-intern-experience-at-datakalp-411017dd5ab8",
+                    "label": "Internship write-up"
+                }
+            ],
             "popover": [
-                "An internship at Datakalp. PPE detection on camera feeds, which turned into data collection, annotation, pose estimation to help the classifier read what it was looking at, and GStreamer pipelines to get the thing deployed.",
-                "The model was the part that already worked."
+                "At Datakalp, I worked on PPE detection under Dr. Kalpit Desai's guidance. Helmet data was available. For safety vests, gloves and glasses, we ended up hunting through Getty Images and other sites.",
+                "Different sites had different safety rules, so the pipeline had to support different combinations of PPE checks. I worked through data collection, modelling and GStreamer pipelines to get it running."
             ],
             "featured": true
         },
         {
             "id": "a12",
             "title": "Video annotation tool",
-            "descriptor": "Because labelling was the bottleneck",
+            "descriptor": "Marking the nine steps of handwashing",
             "year": "2021",
-            "url": null,
-            "linkLabel": null,
             "popover": [
-                "Labelling video by hand was becoming ridiculous, and I was not the one meant to be annotating anyway, so I built them a tool instead.",
-                "They used it to cut footage into the nine steps of handwashing, which was the product."
-            ]
-        },
-        {
-            "id": "a13",
-            "title": "Counterfactual bandits",
-            "descriptor": "A result that did not work",
-            "year": "2021",
-            "url": null,
-            "linkLabel": null,
-            "popover": [
-                "Counterfactual evaluation for recommendations.",
-                "The result did not work. There was pressure to turn it into a paper anyway. We did not."
+                "I spent about fifteen to twenty days building a web-based video annotation tool at Datakalp. The team used it to mark the nine steps of handwashing in footage."
             ]
         },
         {
             "id": "a27",
             "title": "Dealer EOS map",
-            "descriptor": "Who we could actually reach",
+            "descriptor": "Dealer response times and performance, mapped across India",
             "year": "2022",
-            "url": null,
-            "linkLabel": null,
             "popover": [
-                "Where the dealers were, and which of them we could actually reach. Four maps in the end: everyone, then three narrower cuts of the same question.",
-                "The coordinates came as several dealer lists from different months that disagreed with each other, so most of the work was deciding which version of a dealer was true. The stock map markers were not good enough either, so I wrote my own."
+                "At VECV, I built an interactive map showing dealer performance across India, including how often they reached breakdowns on time within their zones. It went out monthly to the head office and regional centres.",
+                "I built the mapping interface using Folium with custom Leaflet plugins for specialized markers, since the standard map markers didn't support what we needed."
             ]
         },
         {
             "id": "a31",
-            "title": "Vehicle application",
-            "descriptor": "What the truck was actually doing",
+            "title": "Vehicle application analytics",
+            "descriptor": "Analysing truck behaviour and costs on specific routes",
             "year": "2022",
-            "url": null,
-            "linkLabel": null,
             "popover": [
-                "Trucks say a great deal about themselves if you read the bus. This took CAN logs off BS4 and BS6 vehicles, joined them to the gearbox tables and the chassis records, and worked out how each truck was actually being driven.",
-                "Six weeks of merged logs went in at a time. A CSV came out."
+                "At VECV, I combined CAN logs from BS4 and BS6 trucks with gearbox tables and chassis records to analyse driving patterns, fuel consumption and mileage on specific routes. I built a Streamlit app around it, which sales teams used in customer presentations and Product Development used to understand vehicle behaviour."
             ]
         },
         {
             "id": "a32",
             "title": "Job-card analyser",
-            "descriptor": "Free text against machine alerts",
+            "descriptor": "Checking vehicle alerts against workshop findings",
             "year": "2022",
-            "url": null,
-            "linkLabel": null,
+            "links": [
+                {
+                    "url": "https://drive.google.com/file/d/1O5-7ILyObvprr2RDpoB8qeJYI8bLgftz/view?usp=drive_link",
+                    "label": "Letter of appreciation"
+                }
+            ],
             "popover": [
-                "Matching what technicians wrote on workshop job cards against the alerts the vehicles themselves raised.",
-                "About ninety-five percent, measured against an internal golden set we built out of old data."
+                "At VECV, we needed to check whether vehicle alerts matched what technicians actually found in the workshop. I built an NLP pipeline to compare workshop notes with alerts, bringing the analysis down from 3–5 days to about ten minutes."
             ],
             "featured": true
         },
@@ -256,60 +307,65 @@
             "title": "Tri-colour palette",
             "descriptor": "One colour in, five out",
             "year": "2022",
-            "url": "https://himanshumittal01.github.io/tri-color-palette/",
-            "linkLabel": "Try it",
+            "links": [
+                {
+                    "url": "https://himanshumittal01.github.io/tri-color-palette/",
+                    "label": "Try it"
+                }
+            ],
             "popover": [
-                "A base colour, two complements sixty degrees apart on the wheel, and their opposites.",
-                "It has been running on GitHub Pages ever since."
+                "I was choosing colours for data visualizations and built a little tool to help."
             ]
         },
         {
             "id": "a15",
-            "title": "bagmodels",
-            "descriptor": "BM25, written out and published",
+            "title": "Bagmodels",
+            "descriptor": "A Python library for ranking documents against a query",
             "year": "2022",
-            "url": "https://pypi.org/project/bagmodels/",
-            "linkLabel": "PyPI",
+            "links": [
+                {
+                    "url": "https://pypi.org/project/bagmodels/",
+                    "label": "PyPI"
+                }
+            ],
             "popover": [
-                "A small library of bag-of-words retrieval algorithms, starting with Okapi BM25, written out rather than imported.",
-                "It went up on PyPI with tests and CI. Four years later it still gets about eighteen installs a month from people I have never met."
+                "A small library of bag-of-words retrieval algorithms. I wrote my own Python implementation and put it on PyPI as bagmodels. I checked recently and was surprised it was still getting downloads four years later."
             ]
         },
         {
             "id": "a16",
             "title": "Speech to emotion",
-            "descriptor": "Eight emotions, twice a second",
+            "descriptor": "An animated face that reacts to your voice",
             "year": "2022",
-            "url": "https://github.com/HimanshuMittal01/speech_to_emotion_classifier",
-            "linkLabel": "Repository",
+            "links": [
+                {
+                    "url": "https://github.com/HimanshuMittal01/speech_to_emotion_classifier",
+                    "label": "Repository"
+                }
+            ],
             "popover": [
-                "It classifies speech into eight emotions, half a second at a time, and drives an animated face that reacts live to whoever is speaking.",
-                "Trained on RAVDESS."
+                "I trained a speech classifier on RAVDESS to recognise eight emotions, then connected it to an animated face. It updates every half-second as you speak."
             ]
         },
         {
             "id": "a17",
             "title": "WonderMirror",
-            "descriptor": "Bodies, garments, and a very good demo",
+            "descriptor": "3D virtual try-on",
             "year": "2022",
-            "url": null,
-            "linkLabel": null,
             "popover": [
-                "Body reconstruction and garment fitting, as a final-year group project.",
-                "I did not treat it as an assignment. I thought there was a company in it, and I skipped campus placements because I wanted my own thing.",
-                "The demo looked considerably better than the product really was."
+                "I never liked trying on clothes. My teammate and I worked on a way to try them on a 3D version of yourself instead, using body reconstruction and virtual garment fitting.",
+                "It was our final-year project, but I thought there was a company in it. I skipped campus placements because I wanted to build my own thing.",
+                "We eventually stopped. The garment-fitting methods we needed were still at the research stage, and most of the useful 3D datasets we found were proprietary."
             ],
             "featured": true
         },
         {
             "id": "a18",
             "title": "Keystroke anomaly detection",
-            "descriptor": "Is this the person who logged in?",
+            "descriptor": "Can typing patterns reveal an intruder?",
             "year": "2022",
-            "url": null,
-            "linkLabel": null,
             "popover": [
-                "An Upwork client wanted to know whether the way somebody types could reveal that a different person had got into a system."
+                "A client wanted to know whether typing patterns could reveal that someone else was using an account. I explored it using reinforcement learning."
             ]
         },
         {
@@ -317,8 +373,12 @@
             "title": "Optimus",
             "descriptor": "Planning a pharma plant",
             "year": "2022 → 2024",
-            "url": "/writing/optimus-deep-dive/",
-            "linkLabel": "The write-up",
+            "links": [
+                {
+                    "url": "/writing/optimus-deep-dive/",
+                    "label": "The write-up"
+                }
+            ],
             "popover": [
                 "Demand, inventory, recipes, blending, machines, changeovers, constraints, schedules, planners.",
                 "The planner I was trying to automate turned out to belong inside the system."
@@ -329,8 +389,12 @@
             "title": "TaxTalk",
             "descriptor": "A tax answer machine, running locally",
             "year": "2023",
-            "url": "https://github.com/HimanshuMittal01/taxtalk",
-            "linkLabel": "Repository",
+            "links": [
+                {
+                    "url": "https://github.com/HimanshuMittal01/taxtalk",
+                    "label": "Repository"
+                }
+            ],
             "popover": [
                 "A question-answering bot for tax, running a quantised Mistral-7B on my own machine against a knowledge base I kept updating.",
                 "I built the landing page too, with pricing and sign-up, before there was anything to sign up for."
@@ -341,8 +405,12 @@
             "title": "GSTN analytics hackathon",
             "descriptor": "Predict the target, no domain knowledge",
             "year": "2024",
-            "url": "https://github.com/HimanshuMittal01/gstnhackathon2024",
-            "linkLabel": "Repository",
+            "links": [
+                {
+                    "url": "https://github.com/HimanshuMittal01/gstnhackathon2024",
+                    "label": "Repository"
+                }
+            ],
             "popover": [
                 "A government hackathon: predict a binary target with no domain knowledge about what any of the columns meant.",
                 "Average precision 0.94, ROC-AUC 0.995, and a written report in the repo."
@@ -353,8 +421,12 @@
             "title": "Kaggle: problematic internet use",
             "descriptor": "Child Mind Institute competition",
             "year": "2024",
-            "url": "https://github.com/HimanshuMittal01/kaggle-cmi-piu",
-            "linkLabel": "Repository",
+            "links": [
+                {
+                    "url": "https://github.com/HimanshuMittal01/kaggle-cmi-piu",
+                    "label": "Repository"
+                }
+            ],
             "popover": [
                 "A Kaggle competition on problematic internet use in children.",
                 "The repo carries more than the submission. The notes in it record where cross-validation and the leaderboard disagreed, which turned out to be the interesting part."
@@ -365,8 +437,12 @@
             "title": "Cataract classifier",
             "descriptor": "Eye photo in, answer out, behind an API",
             "year": "2024",
-            "url": "https://github.com/HimanshuMittal01/cataract-classifier",
-            "linkLabel": "Repository",
+            "links": [
+                {
+                    "url": "https://github.com/HimanshuMittal01/cataract-classifier",
+                    "label": "Repository"
+                }
+            ],
             "popover": [
                 "A fine-tuned EfficientNet-B0 that decides whether an eye shows a cataract, at 98.36% on the holdout set.",
                 "This is where I stopped shipping notebooks. It has a FastAPI backend, a Streamlit front end and a written report."
@@ -377,8 +453,6 @@
             "title": "Trajectory evaluation",
             "descriptor": "Reading the path, not the answer",
             "year": "2024 → 2025",
-            "url": null,
-            "linkLabel": null,
             "popover": [
                 "At Turing I was producing coding and reasoning data, comparing models against each other, and reading back what agents had actually done.",
                 "Somewhere in there the final answer started to matter less to me than the path the model took to get there."
@@ -389,8 +463,12 @@
             "title": "ssnet",
             "descriptor": "Chagas from a twelve-lead ECG",
             "year": "2025",
-            "url": "https://github.com/HimanshuMittal01/ssnet",
-            "linkLabel": "Repository",
+            "links": [
+                {
+                    "url": "https://github.com/HimanshuMittal01/ssnet",
+                    "label": "Repository"
+                }
+            ],
             "popover": [
                 "PhysioNet's 2025 challenge asked whether Chagas disease could be predicted from a twelve-lead ECG. I wrote the data preparation for three separate source corpora and two transformer architectures with sparsity-aware attention.",
                 "I never made a final submission. The README says archived."
@@ -401,8 +479,12 @@
             "title": "Kanban calendar",
             "descriptor": "Built without reading the code",
             "year": "2026",
-            "url": "https://github.com/HimanshuMittal01/kanban-calendar",
-            "linkLabel": "Repository",
+            "links": [
+                {
+                    "url": "https://github.com/HimanshuMittal01/kanban-calendar",
+                    "label": "Repository"
+                }
+            ],
             "popover": [
                 "A desktop planner that puts a kanban board over a time-block calendar, so a card can be constrained to the block it belongs in. Electron and React, and everything stays on the machine.",
                 "I did not read a single line of it. It is the first thing I built entirely by asking for it.",
@@ -414,8 +496,12 @@
             "title": "Cars24 vs Spinny",
             "descriptor": "Six listings, ranked by price to condition",
             "year": "2026",
-            "url": "https://github.com/HimanshuMittal01/cars24-spinny-intel",
-            "linkLabel": "Repository",
+            "links": [
+                {
+                    "url": "https://github.com/HimanshuMittal01/cars24-spinny-intel",
+                    "label": "Repository"
+                }
+            ],
             "popover": [
                 "A multi-agent pipeline that pulls specs and condition signals out of used-car listings, then ranks them by price against condition.",
                 "One agent reads the disclosed facts. Another looks at the photographs and judges the panels, the cabin, the tyres, the engine bay. The composite leans seventy percent towards the facts, because the photographs are interpretation.",
