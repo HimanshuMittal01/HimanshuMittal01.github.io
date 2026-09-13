@@ -1,118 +1,83 @@
 ---
-title: "Optimus: Inside the Build"
-summary: "A deep dive into the production planning and scheduling engine I built for pharma manufacturing plants — the components, the constraints, and the domain knowledge behind it."
+title: "Building Optimus: What it took to schedule a pharmaceutical plant"
+summary: "A year building the scheduling engine behind a production planning system now running in twenty-plus pharma plants — the constraints, the domain knowledge, and why I would put the planner inside the loop next time."
 date: 2026-09-05
 ---
 
-I spent over a year building production planning and scheduling (PP&DS) software for pharmaceutical manufacturers. It's live across more than twenty plants today.
+At Ripik AI, I spent roughly a year building the core scheduling engine of a production planning and scheduling system for Sun Pharma. Versions of the system now run in more than twenty plants.
 
-I'm not going to try to explain *how* I built it — that's 250,000+ lines of code, thirty-plus knowledge-transfer sessions, and hundreds of pages of documentation, and no amount of compression turns that into a readable page. What I can do is walk through the components and the domain knowledge involved, so you can gauge the depth at which we had to see clearly before we could build anything at all.
-
-I started from scratch. For the first couple of weeks I worked with simulated data, because there was nothing else yet. Everything real after that came from visiting factories and sitting with plant teams — operators up through plant managers. The data itself arrived with errors, and cleaning it meant doing manual data entry alongside the plant staff. I'm grateful to every one of them for the time they gave me.
+When I started, I thought I was building an optimization algorithm. I eventually realized I was trying to encode how a factory thinks. A planner does not solve a neat formulation every morning. They know that one machine is under maintenance, another needs a change part currently bolted to a different machine, some material is in inventory but still under quality inspection, and a particular batch cannot sit too long between two operations. Some of this is in SAP, some in spreadsheets, and a surprising amount exists only in people's heads. Before we could schedule anything, we had to understand all of it.
 
 ---
 
-## The Basic Idea
+## The problem looked simple at first
 
-Strip away the software and the problem is one sentence: if demand exceeds what a plant can physically produce, you have to sequence its resources to serve the most critical demand and the maximum volume possible. That shortage is where optimization begins.
+At the top level, production planning sounds simple. There is demand, the plant has finite capacity, and you want to produce as much of the important demand as possible, on time. Our pipeline looked like this:
 
-We turned that into a pipeline:
+**Demand → Pre-scheduling → Scheduling → Optimization → Views**
 
-**Demand → PreScheduling → Scheduling → Optimize → Views**
+Demand is what the business wants. Pre-scheduling works out which batches can actually be produced given available material. Scheduling assigns those batches to machines and places their operations on a timeline. Optimization searches for better schedules. Views turn the result into something planners can use.
 
-- **Demand** — what the market is actually asking for.
-- **PreScheduling** — which batches are even feasible, given current inventory and BOM.
-- **Scheduling** — assign feasible batches to machines, following product recipes.
-- **Optimize** — run scheduling over and over, improving against an objective function each pass.
-- **Views** — turn the resulting schedule into reports: shift-wise machine allocation, plant utilization, and more.
+That fits in a paragraph. Turning it into a system took around 250,000 lines of code. For the first couple of weeks I worked with simulated data. That was enough to build the skeleton of the scheduler, but not enough to understand the problem. The first few months revolved around one plant. As we expanded, I started visiting factories and spending time with the people running them, from operators to plant managers.
 
-Five words. Underneath them is everything that follows.
+Every new plant had some rule that made complete sense once somebody explained it. A machine could be free but still unable to run the next product because the required change part was attached to another machine. A room could become unavailable during a changeover even with idle machines inside it. Some operations could pause over a weekend and resume Monday; others had strict limits on how long they could wait. You find these things out by sitting with planners and asking, again and again, why a particular batch cannot run in a particular place. A lot of the real learning happened when the software and the plant disagreed. Usually the plant was right.
 
 ---
 
-## Scheduling, Up Close
+## How the scheduler worked
 
-The Scheduling step reduces to a task-list algorithm. Every task lives in exactly one of three lists at any moment:
+At the centre of Optimus was a simple loop. Every scheduling task belonged to one of three groups: ATI, available tasks that could be scheduled now; LTI, locked tasks waiting for something else to happen; and CTI, completed tasks already placed on the schedule.
 
-- **ATI** — Available Task IDs (ready to be scheduled)
-- **LTI** — Locked Task IDs (blocked on something not yet done)
-- **CTI** — Completed Task IDs (already scheduled)
+The scheduler picked a task from ATI, determined which resources could perform it, found the best feasible time while respecting the active constraints, scheduled it, and moved it to CTI. That might unlock a task in LTI. Repeat until nothing remained available.
 
-The loop: select a task from ATI, select a resource for it, find the best feasible time on that resource given every active constraint, mark the task complete and move it to CTI, then check whether any task in LTI has just been unblocked and promote it to ATI. Repeat until ATI is empty.
+In pseudocode it is five lines. The difficulty is inside the words _pick_, _feasible_, and _best_. If five batches are available, which goes first? If three machines can make one of them, which machine? If a machine has an empty slot tomorrow morning, can the batch actually run there once you account for material, preceding operations, cleaning, changeovers, holidays, maintenance, and physical equipment? Almost all the domain knowledge we collected eventually went into answering three questions: **which task, which resource, what time?**
 
-It reads like five lines of pseudocode. The part that isn't obvious from the pseudocode is *which* task gets picked when several are sitting in ATI at once. It isn't first-in-first-out. A batch is scored by how much of it maps to real, high-priority demand versus how much is dead capacity that nothing asked for — weighted so a sliver of critical-tier demand counts for meaningfully more than the same quantity of routine demand, not just a little more. A batch that's mostly critical demand with a bit of waste attached loses to one that's entirely critical, even at the same raw size. That scoring rule, and the threshold inside it that stops a weak signal from a minor demand tier quietly dragging an obviously-critical batch below a marginal one, is the kind of thing you only write after watching the wrong batch win once.
+That domain knowledge became substantial. Demand arrived in monthly buckets such as M1, M2 and M3, each with its own priority. The difficult part was not reading demand but converting demand lines into physically valid batches, because plants cannot manufacture arbitrary quantities. Batch sizes, downstream recipes and capacity all affect how demand can be grouped before scheduling even begins.
 
-Every constraint below exists to answer one of two questions inside that loop: *which task, which resource, which time.*
+Inventory introduced another layer. We dealt with raw materials, packing materials, intermediate products and finished goods. Inventory could expire. Stock could exist on paper while still being unavailable because it was under quality inspection. Purchase requisitions and purchase orders represented material that might arrive in the future but could not yet be consumed by the schedule. The difference between _exists in the system_ and _can actually be used now_ mattered constantly.
 
-The "improve objective" step in the pipeline deserves its own honest mention too, because it's easy to wave at and hard to get right. It isn't one number — it's a weighted sum of named metrics: completion time, waiting time, on-time production, due-date penalty, cross-block movement penalty, and a few demand-priority values. Each of those is normalized against its own theoretical maximum before a planner's weight is ever applied to it. That normalization is the unglamorous line that actually mattered: without it, a planner turning up the weight on "hit critical demand" was invisible against the sheer numeric size of "minimize waiting time," because the two metrics lived on completely different scales. Planners noticed before we did — they'd drag a slider and the schedule wouldn't move. Making a weight mean what a planner thinks it means turned out to be its own multi-week problem, hiding inside a sentence that sounds like a one-line design choice.
+BOMs could be multi-level, so units, count factors and pack sizes had to remain consistent as quantities propagated through the hierarchy. Recipes then added the temporal structure. Operations could be sequential or parallel, each with setup time, runtime and waiting requirements. Some operations could pause across non-working periods and resume later; others had stricter timing constraints. A mistake here did not just produce a wrong number. It could make an entire downstream schedule impossible.
 
----
+Then there were changeovers, campaigns and cleaning. Running two batches of the same product was different from switching products entirely, and product changes could sometimes lock an entire room rather than just one machine. Machines also had campaign limits: after a certain number of batches or days, a full cleaning became mandatory.
 
-## The Constraint Surface
+One of my favourite constraints was change parts, because it captured the gap between software and physical reality very clearly. Certain products required specific physical parts to run on certain machines, and plants owned a limited number of them. On the screen the machine is free. In the factory it still cannot run, because the missing resource is a piece of metal currently attached to another machine.
 
-This is where most outside descriptions of "scheduling software" understate the problem. None of what follows is a rule bolted on after the fact — each one was already how a plant operated, with no system that could read it before this one.
-
-**Demand & priority.** Demand isn't one number — it arrives bucketed by month (M1, M2, M3…), each with its own priority, and the biggest source of pain isn't the demand itself but *batching* it: deciding how individual demand lines roll up into batches without breaking downstream feasibility.
-
-**Inventory.** Four categories — Raw Material, Packing Material, Semi-Finished Goods, Finished Goods — each with its own lifecycle issues: expiry dates that can invalidate a batch mid-schedule, and stock sitting in quality inspection that exists on paper but isn't usable yet.
-
-**Procurement.** Purchase Requisitions and Purchase Orders don't resolve instantly — material committed on paper is still unavailable until it physically arrives, and the schedule has to respect that lag rather than assume instant supply.
-
-**Phantom items.** Some inputs — water, tape, other near-infinite consumables — are treated as always available, so the solver doesn't waste constraint-checking on things that will never be the bottleneck.
-
-**Material substitution.** When a vendor changes but the item itself doesn't, existing inventory should still be usable — but the substitution logic differs by material class. RM-to-RM or PM-to-PM transfer is comparatively simple; INTM-to-INTM (intermediate-to-intermediate) transfer is harder, because both the BOM and the inventory ledger have to stay consistent through the swap.
-
-**Bill of materials.** BOMs are multi-level, not flat. Unit handling, count factor, and pack size all have to transform correctly as you move up and down the BOM tree — a pack-size change at one level has to propagate without silently breaking a quantity somewhere else.
-
-**Recipes & operations.** Recipes can be sequential or parallel. Each operation carries its own minimum wait time, runtime, and setup time. Packing can happen on any number of machines, but intermediate product always moves in its fixed batch size regardless of which machine picks it up. Some operations are *splittable* — a task that runs Friday can legitimately resume Monday, and the schedule has to represent that gap without treating it as two unrelated tasks.
-
-**Underprocess INTM POs.** Intermediate product that's mid-process, already committed to a purchase order, has to be tracked as neither "available" nor "not existing" — it's a third state the scheduler has to carry.
-
-**Changeovers.** Two flavors: changeover between batches of the *same* product, and changeover between batches of *different* products — the latter usually costing more time and sometimes requiring the room, not just the machine, to be locked.
-
-**Change parts.** Running a given finished good on a given machine may require a specific physical part, and plants only own a limited number of them — so even if a machine is free, it may not be able to run a given product without the right part being free too.
-
-**Plant map.** Machines exist inside rooms, and constraints exist at both levels: which machines sit in which room, only one machine active per slot, and — critically — a full room going unavailable during a changeover, not just the one machine inside it.
-
-**Calendars.** Plants have holidays where nothing runs. Machines have their own independent availability calendars for planned maintenance or repair, layered on top of the plant calendar.
-
-**Plant types.** Not all plants are the same animal: NOSD, OSD, API, and BFI plants each carry a different constraint profile, so the same engine has to flex per plant type rather than assume one physics fits all.
+There were many more rules: phantom materials that could effectively be treated as always available, material substitutions, under-process intermediate orders, room-level plant maps, machine and plant calendars, vendor-specific material behaviour, and plant-specific exceptions that accumulated as we scaled. None of them sounds especially dramatic on its own. **Together, they are the plant.**
 
 ---
 
-## What Came Out of It
+## A valid schedule was only half the product
 
-Once the schedule exists, it becomes the source for a family of views: MRP, Commit, Machine view, Product view, batch-wise view, plant utilization graphs, and others.
+Once the scheduler could generate a valid plan, we wrapped an optimization loop around it: run scheduling many times, score each result against objectives the planner could tune, such as on-time production, waiting time, due dates and demand priority, and keep the better schedules. For a typical plant-month of roughly a thousand batches, a full run took around fifteen to twenty minutes.
 
-The most demanding of these is the **waterfall chart** — the answer to "why wasn't this demand met?" Underneath it, every product's shortfall resolves to one of a small set of real reason codes, computed by walking its demand against feasible inventory: *No demand* — nothing was asked for. *Demand fulfilled* — feasible quantity matches the ask. *Under commit* — feasible falls short, because of a material shortage, a missing recipe, or no spare capacity. *Over commit* — a batching rule rounded a small ask up past it. That last one looks like a bug the first time a planner sees it. It isn't — it's a batch-size floor doing exactly what it's supposed to do, and the reason code is what turns "why does this number look wrong" into a five-second answer instead of a support ticket.
+The other half was making the schedule usable. One of the main outputs was a waterfall commit view answering a simple question: **why wasn't this demand produced?** A product could have no demand, fully fulfilled demand, or be under-committed because of a material shortage, a missing recipe, or insufficient capacity. It could also appear over-committed.
 
-None of the results were guessed. Aggregate, across the plants live at the time, each measured against that site's own manual-planning baseline: a 7% gain in production efficiency, a 2% reduction in production cost, over $2M in enterprise deployments, across ten-plus manufacturing sites. They came from a hundred small constraints, finally written down, checked, and solved every month — instead of estimated once a quarter.
+That last case confused people initially. If the remaining demand is smaller than the minimum batch size, the plant cannot manufacture a fraction of a batch. It has to make the whole batch, so production exceeds demand. Nothing is wrong; the batching rule is doing its job. But unless the system explains that, the number simply looks broken.
 
----
+The schedule also fed a shift-level, machine-wise plan for every batch in the month, along with Gantt views, batch-wise and product-wise schedules, MRP, and plant-utilization views showing where capacity was sitting idle and where the bottlenecks were.
 
-## Where the Abstraction Broke
-
-Some things resisted clean constraint modeling no matter how carefully we tried:
-
-- **Portable machines** — equipment that isn't fixed to one room, breaking the assumption that a machine's location is static.
-- **Manpower** — operators are a resource too, but a much messier one than a machine: skills, shifts, and fatigue don't reduce to a calendar the way machine availability does.
-- **Max hold time** — some intermediates degrade if they sit too long between operations, which turns "schedule this eventually" into "schedule this within a shrinking window."
-- **Autoclave** — batch sterilization steps with their own timing physics that don't map cleanly onto the rest of the recipe model.
-
-These aren't failures of effort — they're the honest edge of where a discrete scheduling model stops matching a continuous, physical, human plant floor.
-
-And even within the constraints we could model, the system would still occasionally produce a schedule nobody could explain. So it carries a trace flag: switch it on, and every placement decision — which batch, which machine, what time, and every later push that moved it — writes one row to a log, filterable by batch ID after the fact. It's off by default, because tracing every decision at full plant scale isn't free, but it's a single environment variable away from turning "why is this batch running at 3 a.m. on a Sunday" from a half-day manual dig into a filtered spreadsheet.
+We also compared the generated plan against what actually happened in the plant. Completed batches were logged with their actual execution times, which let us calculate weekly and monthly adherence to the plan. That gave us a useful signal, but it was retrospective. By the time a gap appeared in a weekly or monthly adherence report, the schedule and reality may already have been diverging for days.
 
 ---
 
-## What I'd Build Differently
+## Some problems became projects of their own
 
-Two things, now that I've lived inside these constraints long enough to see past the version we shipped.
+Even after all of that, several constraints were deep enough that a good implementation could have been a project by itself. Portable machines broke the assumption that equipment always belonged to one room. Manpower introduced people as another constrained resource, except people have skills and shifts rather than simple availability calendars. Maximum hold times meant an intermediate product could not wait indefinitely between operations. Autoclaves added another shared resource with their own batching and timing behaviour.
 
-**The algorithms.** The objective function above is a linear score, and I now think the true objective is discontinuous in ways a linear score can't represent — a batch running one hour late might not matter at all, and the same batch six hours late might blow a client commitment entirely. I'd reach past it, toward real metaheuristics layered over the same core, now that I actually know the shape of the constraint space rather than discovering it plant by plant.
+Then there was QC scheduling. The quality lab was another resource almost every product eventually depended on, but it behaved very differently from a production machine. Tests had to be scheduled, results gated whether a batch could move forward, and the whole flow interacted with the production schedule. From far away, it looked structurally similar to another shared-resource problem. Once we got into it, almost everything was different. That alone took a couple of months.
 
-**The product.** This is the bigger one. My real insight from a year on the floor is that *co-editing* is the right model, not autonomous perfection. Instead of chasing a 100%-correct schedule and handing it down, the better product gives planners a 90%-followable rough estimate and pairs it with an easy daily-tracking interface — replacing monthly adherence reviews with something planners actually update and trust every day. A slightly-wrong plan a planner keeps current beats a perfect plan nobody touches after the first exception.
+We also designed things we did not get to fully build, including inter-plant flow, where one plant's output becomes another plant's input, and explicit modelling of yield loss. **There is a large difference between a schedule that runs and a plant that runs.**
 
 ---
 
-*See clearly. Build accordingly.*
+## What I would build differently
+
+Every plant asked some version of the same question: **what happens when a machine breaks down?** Our answer was regeneration. Update the state of the plant and re-run the remaining schedule. It worked, and it was practical, but it also exposed the deeper assumption underneath the product.
+
+We initially pushed plants to adhere closely to the generated plan. The model was roughly: planners provide the inputs, Optimus calculates the schedule, and the plant follows it. The more time I spent on the floor, the less I believed that was the right product model. There were too many things the planner knew that we did not. Some could eventually become constraints; some probably never would. So when a planner changed the schedule after Optimus generated it, I stopped seeing that purely as non-adherence. **Sometimes the planner was fixing our model.**
+
+If I built Optimus again, I would stop treating production planning as input data → optimizer → final plan and instead make the planner part of the loop. Generate a strong initial schedule, put it in front of them, let them move things, capture why they moved them, recalculate around their changes, and freeze portions of the schedule only when the plant is actually ready to commit. Then give planners a lightweight daily interface where they can keep the plan aligned with what is happening on the floor.
+
+**Co-editing, not command-and-control.** A slightly imperfect plan that a planner keeps current is more useful than a mathematically better plan that becomes obsolete after the first exception.
+
+Our adherence reports were useful, but weekly or monthly feedback was too slow for a system changing every day. A daily loop owned by the planner would have caught those divergences much earlier.

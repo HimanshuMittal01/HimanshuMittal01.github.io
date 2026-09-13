@@ -1,8 +1,8 @@
 [
     {
         "project": "Optimus",
-        "meta": "Ripik · Production planning & scheduling",
-        "headline": "Planning a factory is not an optimization problem.",
+        "meta": "Ripik \u00b7 Industrial AI",
+        "headline": "Building Optimus: What it took to schedule a pharmaceutical plant",
         "url": "/writing/optimus-deep-dive/",
         "note": null,
         "asset": null,
@@ -11,10 +11,10 @@
     },
     {
         "project": "Faradworks",
-        "meta": "Faradworks · Antler · AI × electronics",
-        "headline": "We raised $200K to automate PCB design. Then the market changed the question.",
-        "url": null,
-        "note": "Write-up in progress",
+        "meta": "Faradworks \u00b7 Antler \u00b7 AI \u00d7 electronics",
+        "headline": "Three Questions I Wish I Had Asked at Faradworks.",
+        "url": "/writing/faradworks/",
+        "note": null,
         "asset": null,
         "assetAlt": null,
         "accent": "gold"
