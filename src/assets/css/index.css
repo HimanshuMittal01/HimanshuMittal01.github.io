@@ -1,42 +1,56 @@
 /* Defaults */
 :root {
-	--font-family: -apple-system, system-ui, sans-serif;
+	--font-family: "Outfit", -apple-system, system-ui, sans-serif;
+	--font-serif: Georgia, "Times New Roman", serif;
 	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
 }
 
-/* Theme colors */
+/* Theme colors.
+   The homepage palette is the site palette: one ink, one paper, one hairline, one
+   accent. Every page reads from these; .home adds only its card washes on top. */
 :root {
-	--color-gray-20: #e0e0e0;
-	--color-gray-50: #C0C0C0;
-	--color-gray-90: #333;
+	--ink: #101014;
+	--ink-soft: #45454f;
+	--ink-faint: #8b8b96;
+	--paper: #f4f4f1;
+	--paper-2: #fbfbf9;
+	--line: rgba(16, 16, 20, 0.14);
+	--line-soft: rgba(16, 16, 20, 0.09);
+	--accent: #4a6c99;
 
-	--background-color: #fff;
+	/* section headlines are peers across the site, so the scale is one token */
+	--h-section: clamp(1.875rem, 3.8vw, 2.875rem);
 
-	--text-color: var(--color-gray-90);
-	--text-color-link: #082840;
-	--text-color-link-active: #5f2b48;
-	--text-color-link-visited: #17050F;
+	--color-gray-20: var(--line-soft);
+	--color-gray-50: var(--ink-faint);
+	--color-gray-90: var(--ink);
 
-	--box-shadow-light: rgba(0, 0, 0, 0.1); /* Light shadow for light mode */
-    --box-shadow-dark: rgba(0, 0, 0, 0.2); /* Darker shadow for light mode */
+	--background-color: var(--paper);
+	--text-color: var(--ink);
+
+	/* one accent, not three: links are ink and reveal the accent on hover */
+	--text-color-link: var(--ink);
+	--text-color-link-active: var(--accent);
+	--text-color-link-visited: var(--ink);
+
+	--box-shadow-light: rgba(16, 16, 20, 0.08);
+	--box-shadow-dark: rgba(16, 16, 20, 0.14);
 
 	--syntax-tab-size: 2;
 }
 
 :root.dark-mode {
-	--color-gray-20: #e0e0e0;
-	--color-gray-50: #C0C0C0;
-	--color-gray-90: #dad8d8;
+	--ink: #ecedf1;
+	--ink-soft: #b3b5bf;
+	--ink-faint: #7d808c;
+	--paper: #101318;
+	--paper-2: #161a21;
+	--line: rgba(255, 255, 255, 0.14);
+	--line-soft: rgba(255, 255, 255, 0.08);
+	--accent: #7ea6d4;
 
-	/* --text-color is assigned to --color-gray-_ above */
-	--text-color-link: #1493fb;
-	--text-color-link-active: #6969f7;
-	--text-color-link-visited: #a6a6f8;
-
-	--box-shadow-light: rgba(255, 255, 255, 0.1); /* Light shadow for dark mode */
-    --box-shadow-dark: rgba(255, 255, 255, 0.2); /* Lighter shadow on hover for dark mode */
-
-	--background-color: #15202b;
+	--box-shadow-light: rgba(0, 0, 0, 0.3);
+	--box-shadow-dark: rgba(0, 0, 0, 0.45);
 }
 
 /*
@@ -90,11 +104,14 @@ html {
 	justify-content: space-between;
 }
 
+/* The article column shares the page container with the header, so every left edge
+   on the site lines up: the wrapper is the wide grid, the prose inside it is the
+   reading measure. */
 .main-content {
 	padding: 0 var(--gutter);
 	margin: 1.5em auto;
-	max-width: 45em;
-	box-sizing: content-box;
+	width: 100%;
+	max-width: calc(74rem + 2 * var(--gutter));
 }
 
 /* https://www.a11yproject.com/posts/how-to-hide-content/ */
@@ -165,23 +182,6 @@ header:after {
 	content: "";
 	display: table;
 	clear: both;
-}
-
-.links-nextprev {
-	display: flex;
-	justify-content: space-between;
-	gap: .5em 1em;
-	list-style: "";
-	border-top: 1px dashed var(--color-gray-20);
-	padding: 1em 0;
-}
-
-.links-nextprev>* {
-	flex-grow: 1;
-}
-
-.links-nextprev-next {
-	text-align: right;
 }
 
 table {
@@ -317,3 +317,232 @@ header {
 .post-metadata time {
 	margin-right: 1em;
 }
+/* ---------- Article pages ----------
+   Scoped to .prose, the wrapper the post layout puts around a piece, so none of it
+   reaches the homepage or the two list pages. The reading measure sits inside the
+   page container, so an article's left edge lines up with the header and the lists. */
+
+.prose {
+	max-width: 36rem;
+}
+
+.prose h1 {
+	font-family: var(--font-serif);
+	font-weight: 400;
+	font-size: var(--h-section);
+	line-height: 1.15;
+	letter-spacing: -0.01em;
+	margin: 0 0 2.5rem;
+	text-wrap: balance;
+}
+
+.prose h2,
+.prose h3 {
+	font-weight: 500;
+	line-height: 1.25;
+	letter-spacing: -0.005em;
+	margin: 2.75rem 0 0.75rem;
+	text-wrap: balance;
+}
+
+.prose h2 { font-size: 1.375rem; }
+.prose h3 { font-size: 1.0625rem; }
+
+.prose p,
+.prose li {
+	font-size: 1rem;
+	line-height: 1.7;
+	color: var(--ink-soft);
+	text-wrap: pretty;
+}
+
+.prose strong { color: var(--ink); font-weight: 600; }
+
+/* a quote is the one place the argument raises its voice, so it gets the rule
+   rather than a tinted box */
+.prose blockquote {
+	margin: 2rem 0;
+	padding-left: 1.25rem;
+	border-left: 2px solid var(--line);
+}
+
+.prose blockquote p { color: var(--ink); }
+
+.prose hr {
+	height: 1px;
+	border: 0;
+	background: var(--line-soft);
+	margin: 3rem 0;
+}
+
+.prose table { border-collapse: collapse; font-size: 0.9375rem; width: 100%; }
+.prose th,
+.prose td {
+	padding: 0.6rem 1em 0.6rem 0;
+	border-bottom: 1px solid var(--line-soft);
+	text-align: left;
+	vertical-align: top;
+}
+.prose th { font-weight: 500; color: var(--ink); }
+.prose td { color: var(--ink-soft); }
+
+/* a wide table or code block scrolls inside the column instead of widening it */
+.prose pre { overflow-x: auto; }
+
+.prose-signoff {
+	margin-top: 3rem;
+	color: var(--ink-faint);
+}
+
+/* ---------- Previous / next ----------
+   The whole block is the link, not just the title, so the target is a card-sized
+   hit area rather than a line of text. */
+
+.post-nav {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 1px;
+	max-width: 36rem;
+	margin: 4rem 0 2rem;
+	border-top: 1px solid var(--line-soft);
+	background: var(--line-soft);
+}
+
+@media (max-width: 640px) {
+	.post-nav { grid-template-columns: minmax(0, 1fr); }
+}
+
+.post-nav-link {
+	display: flex;
+	flex-direction: column;
+	gap: 0.4rem;
+	padding: 1.25rem 1.25rem 1.5rem;
+	background: var(--paper);
+	text-decoration: none;
+	transition: background-color 0.3s ease;
+}
+
+/* a single child should not be stretched across both columns */
+.post-nav-link:only-child { grid-column: span 1; }
+
+.post-nav-next { text-align: right; align-items: flex-end; }
+
+.post-nav-link:hover,
+.post-nav-link:focus-visible { background: var(--paper-2); }
+
+.post-nav-dir {
+	font-size: 0.75rem;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: var(--ink-faint);
+}
+
+.post-nav-title {
+	font-size: 0.9375rem;
+	line-height: 1.4;
+	color: var(--ink);
+	text-wrap: pretty;
+}
+
+.post-nav-link:hover .post-nav-title { color: var(--accent); }
+
+/* ---------- The vertical index ----------
+   A post keeps its reading measure and hands the empty right column to a list of
+   its own sections: dashes at rest, titles on hover, the current one marked. */
+
+html { scroll-behavior: smooth; }
+
+@media (prefers-reduced-motion: reduce) {
+	html { scroll-behavior: auto; }
+}
+
+.prose h2 { scroll-margin-top: 4rem; }
+
+/* index first, then the piece: the index keeps the page gutter and the prose sits
+   to its right, with enough air between them that the two columns read as separate
+   things rather than one wide block. */
+body:has(.prose) .main-content {
+	display: grid;
+	grid-template-columns: minmax(0, 13rem) minmax(0, 36rem);
+	gap: clamp(3rem, 8vw, 8rem);
+	align-items: start;
+}
+
+body:has(.prose) .prose { grid-column: 2; grid-row: 1; }
+body:has(.prose) .post-nav { grid-column: 2; }
+
+.prose-toc {
+	grid-column: 1;
+	grid-row: 1;
+	position: sticky;
+	top: 5rem;
+	padding: 0.5rem 0;
+}
+
+.prose-toc ol {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: grid;
+	gap: 0.7rem;
+}
+
+/* the dash is the resting state of the entry, so it lives on the row and stays
+   visible while the title itself is faded out */
+/* at rest every row is the same height, so the dashes read as an even ruler rather
+   than spacing themselves by how long each hidden title happens to be */
+.prose-toc li {
+	position: relative;
+	padding-left: 2.25rem;
+	height: 0.9rem;
+	overflow: hidden;
+	transition: height 0.2s ease;
+}
+
+.prose-toc:hover li,
+.prose-toc:focus-within li { height: auto; }
+
+.prose-toc li::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 0.5rem;
+	width: 1.25rem;
+	height: 1px;
+	background: var(--line);
+	transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+.prose-toc a {
+	display: block;
+	font-size: 0.8125rem;
+	line-height: 1.35;
+	color: var(--ink-faint);
+	text-decoration: none;
+	opacity: 0;
+	transform: translateX(-0.25rem);
+	transition: opacity 0.3s ease, transform 0.3s ease, color 0.3s ease;
+}
+
+.prose-toc:hover a,
+.prose-toc:focus-within a {
+	opacity: 1;
+	transform: none;
+}
+
+.prose-toc a:hover,
+.prose-toc a:focus-visible { color: var(--ink); }
+
+.prose-toc li:has(a[aria-current="true"])::before {
+	width: 1.75rem;
+	background: var(--ink);
+}
+
+.prose-toc a[aria-current="true"] { color: var(--ink); }
+
+/* no room for a second column, and no hover to reveal it with */
+@media (max-width: 1100px) {
+	body:has(.prose) .main-content { display: block; }
+	.prose-toc { display: none; }
+}
+

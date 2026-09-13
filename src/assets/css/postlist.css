@@ -1,94 +1,25 @@
-/* Container for the post list */
-.post-list {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem; /* Spacing between posts */
-    padding: 2rem;
-}
+/* /writing/ uses the archive furniture in home.css: one list, one hairline per row.
+   What is left here is only what the writing index does not share with /archive/. */
 
-/* Post Card */
-.post-card {
-    display: flex;
-    flex-direction: row;
-    background-color: var(--background-color);
-    color: var(--text-color);
-    border-radius: 8px;
-    box-shadow: 0 4px 12px var(--box-shadow-light); /* Default shadow */
-    overflow: hidden;
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-}
-
-/* Hover Effect for Post Card */
-.post-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px var(--box-shadow-dark); /* Hover shadow */
-}
-
-/* Post Details (Title and Description) */
-.post-details {
-    flex: 1;
-    padding: 1rem;
-}
-
-.post-card h2 {
-    font-size: 1.35rem;
-    margin-bottom: 0.5rem;
-    color: var(--text-color);
-}
-
-.post-card h2 a {
+/* the post title is the link, so it carries the ink rather than the accent */
+.archive-name a {
     text-decoration: none;
-    color: var(--text-color);
+    color: var(--ink);
     transition: color 0.3s ease;
 }
 
-.post-card h2 a:hover {
-    color: var(--text-color-link-active); /* Hover effect for title */
+.archive-name a:hover,
+.archive-name a:focus-visible { color: var(--accent); }
+
+/* Archived posts stay out of the list until the footer dot is clicked */
+.post-card.archived-hidden { display: none; }
+
+.archive-year .fa-box-archive {
+    margin-left: 0.35rem;
+    opacity: 0.5;
 }
 
-/* Description styling */
-.post-card p {
-    font-size: 1rem;
-    color: var(--text-color);
-    line-height: 1.6;
-}
-
-/* Responsive Design for Smaller Screens */
-@media (max-width: 768px) {
-    .post-card {
-        flex-direction: column; /* Stack post card content for smaller screens */
-    }
-
-    .post-card h2 {
-        font-size: 1.25rem;
-    }
-
-    .post-card p {
-        font-size: 0.9rem;
-    }
-}
-
-/* Archived posts hidden until easter egg is triggered */
-.post-card.archived-hidden {
-    display: none;
-}
-
-/* Card needs positioning context for the corner icon */
-.post-card {
-    position: relative;
-}
-
-/* Archived corner marker */
-.archive-corner-icon {
-    position: absolute;
-    top: 0.6rem;
-    right: 0.75rem;
-    font-size: 0.85rem;
-    color: var(--text-color);
-    opacity: 0.35;
-}
-
-/* Hidden easter-egg dot in the footer */
+/* the easter-egg dot itself, in the footer on every page */
 .archive-dot {
     display: inline-block;
     width: 8px;

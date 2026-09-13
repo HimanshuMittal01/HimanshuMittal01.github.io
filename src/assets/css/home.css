@@ -1,27 +1,15 @@
 /* Homepage — editorial, artifact-led. Scoped to .home so the rest of the site is untouched. */
 
 .home {
-    /* structure */
-    --ink: #101014;
-    --ink-soft: #45454f;
-    --ink-faint: #8b8b96;
-    --paper: #f4f4f1;
-    --paper-2: #fbfbf9;
-    --line: rgba(16, 16, 20, 0.14);
-    --line-soft: rgba(16, 16, 20, 0.09);
+    /* structure, ink and paper now live in index.css :root. the homepage adds only
+       what is its own: the tile wash, its column width and its display faces. */
 
-    /* luminous accents — used as card washes, not gradients */
-    --lavender: #b7abee;
+    /* one wash, the tile surface in the archive strip, in the accent's own family */
     --sky: #dce8f4;
-    --mint: #dcefe5;
-    --gold: #f2e6cf;
-    --fig-blue: #4a6c99;
+    --fig-blue: var(--accent);
 
     --wide: 74rem;
-    /* both section headlines are peers — one token so they can't drift apart */
-    --h-section: clamp(1.875rem, 3.8vw, 2.875rem);
     --font-display: "Outfit", var(--font-family);
-    --font-serif: Georgia, "Times New Roman", serif;
 
     color: var(--ink);
     background: var(--paper);
@@ -29,19 +17,7 @@
 }
 
 :root.dark-mode .home {
-    --ink: #ecedf1;
-    --ink-soft: #b3b5bf;
-    --ink-faint: #7d808c;
-    --paper: #101318;
-    --paper-2: #161a21;
-    --line: rgba(255, 255, 255, 0.14);
-    --line-soft: rgba(255, 255, 255, 0.08);
-
     --sky: #182430;
-    --mint: #16261f;
-    --gold: #2a2418;
-    --lavender: #211f30;
-    --fig-blue: #7ea6d4;
 }
 
 /* The home page opts out of the 45em article column. */
@@ -50,12 +26,6 @@ body:has(.home) .main-content {
     margin: 0;
     padding: 0;
 }
-
-/* the header and footer sit outside .home, so the page background itself has to
-   become the homepage paper — otherwise both strips keep the global colour and
-   the page shows a hard seam above the hero and below the last section. */
-:root:has(.home) { --background-color: #f4f4f1; }
-:root.dark-mode:has(.home) { --background-color: #101318; }
 
 /* the global a[href]:visited rule outranks a bare .home a, so match its specificity */
 .home a[href],
@@ -255,11 +225,17 @@ body:has(.home) .main-content {
     padding: clamp(1.5rem, 2.6vw, 2.25rem);
 }
 
-.story--sky { background: var(--sky); }
-.story--gold { background: var(--gold); }
-.story--mint { background: var(--mint); }
-.story--lavender { background: color-mix(in srgb, var(--lavender) 30%, var(--paper-2)); }
-:root.dark-mode .story--lavender { background: var(--lavender); }
+/* The two cards are one surface, not two colours. A warm card next to a cool one
+   asks the reader to find a difference that is not there, and at this size the wash
+   competed with the archive tiles below, where the colour is doing real work as a
+   stand-in for a missing thumbnail. Hierarchy here comes from scale and the serif. */
+.story {
+    border: 1px solid var(--line-soft);
+    transition: border-color 0.35s ease, background-color 0.35s ease;
+}
+
+.story:hover,
+.story:focus-visible { border-color: var(--ink); }
 
 @media (prefers-reduced-motion: no-preference) {
     a.story:hover { transform: translateY(-3px); }
@@ -368,7 +344,13 @@ a.story:focus-visible { filter: brightness(0.98); }
     text-wrap: pretty;
 }
 
-.now-title {
+/* every --h-section headline on the site is set in the serif: this one, the archive
+   and writing titles, and the h1 on a post. one face for one level. */
+.home .now-title {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 1.15;
     font-size: var(--h-section);
     max-width: 16ch;
     margin: 0;
@@ -477,12 +459,10 @@ a.story:focus-visible { filter: brightness(0.98); }
     font-variant-numeric: tabular-nums;
 }
 
-/* the wash is what the thumbnail used to be: it gives the row its rhythm */
-.scrap:nth-child(4n+1) .scrap-plate { background: var(--sky); }
-.scrap:nth-child(4n+2) .scrap-plate { background: var(--mint); }
-.scrap:nth-child(4n+3) .scrap-plate { background: var(--gold); }
-.scrap:nth-child(4n+4) .scrap-plate { background: color-mix(in srgb, var(--lavender) 26%, var(--paper-2)); }
-:root.dark-mode .scrap:nth-child(4n+4) .scrap-plate { background: var(--lavender); }
+/* the wash is what the thumbnail used to be. one wash, not a cycle of four: the
+   colour was assigned by position in the row, so a reader looking for why this tile
+   is green and that one gold finds nothing. one hue makes them read as a set. */
+.scrap .scrap-plate { background: var(--sky); }
 
 .scrap-face:hover .scrap-plate { border-color: var(--ink); }
 .scrap-face:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }

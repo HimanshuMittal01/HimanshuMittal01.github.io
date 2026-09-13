@@ -1,19 +1,38 @@
 ---
 layout: base.html
 permalink: /writing/
+title: Writing · Himanshu Mittal
+description: "Long-form pieces by Himanshu Mittal on AI safety and evaluation, industrial optimization, and building a hardware-AI startup."
 css:
+- /assets/css/home.css
 - /assets/css/postlist.css
 ---
 
-<div class="post-list">
-    {% for post in collections.post %}
-        <div class="post-card{% if post.data.archived %} archived-hidden{% endif %}">
-            {% if post.data.archived %}<i class="fas fa-box-archive archive-corner-icon" aria-hidden="true"></i>{% endif %}
-            <!-- Post Details (Title and Description) -->
-            <div class="post-details">
-                <h2><a href="{{ post.url }}">{{ post.data.title }}</a></h2>
-                <p>{{ post.data.summary }}</p>
-            </div>
+<div class="home archive-page">
+    <section class="home-section">
+        <div class="home-inner">
+            <p class="section-head">Writing</p>
+            <h1 class="archive-title">Pieces long enough to be worth the argument.</h1>
+
+            <ol class="archive-list">
+                {% for post in collections.post %}
+                <li class="archive-item post-card{% if post.data.archived %} archived-hidden{% endif %}">
+                    <div class="archive-head">
+                        <h2 class="archive-name"><a href="{{ post.url }}">{{ post.data.title }}</a></h2>
+                        <p class="archive-year">
+                            {{ post.date | date: "%Y" }}
+                            {%- if post.data.archived %} <i class="fas fa-box-archive" aria-hidden="true"></i>{% endif -%}
+                        </p>
+                    </div>
+                    <div class="archive-body">
+                        <p>{{ post.data.summary }}</p>
+                        <a class="archive-link" href="{{ post.url }}">Read &#8594;</a>
+                    </div>
+                </li>
+                {% endfor %}
+            </ol>
+
+            <a class="section-cue" href="/">&larr; Back home</a>
         </div>
-    {% endfor %}
+    </section>
 </div>

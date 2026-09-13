@@ -1,6 +1,6 @@
 ---
 title: "Red Teaming GenAI Safety as a Measurement Problem"
-summary: "A black-box methodology: baseline first, breadth second, depth last — mapping where a model's safety boundary actually sits instead of collecting jailbreaks."
+summary: "A black-box methodology: baseline first, breadth second, depth last. Mapping where a model's safety boundary actually sits instead of collecting jailbreaks."
 date: 2026-09-13
 ---
 
@@ -15,8 +15,6 @@ That requires treating red teaming as a measurement problem, not just an attack-
 This post describes the black-box methodology I use for that. The tester has no access to model weights, training data, hidden reasoning, or system-level instructions. We only control the inputs and observe the outputs, which is also how most deployed systems are encountered in practice.
 
 The focus here is **safety**, rather than system security. Safety testing asks whether the model produces content that violates its behavioral policy. Security testing covers the wider system: unauthorized access, data leakage, infrastructure vulnerabilities, and similar issues. The boundary can get less clean once models start using tools, but it is still useful to separate the two when defining an engagement.
-
----
 
 ## Start with the policy, not the jailbreak
 
@@ -46,8 +44,6 @@ A useful policy defines both sides of the boundary. For example, a child-safety 
 
 The same applies to definitions. What counts as a minor? What does "illegal" mean across jurisdictions? Where does a policy draw the line around explicit or actionable content? Ambiguity in the policy eventually becomes ambiguity in the evaluation.
 
----
-
 ## Separate the harmful request from the attack
 
 Once the policy boundary is clear, the next step is understanding what we are actually sending to the model.
@@ -69,8 +65,6 @@ A **jailbreak** adds one or more strategies around that core ask: obfuscation, f
 That separation becomes very useful analytically.
 
 If ten different jailbreaks all wrap the same harmful request, then the harmful request and the attack mechanism are two independent variables. Treating them separately lets us ask whether the vulnerability belongs to the request, the jailbreak technique, or the interaction between the two.
-
----
 
 ## A useful mental model for single-turn attacks
 
@@ -109,8 +103,6 @@ Not every successful jailbreak needs all three. In practice, some models will be
 
 There is no reason to assume in advance that one stage is universally the weakest. If the purpose is measurement, the results should tell us.
 
----
-
 ## The attack surface grows in layers
 
 A red teamer's attack surface increases as the system exposes more ways to interact with it.
@@ -132,8 +124,6 @@ PAIR, for example, uses an attacker model to iteratively refine jailbreak prompt
 The important idea is not a particular algorithm. It is the feedback loop.
 
 **The target model's response becomes information for the attacker.**
-
----
 
 ## Design the engagement as an experiment
 
@@ -164,8 +154,6 @@ First, it prevents the attack dataset from exploding combinatorially.
 Second, it keeps the underlying variables visible. We still know which core ask was tested, which attack strategy was applied, and which policy category the resulting response belongs to.
 
 That becomes important once we start analysing failures.
-
----
 
 ## The three-phase red team
 
@@ -225,8 +213,6 @@ Does the technique generalize across many underlying requests, or do failures cl
 
 That is the difference between reporting "this jailbreak worked" and giving the safety team something they can actually investigate.
 
----
-
 ## ASR is the beginning of the analysis, not the end
 
 Attack Success Rate is useful because it compresses a large number of interactions into something comparable.
@@ -246,8 +232,6 @@ Baseline tells us what the model already does.
 Breadth tells us where adversarial pressure changes the picture.
 
 Depth tells us **why**.
-
----
 
 ## What a useful red team engagement should produce
 

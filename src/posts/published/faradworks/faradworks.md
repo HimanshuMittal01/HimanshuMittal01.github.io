@@ -58,8 +58,6 @@ Automated verification is a different thing. The output is not an artifact. It i
 
 Put it from the customer's side. Your team spent a year on a design. Verification normally takes months. Now a startup says its AI checked it in a day. Why would you believe it? And if you have to look anyway, what did you buy?
 
----
-
 **Does the benefit the AI creates outweigh the cost of it being wrong?**
 
 It is not an equation. You cannot put clean numbers on either side. But it changes how you think about the product you are building. Written down this looks obvious. It looked obvious to me too. It only became real when we were the ones asking an engineer to trust the report.

@@ -28,11 +28,11 @@ css:
 
     {% include "partials/_now.html" %}
 
-    <!-- 2. Selected work — the two long-form pieces, then the strip of everything else.
+    <!-- 2. Selected work: the two long-form pieces, then the strip of everything else.
          Depth and breadth are one claim, so they share a section rather than sitting as
          numbered peers; Optimus appears in both, as a story card and as scrap a33.
          TODO(asset): add `asset` + `assetAlt` (product screenshot, system diagram, PCB/Pinscope shot).
-         Cards render without a media plate until a real asset exists — do not stand in a placeholder image. -->
+         Cards render without a media plate until a real asset exists. Do not stand in a placeholder image. -->
     <section class="home-section featured" id="writings">
         <div class="home-inner">
             <div class="section-lead section-lead--tight">
@@ -42,7 +42,7 @@ css:
             <div class="featured-grid">
                 {% for story in featured %}
                 {% assign post = collections.post | where: "url", story.url | first %}
-                {% if story.url %}<a class="story story--{{ story.accent }}" href="{{ story.url }}">{% else %}<article class="story story--{{ story.accent }}">{% endif %}
+                {% if story.url %}<a class="story" href="{{ story.url }}">{% else %}<article class="story">{% endif %}
                     <div class="story-text">
                         <p class="story-project">{{ story.project }}</p>
                         <h3 class="story-headline">{{ post.data.title | default: story.headline }}</h3>

@@ -5,8 +5,7 @@
         "url": "/writing/faradworks/",
         "note": null,
         "asset": null,
-        "assetAlt": null,
-        "accent": "gold"
+        "assetAlt": null
     },
     {
         "project": "Optimus",
@@ -14,7 +13,6 @@
         "url": "/writing/optimus-deep-dive/",
         "note": null,
         "asset": null,
-        "assetAlt": null,
-        "accent": "sky"
+        "assetAlt": null
     }
 ]

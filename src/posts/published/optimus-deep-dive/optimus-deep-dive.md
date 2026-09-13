@@ -1,14 +1,12 @@
 ---
 title: "Building Optimus: What It Takes to Schedule a Pharmaceutical Plant"
-summary: "What a scheduler has to know about a factory before it can schedule anything — and why I would build the next one around the planner instead of above them."
+summary: "What a scheduler has to know about a factory before it can schedule anything, and why I would build the next one around the planner instead of above them."
 date: 2026-09-05
 ---
 
 At Ripik AI, I spent roughly a year building the core scheduling engine of a production planning and scheduling system for Sun Pharma. Versions of the system now run in more than twenty plants.
 
 When I started, I thought I was building an optimization algorithm. I eventually realized I was trying to encode how a factory thinks. A planner does not solve a neat formulation every morning. They know that one machine is under maintenance, another needs a change part currently bolted to a different machine, some material is in inventory but still under quality inspection, and a particular batch cannot sit too long between two operations. Some of this is in SAP, some in spreadsheets, and a surprising amount exists only in people's heads. Before we could schedule anything, we had to understand all of it.
-
----
 
 ## The problem looked simple at first
 
@@ -21,8 +19,6 @@ Demand is what the business wants. Pre-scheduling works out which batches can ac
 That fits in a paragraph. Turning it into a system took around 250,000 lines of code. For the first couple of weeks I worked with simulated data. That was enough to build the skeleton of the scheduler, but not enough to understand the problem. The first few months revolved around one plant. As we expanded, I started visiting factories and spending time with the people running them, from operators to plant managers.
 
 Every new plant had some rule that made complete sense once somebody explained it. A machine could be free but still unable to run the next product because the required change part was attached to another machine. A room could become unavailable during a changeover even with idle machines inside it. Some operations could pause over a weekend and resume Monday; others had strict limits on how long they could wait. You find these things out by sitting with planners and asking, again and again, why a particular batch cannot run in a particular place. A lot of the real learning happened when the software and the plant disagreed. Usually the plant was right.
-
----
 
 ## Which task, which resource, what time?
 
@@ -58,8 +54,6 @@ There were many more rules. The list below is mostly for the reader who has pers
 
 None of them sounds especially dramatic on its own. **Together, they are the plant.**
 
----
-
 ## A valid schedule was only half the product
 
 Once the scheduler could generate a valid plan, we wrapped an optimization loop around it: run scheduling many times, score each result against objectives the planner could tune, such as on-time production, waiting time, due dates and demand priority, and keep the better schedules. For a typical plant-month of roughly a thousand batches, a full run took around fifteen to twenty minutes.
@@ -72,8 +66,6 @@ The schedule also fed a shift-level, machine-wise plan for every batch in the mo
 
 We also compared the generated plan against what actually happened in the plant. Completed batches were logged with their actual execution times, which let us calculate weekly and monthly adherence to the plan. That gave us a useful signal, but it was retrospective. By the time a gap appeared in a weekly or monthly adherence report, the schedule and reality may already have been diverging for days.
 
----
-
 ## Some problems became projects of their own
 
 Even after all of that, several constraints were deep enough that a good implementation could have been a project by itself. Portable machines broke the assumption that equipment always belonged to one room. Manpower introduced people as another constrained resource, except people have skills and shifts rather than simple availability calendars. Maximum hold times meant an intermediate product could not wait indefinitely between operations. Autoclaves added another shared resource with their own batching and timing behaviour.
@@ -81,8 +73,6 @@ Even after all of that, several constraints were deep enough that a good impleme
 Then there was QC scheduling. The quality lab was another resource almost every product eventually depended on, but it behaved very differently from a production machine. Tests had to be scheduled, results gated whether a batch could move forward, and the whole flow interacted with the production schedule. From far away, it looked structurally similar to another shared-resource problem. Once we got into it, almost everything was different. That alone took a couple of months.
 
 We also designed things we did not get to fully build, including inter-plant flow, where one plant's output becomes another plant's input, and explicit modelling of yield loss. **There is a large difference between a schedule that runs and a plant that runs.**
-
----
 
 ## What I would build differently
 
