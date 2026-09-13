@@ -5,6 +5,7 @@ export default function (eleventyConfig) {
     // Copy the contents of the `assets` folder to the output folder
 	// For example, `./public/css/` ends up in `_site/css/`
     eleventyConfig.addPassthroughCopy("src/assets/css/");
+	eleventyConfig.addPassthroughCopy("src/assets/*.pdf");
 	eleventyConfig.addPassthroughCopy("src/assets/images/favicon.png");
 	eleventyConfig.addPassthroughCopy("src/assets/images/logo-*.png");
 

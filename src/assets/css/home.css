@@ -203,16 +203,23 @@ body:has(.home) .main-content {
     color: var(--ink-soft);
 }
 
-/* ---------- 2. Featured writings ---------- */
-
-.home .featured-title {
-    font-family: var(--font-serif);
-    font-weight: 400;
-    letter-spacing: -0.01em;
-    font-size: var(--h-section);
-    max-width: 18ch;
-    margin: 0;
+.hero-social {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 2rem;
+    font-size: 1.0625rem;
 }
+
+.hero-social a {
+    color: var(--ink-faint);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.hero-social a:hover,
+.hero-social a:focus-visible { color: var(--ink); }
+
+/* ---------- 2. Featured writings ---------- */
 
 .featured-grid {
     display: grid;

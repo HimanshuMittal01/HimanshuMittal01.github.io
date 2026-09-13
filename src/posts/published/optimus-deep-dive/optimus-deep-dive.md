@@ -1,6 +1,6 @@
 ---
-title: "Building Optimus: What it took to schedule a pharmaceutical plant"
-summary: "A year building the scheduling engine behind a production planning system now running in twenty-plus pharma plants — the constraints, the domain knowledge, and why I would put the planner inside the loop next time."
+title: "Building Optimus: What It Takes to Schedule a Pharmaceutical Plant"
+summary: "What a scheduler has to know about a factory before it can schedule anything — and why I would build the next one around the planner instead of above them."
 date: 2026-09-05
 ---
 
@@ -24,7 +24,7 @@ Every new plant had some rule that made complete sense once somebody explained i
 
 ---
 
-## How the scheduler worked
+## Which task, which resource, what time?
 
 At the centre of Optimus was a simple loop. Every scheduling task belonged to one of three groups: ATI, available tasks that could be scheduled now; LTI, locked tasks waiting for something else to happen; and CTI, completed tasks already placed on the schedule.
 
@@ -32,17 +32,31 @@ The scheduler picked a task from ATI, determined which resources could perform i
 
 In pseudocode it is five lines. The difficulty is inside the words _pick_, _feasible_, and _best_. If five batches are available, which goes first? If three machines can make one of them, which machine? If a machine has an empty slot tomorrow morning, can the batch actually run there once you account for material, preceding operations, cleaning, changeovers, holidays, maintenance, and physical equipment? Almost all the domain knowledge we collected eventually went into answering three questions: **which task, which resource, what time?**
 
-That domain knowledge became substantial. Demand arrived in monthly buckets such as M1, M2 and M3, each with its own priority. The difficult part was not reading demand but converting demand lines into physically valid batches, because plants cannot manufacture arbitrary quantities. Batch sizes, downstream recipes and capacity all affect how demand can be grouped before scheduling even begins.
+That domain knowledge became substantial. Demand arrived in monthly buckets, each with its own priority, but the difficult part was not reading demand. It was converting demand lines into physically valid batches, because plants cannot manufacture arbitrary quantities.
 
-Inventory introduced another layer. We dealt with raw materials, packing materials, intermediate products and finished goods. Inventory could expire. Stock could exist on paper while still being unavailable because it was under quality inspection. Purchase requisitions and purchase orders represented material that might arrive in the future but could not yet be consumed by the schedule. The difference between _exists in the system_ and _can actually be used now_ mattered constantly.
+Inventory introduced another layer. Stock could expire. It could exist on paper while still being unavailable because it was under quality inspection. Purchase orders represented material that might arrive later but could not yet be consumed by the schedule. The difference between _exists in the system_ and _can actually be used now_ mattered constantly.
 
-BOMs could be multi-level, so units, count factors and pack sizes had to remain consistent as quantities propagated through the hierarchy. Recipes then added the temporal structure. Operations could be sequential or parallel, each with setup time, runtime and waiting requirements. Some operations could pause across non-working periods and resume later; others had stricter timing constraints. A mistake here did not just produce a wrong number. It could make an entire downstream schedule impossible.
+Recipes added the temporal structure. Operations could be sequential or parallel, each with setup time, runtime and waiting requirements. Some could pause across non-working periods and resume later; others had stricter timing constraints. A mistake here did not just produce a wrong number. It could make an entire downstream schedule impossible.
 
 Then there were changeovers, campaigns and cleaning. Running two batches of the same product was different from switching products entirely, and product changes could sometimes lock an entire room rather than just one machine. Machines also had campaign limits: after a certain number of batches or days, a full cleaning became mandatory.
 
 One of my favourite constraints was change parts, because it captured the gap between software and physical reality very clearly. Certain products required specific physical parts to run on certain machines, and plants owned a limited number of them. On the screen the machine is free. In the factory it still cannot run, because the missing resource is a piece of metal currently attached to another machine.
 
-There were many more rules: phantom materials that could effectively be treated as always available, material substitutions, under-process intermediate orders, room-level plant maps, machine and plant calendars, vendor-specific material behaviour, and plant-specific exceptions that accumulated as we scaled. None of them sounds especially dramatic on its own. **Together, they are the plant.**
+There were many more rules. The list below is mostly for the reader who has personally lost a week to one of them; everyone else can skip it and keep the point.
+
+- Demand arriving in monthly buckets such as M1, M2 and M3, each with its own priority, with batch sizes, downstream recipes and capacity all deciding how those lines could be grouped before scheduling even began.
+- Multi-level BOMs, where units, count factors and pack sizes had to stay consistent as quantities propagated down the hierarchy.
+- Raw materials, packing materials, intermediates and finished goods, each behaving differently.
+- Purchase requisitions, which are one step less real than purchase orders.
+- Phantom materials, which could effectively be treated as always available.
+- Material substitutions.
+- Under-process intermediate orders.
+- Room-level plant maps.
+- Machine and plant calendars.
+- Vendor-specific material behaviour.
+- Plant-specific exceptions, which kept accumulating as we scaled.
+
+None of them sounds especially dramatic on its own. **Together, they are the plant.**
 
 ---
 

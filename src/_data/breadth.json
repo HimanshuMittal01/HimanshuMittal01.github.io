@@ -354,8 +354,7 @@
                 "I never liked trying on clothes. My teammate and I worked on a way to try them on a 3D version of yourself instead, using body reconstruction and virtual garment fitting.",
                 "It was our final-year project, but I thought there was a company in it. I skipped campus placements because I wanted to build my own thing.",
                 "We eventually stopped. The garment-fitting methods we needed were still at the research stage, and most of the useful 3D datasets we found were proprietary."
-            ],
-            "featured": true
+            ]
         },
         {
             "id": "a18",
@@ -440,7 +439,8 @@
             "popover": [
                 "After Ripik, I moved to Turing and spent about a year creating and reviewing SFT/RLHF data for large language models. A lot of it was around implicit code execution: coding tasks for data and ML analytics, document generation, model-trajectory comparisons, and classifying behavioural logs against detailed rubrics.",
                 "It was probably the most repetitive work I have done, but also the first time I spent months looking at model behaviour one example at a time. That eventually pulled me towards evaluation, agents, and AI safety."
-            ]
+            ],
+            "featured": true
         },
         {
             "id": "a36",

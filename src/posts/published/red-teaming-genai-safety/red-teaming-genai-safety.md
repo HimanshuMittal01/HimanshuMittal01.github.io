@@ -1,6 +1,6 @@
 ---
-title: "How I Red-Team GenAI Safety in a Black Box"
-summary: "Red teaming as a measurement problem, not an attack-generation problem: a testable policy, a category × attack matrix, and a three-phase workflow that maps the model's safety boundary instead of collecting jailbreaks."
+title: "Red Teaming GenAI Safety as a Measurement Problem"
+summary: "A black-box methodology: baseline first, breadth second, depth last — mapping where a model's safety boundary actually sits instead of collecting jailbreaks."
 date: 2026-09-13
 ---
 
@@ -72,6 +72,45 @@ If ten different jailbreaks all wrap the same harmful request, then the harmful 
 
 ---
 
+## A useful mental model for single-turn attacks
+
+When looking specifically at single-turn jailbreaks, I use a simple abstraction of the safety process.
+
+It should not be confused with the literal internal architecture of the model. In a black-box engagement we generally do not know that architecture. It is just a useful way of reasoning about what an attack is trying to achieve.
+
+The model has to do roughly three things correctly:
+
+**Detect:** recognize that the input contains harmful intent.
+
+**Evaluate:** determine that the policy requires refusal or another safe behavior.
+
+**Respond:** actually produce the safe response rather than leaking the prohibited content anyway.
+
+Attack techniques can then be grouped by the function they serve.
+
+| Function | What the attack is trying to do |
+| --- | --- |
+| **Obfuscation** | Make the underlying harmful intent harder to recognize |
+| **Escalation** | Reach the harmful request gradually through context |
+| **Framing** | Give the request an apparently legitimate justification |
+| **Persona** | Manipulate the identity or role through which the request is interpreted |
+| **Suppression** | Discourage refusal, caveats, or safety language |
+| **Extraction** | Constrain the output into a form that maximizes useful leakage |
+
+This gives us a more useful way to describe jailbreaks than memorizing hundreds of prompt templates.
+
+An individual prompt might combine obfuscation with framing and an output constraint. Another might use persona plus suppression. The exact wording will change constantly; the functional role remains more stable.
+
+That also gives us a compositional model:
+
+**Strong attack = hide or reshape the intent + change how the request is evaluated + influence the output**
+
+Not every successful jailbreak needs all three. In practice, some models will be more vulnerable to one family than another, which is why an engagement has to test across families rather than assume one.
+
+There is no reason to assume in advance that one stage is universally the weakest. If the purpose is measurement, the results should tell us.
+
+---
+
 ## The attack surface grows in layers
 
 A red teamer's attack surface increases as the system exposes more ways to interact with it.
@@ -96,7 +135,7 @@ The important idea is not a particular algorithm. It is the feedback loop.
 
 ---
 
-## Designing the engagement
+## Design the engagement as an experiment
 
 Once the policy and attack surfaces are understood, I scope an engagement along two dimensions: **policy coverage** and **attack-surface coverage**.
 
@@ -110,13 +149,9 @@ The goal is not maximal breadth.
 
 It is enough breadth to discover where the interesting failures are, followed by enough depth to understand them.
 
----
-
-## Build an attack matrix, not a jailbreak dump
-
 For each policy category, I begin with a pool of direct disallowed requests. These can be written specifically for the engagement or drawn from existing benchmark sets, provided they match the policy being evaluated.
 
-Separately, I maintain an attack library: the transformations and jailbreak strategies that can be applied to those core asks.
+Separately, I maintain an attack library: the transformations and jailbreak strategies, grouped by the functions above, that can be applied to those core asks.
 
 The two are then combined into a **Category × Attack Matrix**.
 
@@ -189,45 +224,6 @@ Does the technique generalize across many underlying requests, or do failures cl
 **A red team finding becomes much more useful when it tells you the boundary of the failure, not merely that a failure exists.**
 
 That is the difference between reporting "this jailbreak worked" and giving the safety team something they can actually investigate.
-
----
-
-## A useful mental model for single-turn attacks
-
-When looking specifically at single-turn jailbreaks, I use a simple abstraction of the safety process.
-
-It should not be confused with the literal internal architecture of the model. In a black-box engagement we generally do not know that architecture. It is just a useful way of reasoning about what an attack is trying to achieve.
-
-The model has to do roughly three things correctly:
-
-**Detect:** recognize that the input contains harmful intent.
-
-**Evaluate:** determine that the policy requires refusal or another safe behavior.
-
-**Respond:** actually produce the safe response rather than leaking the prohibited content anyway.
-
-Attack techniques can then be grouped by the function they serve.
-
-| Function | What the attack is trying to do |
-| --- | --- |
-| **Obfuscation** | Make the underlying harmful intent harder to recognize |
-| **Escalation** | Reach the harmful request gradually through context |
-| **Framing** | Give the request an apparently legitimate justification |
-| **Persona** | Manipulate the identity or role through which the request is interpreted |
-| **Suppression** | Discourage refusal, caveats, or safety language |
-| **Extraction** | Constrain the output into a form that maximizes useful leakage |
-
-This gives us a more useful way to describe jailbreaks than memorizing hundreds of prompt templates.
-
-An individual prompt might combine obfuscation with framing and an output constraint. Another might use persona plus suppression. The exact wording will change constantly; the functional role remains more stable.
-
-That also gives us a compositional model:
-
-**Strong attack = hide or reshape the intent + change how the request is evaluated + influence the output**
-
-Not every successful jailbreak needs all three. In practice, some models will be more vulnerable to one family than another, which is precisely why the breadth sweep exists.
-
-I would avoid assuming in advance that one stage is universally the weakest. If the purpose of the engagement is measurement, the model should tell us through the results.
 
 ---
 

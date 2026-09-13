@@ -19,6 +19,7 @@ css:
                     scalable oversight. Previously built industrial optimization systems and a
                     venture-backed hardware-AI startup.
                 </p>
+                <div class="hero-social">{% include "partials/_social.html" %}</div>
             </div>
             <img class="hero-portrait" src="/assets/images/himanshu.jpg" alt="{{ bio.name }}"
                  width="900" height="1200" loading="eager" decoding="sync">
@@ -27,26 +28,24 @@ css:
 
     {% include "partials/_now.html" %}
 
-    <!-- 3. Selected work — the two long-form pieces, then the strip of everything else.
+    <!-- 2. Selected work — the two long-form pieces, then the strip of everything else.
          Depth and breadth are one claim, so they share a section rather than sitting as
          numbered peers; Optimus appears in both, as a story card and as scrap a33.
-         TODO(proof): fill the Faradworks `url` in src/_data/featured.json once
-         src/posts/draft/faradworks/ is written and moved to published/.
          TODO(asset): add `asset` + `assetAlt` (product screenshot, system diagram, PCB/Pinscope shot).
          Cards render without a media plate until a real asset exists — do not stand in a placeholder image. -->
     <section class="home-section featured" id="writings">
         <div class="home-inner">
-            <p class="section-head"><span class="section-num">03</span> Selected work</p>
-            <div class="section-lead">
-                <h2 class="featured-title">See clearly. Build accordingly.</h2>
+            <div class="section-lead section-lead--tight">
+                <p class="section-head"><span class="section-num">02</span> Selected work</p>
                 <a class="section-cue" href="/writing/">More writing &rarr;</a>
             </div>
             <div class="featured-grid">
                 {% for story in featured %}
+                {% assign post = collections.post | where: "url", story.url | first %}
                 {% if story.url %}<a class="story story--{{ story.accent }}" href="{{ story.url }}">{% else %}<article class="story story--{{ story.accent }}">{% endif %}
                     <div class="story-text">
                         <p class="story-project">{{ story.project }}</p>
-                        <h3 class="story-headline">{{ story.headline }}</h3>
+                        <h3 class="story-headline">{{ post.data.title | default: story.headline }}</h3>
                         <p class="story-meta">{{ story.meta }}</p>
                         {% if story.url %}
                         <span class="story-cue">Read the story &rarr;</span>

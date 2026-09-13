@@ -1,10 +1,10 @@
 ---
-title: "Three Questions I Wish I Had Asked at Faradworks"
-summary: "Building AI for hardware design at Faradworks: what we were waiting for, whether to replace the workflow or earn our way into it, and what the AI was actually claiming."
+title: "Three Questions From Building an AI Hardware Startup"
+summary: "Is the market ready, and what are we building while we wait? Do we replace the workflow or earn our way into it? And what is the AI actually claiming?"
 date: 2026-09-13
 ---
 
-In 2025 I co-founded Faradworks with my college roommate from seven years earlier. He was CEO; I was the technical co-founder. We were building AI for hardware design. We started with PCB generation, widened the idea into something we called a Circuit Engine, then narrowed it again to verification. None of those moves felt like a mistake at the time. Each one made sense given what we knew. These are the three questions I wish I had asked earlier, and more bluntly.
+In 2025 I co-founded Faradworks with my college roommate from seven years earlier. He was CEO; I was the technical co-founder. We were building AI for hardware design. We started with PCB generation, widened the idea into something we called a Circuit Engine, then narrowed it again to verification. None of those moves felt like a mistake at the time. Each one made sense given what we knew. These are three questions I learned to ask earlier, and more bluntly.
 
 ## Is the market ready, and what are we building while we wait?
 
