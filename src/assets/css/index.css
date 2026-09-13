@@ -100,6 +100,7 @@ html {
 .page-container {
 	display: flex;
 	min-height: 100vh;
+	min-height: 100dvh;
 	flex-direction: column;
 	justify-content: space-between;
 }
@@ -471,15 +472,19 @@ body:has(.prose) .main-content {
 body:has(.prose) .prose { grid-column: 2; grid-row: 1; }
 body:has(.prose) .post-nav { grid-column: 2; }
 
+/* the column stretches and the list inside it is what sticks. Safari gives a
+   start-aligned grid item a containing block its own height, so sticky on the item
+   itself has nowhere to slide and the index just scrolls away. */
 .prose-toc {
 	grid-column: 1;
 	grid-row: 1;
-	position: sticky;
-	top: 5rem;
+	align-self: stretch;
 	padding: 0.5rem 0;
 }
 
 .prose-toc ol {
+	position: sticky;
+	top: 5rem;
 	list-style: none;
 	margin: 0;
 	padding: 0;

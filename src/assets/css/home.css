@@ -467,6 +467,12 @@ a.story:focus-visible { filter: brightness(0.98); }
 .scrap-face:hover .scrap-plate { border-color: var(--ink); }
 .scrap-face:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
 
+/* Without popover support the div has no UA display:none, so all five annotations
+   would render inline in the page. Hide them and leave the tiles as plain labels. */
+@supports not selector(:popover-open) {
+    .scrap-pop { display: none; }
+}
+
 /* the annotation. native popover, so it escapes the grid, and handles keyboard,
    touch and light-dismiss without a line of JS. */
 .scrap-pop {
