@@ -28,17 +28,13 @@ css:
 
     {% include "partials/_now.html" %}
 
-    <!-- 2. Selected work: the two long-form pieces, then the strip of everything else.
-         Depth and breadth are one claim, so they share a section rather than sitting as
-         numbered peers; Optimus appears in both, as a story card and as scrap a33.
+    <!-- 2. Selected work: the long-form pieces only. The breadth used to sit here as a
+         five-tile strip; five of thirty-three reads as five projects, not as a
+         fourteen-year run, so all of it lives at /archive/ behind the nav link.
          TODO(asset): add `asset` + `assetAlt` (product screenshot, system diagram, PCB/Pinscope shot).
          Cards render without a media plate until a real asset exists. Do not stand in a placeholder image. -->
-    <section class="home-section featured" id="writings">
+    <section class="home-section featured">
         <div class="home-inner">
-            <div class="section-lead section-lead--tight">
-                <p class="section-head"><span class="section-num">02</span> Selected work</p>
-                <a class="section-cue" href="/writing/">More writing &rarr;</a>
-            </div>
             <div class="featured-grid">
                 {% for story in featured %}
                 {% assign post = collections.post | where: "url", story.url | first %}
@@ -60,29 +56,7 @@ css:
                 {% endfor %}
             </div>
 
-            <!-- same section, quieter register: six from the archive, chosen for range -->
-            <div class="breadth" id="breadth">
-                <div class="section-lead section-lead--sub">
-                    <p class="sub-head">From the archive</p>
-                    <a class="section-cue" href="/archive/">Explore the archive &rarr;</a>
-                </div>
-                <div class="scraps">
-                {% for s in breadth.scraps %}{% if s.featured %}
-                <div class="scrap">
-                    <button type="button" class="scrap-face" popovertarget="pop-{{ s.id }}">
-                        <span class="scrap-plate"><span class="desc">{{ s.descriptor | escape }}</span></span>
-                        <span class="title">{{ s.title | escape }}</span>
-                        <span class="year">{{ s.year }}</span>
-                    </button>
-                    <div class="scrap-pop" id="pop-{{ s.id }}" popover>
-                        <p class="pop-head">{{ s.title | escape }} <span>{{ s.year }}</span></p>
-                        {% for p in s.popover %}<p>{{ p | escape }}</p>{% endfor %}
-                        {% for l in s.links %}{% assign lscheme = l.url | slice: 0, 4 %}<a href="{{ l.url }}"{% if lscheme == "http" %} target="_blank" rel="noopener"{% endif %}>{{ l.label }} {% if lscheme == "http" %}&#8599;{% else %}&#8594;{% endif %}</a>{% endfor %}
-                    </div>
-                </div>
-                {% endif %}{% endfor %}
-                </div>
-            </div>
+            <a class="section-cue" href="/writing/">More writing &rarr;</a>
         </div>
     </section>
 

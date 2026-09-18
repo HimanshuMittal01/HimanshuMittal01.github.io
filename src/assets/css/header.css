@@ -46,6 +46,11 @@ header::after { content: none; }
     gap: 1.5rem;
 }
 
+.site-nav {
+    display: flex;
+    gap: 1.25rem;
+}
+
 .site-nav a {
     text-decoration: none;
     font-size: 0.9375rem;

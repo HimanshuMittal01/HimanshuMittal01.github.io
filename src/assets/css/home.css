@@ -80,34 +80,12 @@ body:has(.home) .main-content {
 .section-head {
     position: relative;
     margin: 0 0 1.5rem;
+    font-weight: 400;
     font-size: 0.75rem;
     letter-spacing: 0.16em;
     text-transform: uppercase;
     color: var(--ink-faint);
 }
-
-.section-num {
-    position: absolute;
-    left: -2.5rem;
-    font-variant-numeric: tabular-nums;
-}
-
-/* the number has nowhere to hang once the gutter closes up */
-@media (max-width: 1220px) {
-    .section-num { position: static; margin-right: 1.25rem; }
-}
-
-/* headline left, "explore more" right, sharing a baseline */
-.section-lead {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 2rem;
-    flex-wrap: wrap;
-}
-
-.section-lead--tight { margin-bottom: 1.75rem; }
-.section-lead--tight .section-head { margin-bottom: 0; }
 
 .section-cue {
     font-size: 0.875rem;
@@ -376,146 +354,6 @@ a.story:focus-visible { filter: brightness(0.98); }
     color: var(--ink);
 }
 
-/* ---------- 4. Breadth — six tiles, the rest at /archive/ ---------- */
-
-/* the second register inside section 03: same column, quieter, and set far enough
-   below the cards that it reads as a change of scale rather than a new section */
-.breadth { margin-top: clamp(3.5rem, 8vh, 5.5rem); }
-
-.sub-head {
-    margin: 0;
-    font-size: 0.75rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-}
-
-.section-lead--sub { margin-bottom: 1.5rem; }
-
-.scraps {
-    display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    gap: 1rem;
-}
-
-/* narrow: one strip that scrolls sideways. the cut-off card is the affordance,
-   so the cards keep a fixed width instead of wrapping into a second row. */
-@media (max-width: 1000px) {
-    .scraps {
-        grid-template-columns: none;
-        grid-auto-flow: column;
-        grid-auto-columns: clamp(10rem, 58vw, 14rem);
-        overflow-x: auto;
-        scroll-snap-type: x proximity;
-        padding-bottom: 0.5rem;
-    }
-    .scrap { scroll-snap-align: start; }
-}
-
-.scrap-face {
-    display: flex;
-    flex-direction: column;
-    gap: 0.55rem;
-    width: 100%;
-    padding: 0;
-    background: none;
-    border: 0;
-    text-align: left;
-    font: inherit;
-    color: inherit;
-    cursor: pointer;
-    height: 100%;
-}
-
-/* the plate stands in for the artwork: the descriptor is the image, so the
-   descriptor sets the height. flex:1 keeps every plate in the row level. */
-.scrap-plate {
-    display: flex;
-    align-items: flex-end;
-    flex: 1;
-    min-height: 5rem;
-    padding: 0.75rem;
-    background: var(--paper-2);
-    border: 1px solid var(--line-soft);
-    transition: background-color 0.35s ease, border-color 0.35s ease;
-}
-
-.scrap-plate .desc {
-    font-size: 0.875rem;
-    line-height: 1.35;
-    color: var(--ink-soft);
-    text-wrap: pretty;
-}
-
-.scrap-face .title {
-    font-size: 0.8125rem;
-    line-height: 1.35;
-    color: var(--ink);
-}
-
-.scrap-face .year {
-    font-size: 0.75rem;
-    color: var(--ink-faint);
-    font-variant-numeric: tabular-nums;
-}
-
-/* the wash is what the thumbnail used to be. one wash, not a cycle of four: the
-   colour was assigned by position in the row, so a reader looking for why this tile
-   is green and that one gold finds nothing. one hue makes them read as a set. */
-.scrap .scrap-plate { background: var(--sky); }
-
-.scrap-face:hover .scrap-plate { border-color: var(--ink); }
-.scrap-face:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
-
-/* Without popover support the div has no UA display:none, so all five annotations
-   would render inline in the page. Hide them and leave the tiles as plain labels. */
-@supports not selector(:popover-open) {
-    .scrap-pop { display: none; }
-}
-
-/* the annotation. native popover, so it escapes the grid, and handles keyboard,
-   touch and light-dismiss without a line of JS. */
-.scrap-pop {
-    max-width: 30rem;
-    padding: 1.5rem 1.6rem;
-    border: 1px solid var(--line);
-    border-radius: 2px;
-    background: var(--paper-2);
-    color: var(--ink);
-    box-shadow: 0 24px 70px rgba(30, 34, 50, 0.18);
-}
-
-:root.dark-mode .scrap-pop { box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5); }
-.scrap-pop::backdrop { background: rgba(20, 20, 25, 0.28); }
-
-.scrap-pop .pop-head {
-    margin: 0 0 0.9rem;
-    font-size: 0.75rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-}
-
-.scrap-pop .pop-head span { float: right; text-transform: none; letter-spacing: 0; }
-
-.scrap-pop p {
-    margin: 0 0 0.8rem;
-    font-size: 0.9375rem;
-    line-height: 1.62;
-    color: var(--ink-soft);
-}
-
-.scrap-pop a {
-    margin-right: 1.1rem;
-    display: inline-block;
-    margin-top: 0.4rem;
-    font-size: 0.8125rem;
-    text-decoration: none;
-    border-bottom: 1px solid var(--line);
-}
-
-.scrap-pop a:hover { border-color: var(--ink); }
-
 /* ---------- /archive/ — the same furniture, one long column ---------- */
 
 .home .archive-title {
@@ -586,4 +424,9 @@ a.story:focus-visible { filter: brightness(0.98); }
 
 .archive-link:hover { border-color: var(--ink); }
 
-.archive-page .section-cue { margin-top: clamp(2.5rem, 6vh, 4rem); display: inline-block; }
+.archive-page .section-cue,
+.featured-grid + .section-cue { margin-top: clamp(2.5rem, 6vh, 4rem); display: inline-block; }
+
+/* under the cards it sits at the right edge of the grid, where it used to sit
+   beside the section label */
+.featured-grid + .section-cue { display: block; width: fit-content; margin-left: auto; }

@@ -1,5 +1,4 @@
 {
-    "intro": "Things I built, tried, and kept around.",
     "scraps": [
         {
             "id": "a00",
@@ -26,8 +25,7 @@
             "popover": [
                 "A Python course ended with tic-tac-toe and blackjack. I wanted something with enough logic that I couldn't hold the whole thing in my head at once. Chess seemed like a good idea. Then I decided I should be able to say a move out loud and watch the board respond.",
                 "It became the first thing I ever pushed to GitHub. I still play occasionally, around 2000 on Lichess."
-            ],
-            "featured": true
+            ]
         },
         {
             "id": "a02",
@@ -114,7 +112,7 @@
         {
             "id": "a06",
             "title": "Mentify",
-            "descriptor": "Mental health chatbot",
+            "descriptor": "A weekend hackathon build, and my last all-nighter",
             "year": "2019",
             "links": [
                 {
@@ -141,8 +139,7 @@
             "popover": [
                 "An NVIDIA bootcamp gave us 45 days to build a native TensorRT plugin. My teammate and I spent half of them solving the wrong problem, until a session with NVIDIA engineers cleared things up. I must have read the developer guide fifteen times. We wrote a Swish plugin in C++ and measured roughly 3× faster inference on LeNet-5.",
                 "We came first. There were two teams."
-            ],
-            "featured": true
+            ]
         },
         {
             "id": "a08",
@@ -238,8 +235,7 @@
             "popover": [
                 "Under the guidance of Dr. Gaurav Singhal, I built the training pipeline: regression splines, gradient boosting and a small neural network, all driven by one config file.",
                 "The work was published in the International Journal of Biometeorology. My first peer-reviewed paper."
-            ],
-            "featured": true
+            ]
         },
         {
             "id": "a30",
@@ -359,7 +355,7 @@
         {
             "id": "a18",
             "title": "Keystroke anomaly detection",
-            "descriptor": "Can typing patterns reveal an intruder?",
+            "descriptor": "A client asked if typing patterns could catch an impostor",
             "year": "2022",
             "popover": [
                 "A client wanted to know whether typing patterns could reveal that someone else was using an account. I explored it using reinforcement learning."
@@ -413,8 +409,7 @@
             ],
             "popover": [
                 "I saw my father working through a GST calculation in Excel and thought it looked like a ten-minute scripting job. Then he explained all the rules and edge cases hiding underneath it. I built the first calculator in a day, and we have kept adding tools occasionally."
-            ],
-            "featured": true
+            ]
         },
         {
             "id": "a21",
@@ -439,8 +434,7 @@
             "popover": [
                 "After Ripik, I moved to Turing and spent about a year creating and reviewing SFT/RLHF data for large language models. A lot of it was around implicit code execution: coding tasks for data and ML analytics, document generation, model-trajectory comparisons, and classifying behavioural logs against detailed rubrics.",
                 "It was probably the most repetitive work I have done, but also the first time I spent months looking at model behaviour one example at a time. That eventually pulled me towards evaluation, agents, and AI safety."
-            ],
-            "featured": true
+            ]
         },
         {
             "id": "a36",
