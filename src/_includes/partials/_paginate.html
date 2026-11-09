@@ -4,13 +4,13 @@
 {% if nextPost or previousPost %}
 <nav class="post-nav" aria-label="More writing">
     {% if previousPost %}
-    <a class="post-nav-link post-nav-prev" href="{{ previousPost.url }}">
+    <a class="post-nav-link post-nav-prev" href="{{ previousPost.data.link | default: previousPost.url }}"{% if previousPost.data.link %} target="_blank" rel="noopener"{% endif %}>
         <span class="post-nav-dir">&larr; Previous</span>
         <span class="post-nav-title">{{ previousPost.data.title }}</span>
     </a>
     {% endif %}
     {% if nextPost %}
-    <a class="post-nav-link post-nav-next" href="{{ nextPost.url }}">
+    <a class="post-nav-link post-nav-next" href="{{ nextPost.data.link | default: nextPost.url }}"{% if nextPost.data.link %} target="_blank" rel="noopener"{% endif %}>
         <span class="post-nav-dir">Next &rarr;</span>
         <span class="post-nav-title">{{ nextPost.data.title }}</span>
     </a>

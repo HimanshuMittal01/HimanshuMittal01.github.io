@@ -17,7 +17,7 @@ css:
                 {% for post in collections.post %}
                 <li class="archive-item post-card{% if post.data.archived %} archived-hidden{% endif %}">
                     <div class="archive-head">
-                        <h2 class="archive-name"><a href="{{ post.url }}">{{ post.data.title }}</a></h2>
+                        <h2 class="archive-name"><a href="{{ post.data.link | default: post.url }}"{% if post.data.link %} target="_blank" rel="noopener"{% endif %}>{{ post.data.title }}</a></h2>
                         <p class="archive-year">
                             {{ post.date | date: "%Y" }}
                             {%- if post.data.archived %} <i class="fas fa-box-archive" aria-hidden="true"></i>{% endif -%}
@@ -25,7 +25,7 @@ css:
                     </div>
                     <div class="archive-body">
                         <p>{{ post.data.summary }}</p>
-                        <a class="archive-link" href="{{ post.url }}">Read &#8594;</a>
+                        <a class="archive-link" href="{{ post.data.link | default: post.url }}"{% if post.data.link %} target="_blank" rel="noopener">Read &#8599;{% else %}>Read &#8594;{% endif %}</a>
                     </div>
                 </li>
                 {% endfor %}
