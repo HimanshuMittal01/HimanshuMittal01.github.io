@@ -15,9 +15,9 @@ css:
                 <p class="eyebrow">Hi, I&rsquo;m</p>
                 <h1 class="hero-title">{{ bio.name }}</h1>
                 <p class="hero-lede">
-                    Currently leading technical work on foundation models and their safety, especially interested in
-                    AI control and evaluations. Previously built industrial optimization systems and a
-                    venture-backed hardware-AI startup.
+                    I lead technical work at <a href="https://solumn.ai/#case-study" target="_blank" rel="noopener">Solumn AI</a>, where we do AI safety evals for frontier models.
+                    I am interested in agent foundations and control research.
+                    Previously built <a href="https://aws.amazon.com/marketplace/pp/prodview-zcm5kdvmeeqgu" target="_blank" rel="noopener">industrial optimization systems</a> and a <a href="https://www.pinscope.ai/" target="_blank" rel="noopener">venture-backed hardware-AI startup</a>.
                 </p>
                 <div class="hero-social">{% include "partials/_social.html" %}</div>
             </div>
@@ -25,8 +25,6 @@ css:
                  width="900" height="1200" loading="eager" decoding="sync">
         </div>
     </section>
-
-    {% include "partials/_now.html" %}
 
     <!-- 2. Selected work: the long-form pieces only. The breadth used to sit here as a
          five-tile strip; five of thirty-three reads as five projects, not as a
@@ -40,14 +38,10 @@ css:
                 {% assign post = collections.post | where: "url", story.url | first %}
                 {% if story.url %}<a class="story" href="{{ story.url }}">{% else %}<article class="story">{% endif %}
                     <div class="story-text">
-                        <p class="story-project">{{ story.project }}</p>
+                        <p class="story-project"><span>{{ story.meta }}</span>{% if story.url %}<span class="story-arrow" aria-hidden="true">&rarr;</span>{% endif %}</p>
                         <h3 class="story-headline">{{ post.data.title | default: story.headline }}</h3>
-                        <p class="story-meta">{{ story.meta }}</p>
-                        {% if story.url %}
-                        <span class="story-cue">Read the story &rarr;</span>
-                        {% else %}
-                        <span class="story-cue story-cue--pending">{{ story.note }}</span>
-                        {% endif %}
+                        <p class="story-summary">{{ post.data.summary }}</p>
+                        {% unless story.url %}<span class="story-cue story-cue--pending">{{ story.note }}</span>{% endunless %}
                     </div>
                     {% if story.asset %}
                     <div class="story-media"><img src="{{ story.asset }}" alt="{{ story.assetAlt }}"></div>

@@ -1,14 +1,19 @@
 [
     {
-        "project": "Faradworks",
-        "meta": "Faradworks · Antler · AI × electronics",
+        "meta": "AI safety · Evaluation",
+        "url": "/writing/red-teaming-genai-safety/",
+        "note": null,
+        "asset": null,
+        "assetAlt": null
+    },
+    {
+        "meta": "Faradworks · Antler",
         "url": "/writing/faradworks/",
         "note": null,
         "asset": null,
         "assetAlt": null
     },
     {
-        "project": "Optimus",
         "meta": "Ripik · Industrial AI",
         "url": "/writing/optimus-deep-dive/",
         "note": null,

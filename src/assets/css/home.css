@@ -4,7 +4,6 @@
     /* structure, ink and paper now live in index.css :root. the homepage adds only
        what is its own: the tile wash, its column width and its display faces. */
 
-    --fig-blue: var(--accent);
 
     --wide: 74rem;
     --font-display: "Outfit", var(--font-family);
@@ -134,6 +133,21 @@ body:has(.home) .main-content {
     color: var(--ink-soft);
 }
 
+/* the only links in running text on the page: underlined so they read as links, ink
+   until hovered like every other link */
+.hero-lede a {
+    text-decoration: underline;
+    text-decoration-color: var(--line);
+    text-underline-offset: 0.2em;
+    transition: color 0.3s ease, text-decoration-color 0.3s ease;
+}
+
+.hero-lede a:hover,
+.hero-lede a:focus-visible {
+    color: var(--accent);
+    text-decoration-color: currentColor;
+}
+
 .hero-social {
     display: flex;
     gap: 1.5rem;
@@ -154,12 +168,12 @@ body:has(.home) .main-content {
 
 .featured-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1.25rem;
     margin-top: 2rem;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 900px) {
     .featured-grid { grid-template-columns: minmax(0, 1fr); }
 }
 
@@ -214,6 +228,26 @@ a.story:focus-visible { filter: brightness(0.98); }
     letter-spacing: 0.16em;
     text-transform: uppercase;
     color: color-mix(in srgb, var(--ink) 55%, transparent);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+}
+
+/* the whole card is the link, so one arrow in the corner replaces a "Read the story" line */
+.story-arrow {
+    font-size: 1.125rem;
+    letter-spacing: 0;
+    line-height: 1;
+    color: var(--ink-faint);
+    transition: color 0.35s ease, transform 0.35s ease;
+}
+
+a.story:hover .story-arrow,
+a.story:focus-visible .story-arrow { color: var(--accent); }
+
+@media (prefers-reduced-motion: no-preference) {
+    a.story:hover .story-arrow { transform: translateX(4px); }
 }
 
 /* serif here: these are headlines from written pieces, not interface labels */
@@ -221,18 +255,21 @@ a.story:focus-visible { filter: brightness(0.98); }
     font-family: var(--font-serif);
     font-weight: 400;
     letter-spacing: -0.005em;
-    font-size: clamp(1.25rem, 2.1vw, 1.75rem);
+    font-size: clamp(1.25rem, 1.8vw, 1.5rem);
     line-height: 1.2;
     margin: 0.25rem 0 0;
     max-width: 20ch;
     color: var(--ink);
 }
 
-.story-meta {
+/* the post's own summary, pinned to the foot of the card */
+.story-summary {
     margin: auto 0 0;
     padding-top: 1.5rem;
     font-size: 0.875rem;
-    color: color-mix(in srgb, var(--ink) 62%, transparent);
+    line-height: 1.55;
+    color: var(--ink-soft);
+    text-wrap: pretty;
 }
 
 .story-cue {
@@ -243,98 +280,6 @@ a.story:focus-visible { filter: brightness(0.98); }
 .story-cue--pending {
     color: color-mix(in srgb, var(--ink) 55%, transparent);
     font-weight: 400;
-}
-
-/* ---------- 3. Where the work is pointed now ---------- */
-
-/* the question on the left, the argument on the right */
-.now-split {
-    display: grid;
-    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
-    gap: clamp(2rem, 5vw, 4.5rem);
-    align-items: start;
-}
-
-@media (max-width: 900px) {
-    .now-split { grid-template-columns: minmax(0, 1fr); }
-}
-
-/* the diagram fills the column under the claim; on narrow screens the split collapses
-   and it simply sits between the claim and the prose */
-.now-figure {
-    margin: clamp(2rem, 5vh, 3.25rem) 0 0;
-    max-width: 26rem;
-}
-
-.now-figure svg { display: block; width: 100%; height: auto; overflow: visible; }
-
-.now-figure path { fill: none; stroke-linecap: round; stroke-linejoin: round; }
-
-/* axes and arrowheads recede; the two curves are the content */
-.fig-axis path { stroke: var(--ink-faint); stroke-width: 1; }
-.fig-axis path:not(:first-child) { fill: var(--ink-faint); stroke: none; }
-
-.fig-ai { stroke: var(--ink); stroke-width: 2; }
-.fig-human { stroke: var(--fig-blue); stroke-width: 2; }
-
-.fig-gap path { stroke: var(--ink-faint); stroke-width: 1; }
-.fig-gap path:not(:first-child) { fill: var(--ink-faint); stroke: none; }
-
-.now-figure text {
-    font-family: var(--font-family);
-    font-size: 11px;
-    fill: var(--ink-soft);
-}
-
-.now-figure .fig-label { font-size: 12px; fill: var(--ink); }
-.now-figure .fig-label--human { fill: var(--fig-blue); }
-
-.now-figure .fig-note,
-.now-figure .fig-axis-label {
-    font-size: 10px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    fill: var(--ink-faint);
-}
-.now-figure figcaption {
-    margin-top: 1rem;
-    font-size: 0.8125rem;
-    line-height: 1.5;
-    color: var(--ink-faint);
-    text-align: center;
-    text-wrap: pretty;
-}
-
-/* every --h-section headline on the site is set in the serif: this one, the archive
-   and writing titles, and the h1 on a post. one face for one level. */
-.home .now-title {
-    font-family: var(--font-serif);
-    font-weight: 400;
-    letter-spacing: -0.01em;
-    line-height: 1.15;
-    font-size: var(--h-section);
-    max-width: 16ch;
-    margin: 0;
-}
-
-.now-body {
-    display: grid;
-    gap: 1.15rem;
-    max-width: 36rem;
-}
-
-.now-body p {
-    margin: 0;
-    font-size: 0.9375rem;
-    line-height: 1.65;
-    color: var(--ink-soft);
-    text-wrap: pretty;
-}
-
-/* said once, quietly, and not asking the reader for anything */
-.now-body .now-close {
-    margin-top: 0.5rem;
-    color: var(--ink);
 }
 
 /* ---------- /archive/ — the same furniture, one long column ---------- */
