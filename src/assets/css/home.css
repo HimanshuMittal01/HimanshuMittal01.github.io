@@ -356,15 +356,6 @@ a.story:focus-visible { filter: brightness(0.98); }
 
 /* ---------- /archive/ — the same furniture, one long column ---------- */
 
-.home .archive-title {
-    font-family: var(--font-serif);
-    font-weight: 400;
-    font-size: clamp(1.625rem, 3.2vw, 2.375rem);
-    line-height: 1.25;
-    max-width: 30ch;
-    margin: 0 0 clamp(3rem, 7vh, 4.5rem);
-}
-
 .archive-list {
     list-style: none;
     margin: 0;
