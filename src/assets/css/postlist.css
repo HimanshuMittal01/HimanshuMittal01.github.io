@@ -1,6 +1,13 @@
 /* /writing/ uses the archive furniture in home.css: one list, one hairline per row.
    What is left here is only what the writing index does not share with /archive/. */
 
+/* post titles are headlines from written pieces: serif, as on the home cards and the post */
+.post-card .archive-name {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    letter-spacing: -0.005em;
+}
+
 /* the post title is the link, so it carries the ink rather than the accent */
 .archive-name a {
     text-decoration: none;

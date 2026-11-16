@@ -36,6 +36,10 @@
 			{{site.description}}
 		  {% endif %}
 		" />
+	<meta property="og:type" content="{% if layout == 'post.html' %}article{% else %}website{% endif %}" />
+	<meta property="og:title" content="{{ title | default: "Himanshu Mittal" }}" />
+	<meta property="og:description" content="{% if description %}{{ description }}{% elsif summary %}{{ summary }}{% else %}{{ site.description }}{% endif %}" />
+	<meta name="twitter:card" content="summary" />
 </head>
 
 <body>

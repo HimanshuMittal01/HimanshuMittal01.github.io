@@ -2,11 +2,11 @@
     "scraps": [
         {
             "id": "a00",
-            "title": "Before Github.",
+            "title": "Before GitHub.",
             "descriptor": "Websites, tools, unfinished games",
             "year": "2012–2018",
             "popover": [
-                "When I was twelve, a friend showed me my name scrolling across a browser using the `<marquee>` tag. It amazed me that I could make the browser show whatever I wanted.",
+                "When I was twelve, a friend showed me my name scrolling across a browser using the <marquee> tag. It amazed me that I could make the browser show whatever I wanted.",
                 "School and entrance-exam prep took up most of my time, but I spent whatever was left making things with friends: websites, painting tools, and games. We always imagined someone using them. Mostly, nobody did.",
                 "Somewhere along the way, my school selected me as one of ten students for a trip to Singapore. I’m still grateful for that. My friends still ask, “What school does that?” Hahaha."
             ]

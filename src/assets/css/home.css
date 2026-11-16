@@ -4,8 +4,6 @@
     /* structure, ink and paper now live in index.css :root. the homepage adds only
        what is its own: the tile wash, its column width and its display faces. */
 
-    /* one wash, the tile surface in the archive strip, in the accent's own family */
-    --sky: #dce8f4;
     --fig-blue: var(--accent);
 
     --wide: 74rem;
@@ -14,10 +12,6 @@
     color: var(--ink);
     background: var(--paper);
     font-family: var(--font-family);
-}
-
-:root.dark-mode .home {
-    --sky: #182430;
 }
 
 /* The home page opts out of the 45em article column. */
@@ -74,18 +68,7 @@ body:has(.home) .main-content {
     background: var(--line);
 }
 
-/* ---------- section furniture: hanging number, eyebrow, optional right-hand cue ---------- */
-
-/* the number hangs out into the gutter so the eyebrow lines up with the content column */
-.section-head {
-    position: relative;
-    margin: 0 0 1.5rem;
-    font-weight: 400;
-    font-size: 0.75rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-}
+/* ---------- section furniture: the cue that ends a section ---------- */
 
 .section-cue {
     font-size: 0.875rem;
@@ -369,6 +352,9 @@ a.story:focus-visible { filter: brightness(0.98); }
     padding: clamp(1.75rem, 3.5vh, 2.5rem) 0;
     border-top: 1px solid var(--line-soft);
 }
+
+/* the header already draws a rule above the list */
+.archive-item:first-child { border-top: 0; }
 
 @media (max-width: 800px) {
     .archive-item { grid-template-columns: minmax(0, 1fr); gap: 0.75rem; }

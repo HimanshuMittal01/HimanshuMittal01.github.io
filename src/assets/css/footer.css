@@ -1,19 +1,11 @@
 /* Footer. Icons only. Nothing here asks the visitor for anything. */
 
 .footer {
-    --footer-line: rgba(16, 16, 20, 0.10);
-    --footer-muted: #6c6c76;
-
     width: 100%;
     padding: clamp(2.5rem, 6vh, 3.5rem) 1.5rem;
     background: transparent;
     color: var(--text-color);
-    border-top: 1px solid var(--footer-line);
-}
-
-:root.dark-mode .footer {
-    --footer-line: rgba(255, 255, 255, 0.12);
-    --footer-muted: #9498a3;
+    border-top: 1px solid var(--line-soft);
 }
 
 .footer-content {
@@ -32,7 +24,7 @@
 }
 
 .footer-social-links a {
-    color: var(--footer-muted);
+    color: var(--ink-faint);
     text-decoration: none;
     font-size: 1.125rem;
     transition: color 0.3s ease;
